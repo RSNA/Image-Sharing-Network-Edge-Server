@@ -1,0 +1,18 @@
+[submodule "admin-app"]
+	path = admin-app
+	url = git@rsna-nibib-code.mirtl.org:image-sharing/admin-app.git
+[submodule "documentation"]
+	path = documentation
+	url = git@rsna-nibib-code.mirtl.org:image-sharing/documentation.git
+[submodule "hl7-receiver-app"]
+	path = hl7-receiver-app
+	url = git@rsna-nibib-code.mirtl.org:image-sharing/hl7-receiver-app.git
+[submodule "prepare-content-app"]
+	path = prepare-content-app
+	url = git@rsna-nibib-code.mirtl.org:image-sharing/prepare-content-app.git
+[submodule "token-app"]
+	path = token-app
+	url = git@rsna-nibib-code.mirtl.org:image-sharing/token-app.git
+[submodule "transfer-content-app"]
+	path = transfer-content-app
+	url = git@rsna-nibib-code.mirtl.org:image-sharing/transfer-content-app.git
