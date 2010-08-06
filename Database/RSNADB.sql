@@ -71,6 +71,7 @@ CREATE TABLE jobs (
     job_id integer NOT NULL,
     job_set_id integer NOT NULL,
     exam_id integer NOT NULL,
+    report_id integer NOT NULL,
     status integer NOT NULL,
     status_message character varying,
     documentset_id character varying(50),
@@ -100,6 +101,7 @@ ALTER TABLE ONLY jobs
 CREATE TABLE job_sets (
     job_set_id integer NOT NULL,
     patient_id integer NOT NULL,
+    user_id integer NOT NULL,
     security_question character varying,
     security_answer integer,
     email_address character varying,
