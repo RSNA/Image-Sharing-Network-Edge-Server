@@ -16,3 +16,6 @@
 [submodule "transfer-content-app"]
 	path = transfer-content-app
 	url = git@rsna-nibib-code.mirtl.org:image-sharing/transfer-content-app.git
+[submodule "database"]
+	path = database
+	url = git@rsna-nibib-code.mirtl.org:image-sharing/database.git
