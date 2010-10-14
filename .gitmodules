@@ -19,3 +19,6 @@
 [submodule "database"]
 	path = database
 	url = git@rsna-nibib-code.mirtl.org:image-sharing/database.git
+[submodule "rsna"]
+	path = rsna
+	url = git@rsna-nibib-code.mirtl.org:image-sharing/rsna.git
