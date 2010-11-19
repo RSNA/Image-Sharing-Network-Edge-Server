@@ -22,3 +22,6 @@
 [submodule "rsna"]
 	path = rsna
 	url = git@rsna-nibib-code.mirtl.org:image-sharing/rsna.git
+[submodule "core"]
+	path = core
+	url = git@rsna-nibib-code.mirtl.org:image-sharing/core.git
