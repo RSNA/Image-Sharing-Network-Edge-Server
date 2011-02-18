@@ -1,0 +1,27 @@
+<processing>
+  <job name="install database">
+    <os family="unix" />
+    <executefile name="$INSTALL_PATH/scripts/edge-db-install.sh">
+      <env>DBPASSWD=$database.password</env>
+      <env>DBSUPERPASSWD=$database.superpassword</env>
+      <arg>$database.host</arg>
+      <arg>$database.port</arg>
+      <arg>$database.superuser</arg>
+      <arg>$INSTALL_PATH/RSNADB_Schema.sql</arg>
+    </executefile>
+  </job>
+  <job name="mirth setup">
+    <createForPack name="Mirth" />
+    <os family="unix" />
+    <executefile name="$INSTALL_PATH/scripts/mirth-setup.sh">
+      <env>DBPASSWD=$mirthdb.password</env>
+      <env>DBSUPERPASSWD=$mirthdb.superpassword</env>
+      <arg>$mirthdb.host</arg>
+      <arg>$mirthdb.port</arg>
+      <arg>$mirthdb.name</arg>
+      <arg>$mirthdb.username</arg>
+      <arg>$database.superuser</arg>
+      <arg>$INSTALL_PATH/mirth</arg>
+    </executefile>
+  </job>
+</processing>

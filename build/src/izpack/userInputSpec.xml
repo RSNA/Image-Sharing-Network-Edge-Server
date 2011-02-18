@@ -1,0 +1,59 @@
+<userInput>
+<panel order="0">
+<field type="title" txt="Configure database connection" bold="true" size="1" />
+<field type="text" variable="database.host">
+  <spec txt="Host:" size="25" set="localhost" />
+</field>
+<field type="text" variable="database.port">
+  <spec txt="Port:" size="25" set="5432" />
+</field>
+<field type="space" />
+<field type="text" variable="database.superuser">
+  <spec txt="Database Superuser Name:" size="25" set="postgres" />
+</field>
+<field type="space" />
+<field type="password" variable="database.superpassword">
+  <spec>
+    <pwd txt="Database Superuser Password:" size="25" set="" />
+  </spec>
+</field>
+<field type="space" />
+<field type="password" variable="database.password">
+  <spec>
+    <pwd txt="Password for RSNA Database user:" size="25" set="" />
+  </spec>
+</field>
+</panel>
+<panel order="1">
+<createForPack name="Mirth" />
+<field type="title" txt="Configure Mirth database connection" bold="true" size="1" />
+<field type="text" variable="mirthdb.host">
+  <spec txt="Mirth Database Host:" size="25" set="$database.host" />
+</field>
+<field type="text" variable="mirthdb.port">
+  <spec txt="Port:" size="25" set="$database.port" />
+</field>
+<field type="space" />
+<field type="text" variable="mirthdb.superuser">
+  <spec txt="Mirth Database Superuser Name:" size="25" set="$database.superuser" />
+</field>
+<field type="password" variable="mirthdb.superpassword">
+  <spec>
+    <pwd txt="Database Superuser Password:" size="25" set="$database.superpassword" />
+  </spec>
+</field>
+<field type="space" />
+<field type="text" variable="mirthdb.name">
+  <spec txt="Username for Mirth Database:" size="25" set="mirthdb" />
+</field>
+<field type="text" variable="mirthdb.username">
+  <spec txt="Username for Mirth Database:" size="25" set="mirth" />
+</field>
+<field type="space" />
+<field type="password" variable="mirthdb.password">
+  <spec>
+    <pwd txt="Password for Mirth Database user:" size="25" set="" />
+  </spec>
+</field>
+</panel>
+</userInput>

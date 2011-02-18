@@ -1,0 +1,192 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.rsna.isn</groupId>
+  <artifactId>edgeserver</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>RSNA Edgeserver</name>
+  <url>http://www.rsna.org/</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <staging.dir>${project.build.directory}/${project.artifactId}-install</staging.dir>
+    <izpack.standalone.compiler.version>4.3.2</izpack.standalone.compiler.version>
+    <app.group>${project.groupId}</app.group>
+    <app.title>${project.name}</app.title>
+    <app.subpath>${project.artifactId}-${project.version}</app.subpath>
+    <app.version>${project.version}</app.version>
+    <glassfish.version>3.0.1</glassfish.version>
+    <mirth.version>1.8.2.4472</mirth.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.codehaus.izpack</groupId>
+      <artifactId>izpack-standalone-compiler</artifactId>
+      <version>${izpack.standalone.compiler.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.rsna.isn</groupId>
+      <artifactId>glassfish</artifactId>
+      <version>${glassfish.version}</version>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>org.rsna.isn</groupId>
+      <artifactId>mirth</artifactId>
+      <version>${mirth.version}</version>
+      <type>zip</type>
+    </dependency>
+  </dependencies>
+
+  <modules>
+    <module>../core</module>
+    <module>../prepare-content-app</module>
+    <module>../transfer-content-app</module>
+    <module>../token-app</module>
+  </modules>
+  <build>
+    <defaultGoal>package</defaultGoal>
+    <plugins>
+      <plugin>
+	<groupId>com.savage7.maven.plugins</groupId>
+	<artifactId>maven-external-dependency-plugin</artifactId>
+	<version>0.4</version>
+	<inherited>false</inherited>
+	<configuration>
+	  <stagingDirectory>
+	    ${project.build.directory}
+	  </stagingDirectory>
+	  <createChecksum>true</createChecksum>
+	  <force>false</force>
+	  <artifactItems>
+	    <artifactItem>
+	      <groupId>org.rsna.isn</groupId>
+	      <artifactId>glassfish</artifactId>
+	      <version>${glassfish.version}</version>
+	      <packaging>zip</packaging>
+	      <downloadUrl>
+		http://download.java.net/glassfish/{version}/release/glassfish-{version}-web.zip
+	      </downloadUrl>
+	      <checksum>ccd6b19b76eb9201c119b21f8f6978dd671959c7</checksum>
+	    </artifactItem>
+	    <artifactItem>
+	      <groupId>org.rsna.isn</groupId>
+	      <artifactId>mirth</artifactId>
+	      <version>${mirth.version}</version>
+	      <packaging>zip</packaging>
+	      <downloadUrl>
+		http://downloads.mirthcorp.com/connect/{version}/mirth-{version}.zip
+	      </downloadUrl>
+	      <checksum>ada132af6e45d40cda85b2670f0990b54c966a6a</checksum>
+	    </artifactItem>
+	  </artifactItems>
+	</configuration>
+
+	<executions>
+	  <execution>
+	    <id>clean-external-dependencies</id>
+	    <phase>clean</phase>
+	    <goals>
+	      <!-- mvn com.savage7.maven.plugins:maven-external-dependency-plugin:clean-external -->
+	      <goal>clean-external</goal>
+	    </goals>
+	  </execution>
+	  <execution>
+	    <id>resolve-install-external-dependencies</id>
+	    <phase>process-resources</phase>
+	    <goals>
+	      <!-- mvn com.savage7.maven.plugins:maven-external-dependency-plugin:resolve-external -->
+	      <goal>resolve-external</goal>
+
+	      <!-- mvn com.savage7.maven.plugins:maven-external-dependency-plugin:install-external -->
+	      <goal>install-external</goal>
+	    </goals>
+	  </execution>
+	  <execution>
+	    <id>deploy-external-dependencies</id>
+	    <phase>deploy</phase>
+	    <goals>
+	      <!-- mvn com.savage7.maven.plugins:maven-external-dependency-plugin:deploy-external -->
+	      <goal>deploy-external</goal>
+	    </goals>
+	  </execution>
+	</executions>
+
+      </plugin>
+      <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-assembly-plugin</artifactId>
+	<version>2.2-beta-5</version>
+	<configuration>
+	  <finalName>edgeserver</finalName>
+	  <descriptors>
+	    <descriptor>src/main/assembly/build.xml</descriptor>
+	  </descriptors>
+	</configuration>
+	<executions>
+	  <execution>
+	    <id>make-assembly</id>
+	    <phase>package</phase>
+	    <goals>
+	      <goal>single</goal>
+	    </goals>
+	  </execution>
+	</executions>
+      </plugin>
+
+      <plugin>
+	<groupId>org.codehaus.mojo</groupId>
+	<artifactId>exec-maven-plugin</artifactId>
+	<version>1.1</version>
+	<executions>
+	  <execution>
+	    <phase>compile</phase>
+	    <goals>
+	      <goal>exec</goal>
+	    </goals>
+	  </execution>
+	</executions>
+	<configuration>
+	  <executable>git</executable>
+	  <arguments>
+	    <argument>describe</argument>
+	    <argument>--always</argument>
+	    <argument>--dirty</argument>
+	  </arguments>
+	  <outputFile>${staging.dir}/version.txt</outputFile>
+	</configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.izpack</groupId>
+        <artifactId>izpack-maven-plugin</artifactId>
+        <version>1.0-alpha-5</version>
+	<configuration>
+	  <izpackBasedir>${staging.dir}</izpackBasedir>
+	</configuration>
+        <executions>
+          <execution>
+	    <id>standard-installer</id>
+            <phase>package</phase>
+            <goals>
+              <goal>izpack</goal>
+            </goals>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.codehaus.izpack</groupId>
+            <artifactId>izpack-standalone-compiler</artifactId>
+            <version>${izpack.standalone.compiler.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
