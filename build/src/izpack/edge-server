@@ -79,8 +79,8 @@ stop)
         ;;
 
 restart|reload)
-	stop
-	start
+	$0 stop
+	$0 start
         ;;
 *)
         log_action_msg "Usage: $0 {start|stop|restart}"
