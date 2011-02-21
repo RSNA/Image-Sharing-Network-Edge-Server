@@ -170,7 +170,7 @@
           </protocol>
         </protocols>
         <network-listeners>
-          <network-listener port="8080" protocol="http-listener-1" transport="tcp" name="http-listener-1" thread-pool="http-thread-pool"></network-listener>
+          <network-listener port="3000" protocol="http-listener-1" transport="tcp" name="http-listener-1" thread-pool="http-thread-pool"></network-listener>
           <network-listener port="4848" protocol="admin-listener" transport="tcp" address="localhost" name="admin-listener" thread-pool="http-thread-pool"></network-listener>
         </network-listeners>
         <transports>
