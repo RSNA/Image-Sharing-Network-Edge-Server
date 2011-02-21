@@ -24,4 +24,14 @@
       <arg>$INSTALL_PATH/mirth</arg>
     </executefile>
   </job>
+  <job name="glassfish setup">
+    <os family="unix" />
+    <createForPack name="Glassfish" />
+    <executefile name="$INSTALL_PATH/scripts/glassfish-setup.sh">
+      <env>INSTALL_PATH=$INSTALL_PATH</env>
+      <env>DBPASS=$database.password</env>
+      <arg>$database.host</arg>
+      <arg>$database.port</arg>
+    </executefile>
+  </job>
 </processing>

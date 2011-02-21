@@ -58,6 +58,8 @@
       <description>Glassfish Installation</description>
       <file unpack="true" src="glassfish-3.0.1.zip" targetdir="$INSTALL_PATH" />
       <file src="${basedir}/src/izpack/domain.xml" targetdir="$INSTALL_PATH/scripts" />
+      <file src="${basedir}/src/izpack/glassfish-setup.sh" targetdir="$INSTALL_PATH/scripts" />
+      <executable targetfile="$INSTALL_PATH/scripts/glassfish-setup.sh" stage="never" />
     </pack>
     <pack name="Mirth" required="no">
       <description>Mirth Installation</description>
