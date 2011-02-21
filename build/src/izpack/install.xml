@@ -7,7 +7,7 @@
     <appversion>${app.version}</appversion>
     <uninstaller write="no" />
     <javaversion>1.6</javaversion>
-<!--  <run-privileged/> -->
+    <run-privileged/>
   </info>
 
   <guiprefs resizable="no" width="640" height="480">
