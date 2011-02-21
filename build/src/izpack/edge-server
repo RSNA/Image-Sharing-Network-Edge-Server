@@ -1,0 +1,89 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides: edge-server
+# Should-Start: postgresql
+# Should-Stop: postgresql
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: starts the edge server
+### END INIT INFO
+
+set -e
+
+umask 022
+
+export RSNA_ROOT=$rsna.root
+
+mkdir -p $RSNA_ROOT/tmp/pids
+
+TPID=$RSNA_ROOT/tmp/pids/transfer.pid
+PPID=$RSNA_ROOT/tmp/pids/prepare.pid
+
+USER=edge
+
+. /lib/lsb/init-functions
+
+case $1 in
+start)
+	log_daemon_msg "Starting Edge server"
+	if su edge -l -c "$RSNA_ROOT/glassfishv3/bin/asadmin start-domain domain1"; then
+	    log_progress_msg "token-app"
+	else
+	    log_end_msg 1
+	    exit 1
+	fi
+
+	if start-stop-daemon -c $USER --start -d $RSNA_ROOT --quiet --oknodo -b --pidfile $PPID --exec java -- -server -jar $RSNA_ROOT/prep-content*.jar; then
+	    log_progress_msg "prepare-content-app"
+	else
+	    log_end_msg 1
+	   exit 1
+	fi
+
+	if start-stop-daemon -c $USER --start -d $RSNA_ROOT --quiet -m --oknodo -b --pidfile $TPID --exec $(which java) -- -server -jar $RSNA_ROOT/transfer-content*.jar; then log_progress_msg "transfer-content-app"
+	else
+	   log_end_msg 1
+	   exit 1
+	fi
+	if su edge -l -c "$RSNA_ROOT/mirth-daemon start"; then log_progress_msg "mirth"
+	else
+	   log_end_msg 1
+	   exit 1
+	fi
+	log_end_msg 0
+        ;;
+stop)
+	log_daemon_msg "Stopping Edge server"
+	if su edge -l -c "$RSNA_ROOT/glassfishv3/bin/asadmin stop-domain domain1"; then
+	    log_progress_msg "token-app"
+	else
+	    log_end_msg 1
+	fi
+	if start-stop-daemon --stop --quiet --oknodo --pidfile $PPID; then
+	    log_progress_msg "prepare-content-app"
+	else
+	   log_end_msg 1
+	fi
+	if start-stop-daemon --stop --quiet --oknodo --pidfile $TPID; then
+	    log_progress_msg "transfer-content-app"
+	else
+	   log_end_msg 1
+	fi
+	if su edge -l -c "$RSNA_ROOT/mirth-daemon stop"; then log_progress_msg "mirth"
+	else
+	   log_end_msg 1
+	   exit 1
+	fi
+	log_end_msg 0
+        ;;
+
+restart|reload)
+	stop
+	start
+        ;;
+*)
+        log_action_msg "Usage: $0 {start|stop|restart}"
+        exit 1
+
+esac

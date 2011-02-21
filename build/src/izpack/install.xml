@@ -21,6 +21,10 @@
     <langpack iso3="eng" />
   </locale>
 
+  <dynamicvariables>
+    <variable name="rsna.root" value="$INSTALL_PATH" />
+  </dynamicvariables>
+
   <resources>
     <res id="userInputSpec.xml" src="${basedir}/src/izpack/userInputSpec.xml" />
     <res id="ProcessPanel.Spec.xml" src="${basedir}/src/izpack/ProcessPanel.Spec.xml" />
@@ -51,8 +55,11 @@
       <file src="${basedir}/../database/RSNADB_Schema.sql" targetdir="$INSTALL_PATH" />
       <file src="${basedir}/src/izpack/edge-db-install.sh" targetdir="$INSTALL_PATH/scripts" />
       <file src="${basedir}/src/izpack/database.properties" targetdir="$INSTALL_PATH/conf" />
+      <file src="${basedir}/src/izpack/edge-server" targetdir="/etc/init.d" os="unix" />
       <executable targetfile="$INSTALL_PATH/scripts/edge-db-install.sh" stage="never" />
+      <executable targetfile="/etc/init.d/edge-server" stage="never" os="unix" />
       <parsable targetfile="$INSTALL_PATH/conf/database.properties" type="javaprop" />
+      <parsable targetfile="/etc/init.d/edge-server" os="unix" />
     </pack>
     <pack name="Glassfish" required="no">
       <description>Glassfish Installation</description>
@@ -66,6 +73,9 @@
       <file unpack="true" src="mirth-1.8.2.4472.zip" targetdir="$INSTALL_PATH/mirth" />
       <file src="${basedir}/src/izpack/mirth-setup.sh" targetdir="$INSTALL_PATH/scripts" />
       <executable targetfile="$INSTALL_PATH/scripts/mirth-setup.sh" stage="never" />
+      <executable targetfile="$INSTALL_PATH/mirth/mirth-daemon" stage="never" />
+      <executable targetfile="$INSTALL_PATH/mirth/mirth.sh" stage="never" />
+      <executable targetfile="$INSTALL_PATH/mirth/shell.sh" stage="never" />
     </pack>
 
   </packs>
