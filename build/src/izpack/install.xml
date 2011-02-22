@@ -76,6 +76,8 @@
       <executable targetfile="$INSTALL_PATH/mirth/mirth-daemon" stage="never" />
       <executable targetfile="$INSTALL_PATH/mirth/mirth.sh" stage="never" />
       <executable targetfile="$INSTALL_PATH/mirth/shell.sh" stage="never" />
+      <executable targetfile="$INSTALL_PATH/mirth/wrapper-linux-x86-32" stage="never" />
+      <executable targetfile="$INSTALL_PATH/mirth/wrapper-linux-x86-64" stage="never" />
     </pack>
 
   </packs>
