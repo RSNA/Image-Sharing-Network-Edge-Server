@@ -1,0 +1,169 @@
+MSH
+ 1 |
+ 2 ^~\&
+ 3 RSNA_OF
+ 4 XYZ_RADIOLOGY
+ 5 RSNA_IM
+ 6 XYZ_IMAGE_MANAGER
+ 7 
+ 8 
+ 9 ORM^O01
+ 10 1001001
+ 11 P
+ 12 2.3.1
+ 13 
+ 14 
+ 15 
+ 16 
+ 17 
+ 18  
+PID
+ 1
+ 2 
+ 3 74321^^^RSNA-Test
+ 4 
+ 5 Clark^Wayne
+ 6 
+ 7 19801214
+ 8 M
+ 9 
+ 10 AP
+ 11 
+ 12 
+ 13 
+ 14 
+ 15 
+ 16 
+ 17 
+ 18 74321
+ 19 
+ 20 
+ 21 
+ 22 
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30 
+PV1
+ 1 
+ 2 E
+ 3 
+ 4
+ 5
+ 6
+ 7 
+ 8 5101^NELL^FREDERICK^P^^DR
+ 9 
+ 10 
+ 11 
+ 12 
+ 13 
+ 14 
+ 15 
+ 16 
+ 17 
+ 18 
+ 19 V74321-001^^^RSNA-Test
+ 20 
+ 21 
+ 22 
+ 23 
+ 24 
+ 25 
+ 26 
+ 27 
+ 28 
+ 29 
+ 30 
+ 31 
+ 32 
+ 33 
+ 34 
+ 35 
+ 36 
+ 37 
+ 38 
+ 39 
+ 40 
+ 41 
+ 42 
+ 43 
+ 44 201102011300
+ 45 
+ 46 
+ 47 
+ 48 
+ 49 
+ 50 
+ 51 V
+ORC
+ 1 NW
+ 2 A1001.1Z^RSNA_ORDPLC
+ 3 1001.15Z^RSNA_ORDFIL
+ 4
+ 5 SC
+ 6
+ 7 1^once^^^^S
+ 8
+ 9 201102011510
+ 10 ^ROSEWOOD^RANDOLPH
+ 11
+ 12 7101^ESTRADA^JAIME^P^^DR
+ 13
+ 14 (314)555-1212
+ 15 201102011510
+ 16
+ 17 922229-10^IHE-RAD^IHE-CODE-231
+ 18
+ 19
+OBR
+ 1 1
+ 2 A1001.1Z^RSNA_ORDPLC
+ 3 1001.15Z^RSNA_ORDFIL
+ 4 K99^Head MR^RSNA-Test^K99_A1^Head MR Protocol Item 1^RSNA-Test
+ 5
+ 6
+ 7 
+ 8
+ 9
+ 10 
+ 11 
+ 12 
+ 13 xxx
+ 14 
+ 15 Radiology^^^^R^
+ 16 7101^ESTRADA^JAIME^P^^DR
+ 17 
+ 18 AA1001_1
+ 19 RP1001_1
+ 20 SPS1001_1.1
+ 21 
+ 22 
+ 23 
+ 24 MR
+ 25 
+ 26 
+ 27 1^once^^^^S
+ 28 
+ 29 
+ 30 WALK
+ 31 
+ 32 
+ 33 
+ 34 
+ 35 
+ 36 
+ 37 
+ 38 
+ 39 
+ 40 
+ 41 A
+ 42 
+ 43 
+ 44 K99^Head MR^RSNA-Test
+ZDS
+ 1 1.2.1^1001.1^Application^DICOM
