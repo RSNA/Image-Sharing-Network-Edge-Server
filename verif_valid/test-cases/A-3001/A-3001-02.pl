@@ -27,6 +27,7 @@ require image_sharing;
 
  @patient = image_sharing::select_patient_by_mrn("rsnadb", "A-3001-02");
 
+ print "Start patient data test\n";
  my %patientHash;
  @localPatient = ("pid", "A-3001-02", "Clark^Wilma^", "1980-12-16", "F");
  %patientHash = image_sharing::append_patient_hash_global(@patient, %patientHash);
