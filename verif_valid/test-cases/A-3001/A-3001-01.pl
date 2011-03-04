@@ -9,8 +9,10 @@ require image_sharing;
  image_sharing::check_environment();
  image_sharing::clear_db("rsnadb");
 
+ my $verbose = "";
+ $verbose = "1" if (scalar(@ARGV) > 0);
  chdir("data/A-3001");
- print `perl A-3001.pl`;
+ print `perl A-3001.pl $verbose`;
  die if $?;
  chdir("../..");
 
