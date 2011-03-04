@@ -23,7 +23,7 @@ sub fill_variables {
  my $verbose = 0;
  $verbose = 1 if (scalar(@ARGV) > 0);
  # First, create all scheduling ORM messages
- @ files = ("A-3001-01", "A-3001-02");
+ @ files = ("A-3001-01", "A-3001-02", "A-3001-03", "A-3001-04");
  foreach $f(@files) {
   print "$f\n" if ($verbose);
 
