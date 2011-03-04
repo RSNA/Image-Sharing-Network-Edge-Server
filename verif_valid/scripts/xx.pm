@@ -1,4 +1,5 @@
 use Env;
+use DBI;
 
 package image_sharing;
 
@@ -37,6 +38,19 @@ sub compute_file_lengths {
   $total += $fileSize;
  }
  return $total;
+}
+
+sub generate_date_time {
+  ($sec,$min,$hour,$mday,$mon,$year) = localtime(time);
+  $year += 1900; $mon++;
+  $mon  = "0" . $mon  if ($mon  < 9);
+  $mday = "0" . $mday if ($mday < 9);
+  $hour = "0" . $hour if ($hour < 9);
+  $min  = "0" . $min  if ($min  < 9);
+  $sec  = "0" . $sec  if ($sec  < 9);
+
+  my $t = $year . $mon . $mday . $hour . $min . $sec;
+  return $t;
 }
 
 
@@ -90,13 +104,13 @@ sub construct_hl7_orm_or_oru {
 }
 
 sub xmit_hl7 {
-  my $hostName = @_[0];
-  my $port = @_[1];
+  my $hostName = $_[0];
+  my $port = $_[1];
 
   my $maxIndex = scalar(@_);
   my $idx = 2;
   for ($idx = 2; $idx < $maxIndex; $idx++) {
-    my $x = "$main::MESA_TARGET/bin/send_hl7 localhost 20000 @_[$idx]";
+    my $x = "$main::MESA_TARGET/bin/send_hl7 localhost 20000 $_[$idx]";
     `$x`;
     die "Could not execute: $x" if $?;
   }
@@ -337,6 +351,26 @@ sub get_status_comment_pairs_from_transactions {
   }
   $dbh->disconnect();
   return %h;
+}
+
+sub clear_db {
+  my ($dbName) = @_;
+
+  my $dsn = "dbi:Pg:dbname=$dbName";
+  my $dbh = DBI->connect($dsn);
+  die "Could not connect" if $?;
+
+  @tableNames = ( "hipaa_audit_accession_numbers",
+	"hipaa_audit_mrns", "transactions", "jobs",
+	"job_sets", "reports", "exams", "patients");
+
+  foreach $t(@tableNames) {
+    my $str = "delete from $t;";
+    my $sth = $dbh->prepare($str);
+    $sth->execute();
+    die "Could not execute $str" if $?;
+  }
+  $dbh->disconnect();
 }
  
 1;
