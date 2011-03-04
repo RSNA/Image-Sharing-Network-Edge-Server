@@ -5,7 +5,7 @@ use File::Copy;
 use lib "..";
 use lib "../../scripts";
 require mesa_msgs;
-require xx;
+require image_sharing;
 
 sub fill_variables {
  my $path = shift;
@@ -20,10 +20,12 @@ sub fill_variables {
  close F;
 }
 
+ my $verbose = 0;
+ $verbose = 1 if (scalar(@ARGV) > 0);
  # First, create all scheduling ORM messages
- @ files = ("A-3001-01");
+ @ files = ("A-3001-01", "A-3001-02");
  foreach $f(@files) {
-  print "$f\n";
+  print "$f\n" if ($verbose);
 
   my $tmp = "/tmp/x.var";
   fill_variables($tmp);
@@ -34,13 +36,13 @@ sub fill_variables {
 	$tmp);			# Second input
 
   mesa_msgs::create_hl7("$f-orm");
-  print "$f ORM created\n";
+  print "Created: $f-orm\n" if ($verbose);
 
   mesa_msgs::create_text_file(
 	"$f.var",		# This is the output
 	"../ihe_oru.tpl",	# Template for an O01 message
 	"$f-oru.txt");		# Input with order information
   mesa_msgs::create_hl7("$f-oru");
-  print "$f ORU created\n";
+  print "Created: $f-oru\n" if ($verbose);
 
  }
