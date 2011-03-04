@@ -353,6 +353,25 @@ sub get_status_comment_pairs_from_transactions {
   return %h;
 }
 
+sub select_patient_by_mrn {
+ my ($dbName, $mrn) = @_;
+
+  my $dsn = "dbi:Pg:dbname=$dbName";
+  my $dbh = DBI->connect($dsn);
+  my $str = "select patient_id, mrn, patient_name, dob, sex from patients where mrn = '$mrn'";
+
+  my $sth = $dbh->prepare($str);
+  $sth->execute();
+  my @row = $sth->fetchrow_array;
+  if (scalar(@row) != 5) {
+  } else {
+    $sth->fetchrow_array;
+  }
+  $dbh->disconnect();
+  return @row;
+}
+
+
 sub clear_db {
   my ($dbName) = @_;
 
