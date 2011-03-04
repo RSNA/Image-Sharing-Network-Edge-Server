@@ -371,6 +371,24 @@ sub select_patient_by_mrn {
   return @row;
 }
 
+sub select_exam_by_patient_id {
+ my ($dbName, $pid) = @_;
+
+  my $dsn = "dbi:Pg:dbname=$dbName";
+  my $dbh = DBI->connect($dsn);
+  my $str = "select exam_id, accession_number, exam_description, modified_date from exams where patient_id = '$pid'";
+
+  my $sth = $dbh->prepare($str);
+  $sth->execute();
+  my @row = $sth->fetchrow_array;
+  if (scalar(@row) != 4) {
+  } else {
+    $sth->fetchrow_array;
+  }
+  $dbh->disconnect();
+  return @row;
+}
+
 
 sub clear_db {
   my ($dbName) = @_;
@@ -454,6 +472,58 @@ sub check_patient {
  if ($h{"G_SEX"} ne $h{"L_SEX"}) {
   $g = $h{"G_SEX"}; $l = $h{"L_SEX"};
   print "Global SEX <$g> does not match local SEX <$l>\n";
+  $pass = 0;
+ }
+
+ return $pass;
+}
+
+sub append_exam_hash_global {
+ my $gExamID = shift;
+ my $gAccNum = shift;
+ my $gExamDesc = shift;
+ my $gModDate = shift;
+
+ my %h = @_;
+
+ $h{"G_EXAM_ID"}   = $gExamID;
+ $h{"G_ACC_NUM"}   = $gAccNum;
+ $h{"G_EXAM_DESC"} = $gExamDesc;
+ $h{"G_MOD_DATE"}  = $gModDate;
+
+ return %h;
+}
+
+sub append_exam_hash_local {
+ my $lExamID = shift;
+ my $lAccNum = shift;
+ my $lExamDesc = shift;
+ my $lModDate = shift;
+
+ my %h = @_;
+
+ $h{"L_EXAM_ID"}   = $lExamID;
+ $h{"L_ACC_NUM"}   = $lAccNum;
+ $h{"L_EXAM_DESC"} = $lExamDesc;
+ $h{"L_MOD_DATE"}  = $lModDate;
+
+ return %h;
+}
+
+sub check_exam {
+ my %h = @_;
+
+ my $pass = 1;
+
+ if ($h{"G_ACC_NUM"} ne $h{"L_ACC_NUM"}) {
+  $g = $h{"G_ACC_NUM"}; $l = $h{"L_ACC_NUM"};
+  print "Global ACC_NUM <$g> does not match local ACC_NUM <$l>\n";
+  $pass = 0;
+ }
+
+ if ($h{"G_EXAM_DESC"} ne $h{"L_EXAM_DESC"}) {
+  $g = $h{"G_EXAM_DESC"}; $l = $h{"L_EXAM_DESC"};
+  print "Global EXAM_DESC <$g> does not match local EXAM_DESC <$l>\n";
   $pass = 0;
  }
 
