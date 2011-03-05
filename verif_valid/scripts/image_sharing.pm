@@ -137,7 +137,7 @@ sub extract_DICOM_attributes {
   my $path = shift;
 
   %attributeHash;
-  @tags = ("0008 0018", "0008 0050", "0010 0010", "0010 0020", "0020 000D", "0020 000E");
+  @tags = ("0002 0010", "0008 0018", "0008 0050", "0010 0010", "0010 0020", "0020 000D", "0020 000E");
   foreach $t(@tags) {
     my $x = "/opt/mesa/bin/dcm_print_element $t $path";
     my $y = `$x`; chomp $y;
@@ -170,6 +170,17 @@ sub cstore
   $x .= " -set 00080050=$accessionNumber";
   $x .= " -set 00080030=$studyTime";
   $x .= " -setuid $uidPrefix" if ($uidPrefix ne "");
+
+  `$x`;
+  die "Could not execute $x" if $?;
+}
+
+sub cstore_EVRLE
+{
+  my ($folder, $ae, $dcmHost, $port, $name, $patID, $accessionNumber, $uidPrefix) = @_;
+  my $studyTime = "120000";
+
+  my $x = "/opt/mesa/bin/send_image -X 1.2.840.10008.1.2.1 -c $ae $dcmHost $port $folder";
 
   `$x`;
   die "Could not execute $x" if $?;
