@@ -75,19 +75,6 @@ sub extract_parameters()
   return @params;
 }
 
-sub check_dicom_rcvr
-{
-  my ($ae, $dcmHost, $port) = @_;
-
-  my $x = "$DCM4CHE_HOME/bin/dcmecho $ae" . "@" . "$dcmHost:$port";
-  `$x`;
-  if ($?) {
-    print "DICOM Connection failed: $x\n\n";
-    print `$x`;
-    die "\n\n";
-  }
-}
-
 sub make_folder
 {
   my ($folder) = @_;
@@ -183,7 +170,7 @@ sub p {
  image_sharing::check_environment();
  ($ae, $dcmHost, $port) = image_sharing::default_DICOM_params();
 
- check_dicom_rcvr($ae, $dcmHost, $port);
+ image_sharing::check_dicom_rcvr($ae, $dcmHost, $port);
 
  $folderDICOM = "/rsna/test-data/HitachiMR-2011-KIN/0A541B4B";
  $targetFolder= "/rsna/dcm/A-4001-01";
