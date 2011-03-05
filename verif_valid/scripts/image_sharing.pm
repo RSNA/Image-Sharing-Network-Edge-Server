@@ -146,6 +146,35 @@ sub extract_DICOM_attributes {
   return %attributeHash;
 }
 
+sub check_dicom_rcvr
+{
+  my ($ae, $dcmHost, $port) = @_;
+
+  my $x = "$main::DCM4CHE_HOME/bin/dcmecho $ae" . "@" . "$dcmHost:$port";
+  `$x`;
+  if ($?) {
+    print "DICOM Connection failed: $x\n\n";
+    print `$x`;
+    die "\n\n";
+  }
+}
+
+sub cstore
+{
+  my ($folder, $ae, $dcmHost, $port, $name, $patID, $accessionNumber, $uidPrefix) = @_;
+  my $studyTime = "120000";
+  my $x = "$main::DCM4CHE_HOME/bin/dcmsnd $ae" . "@" . "$dcmHost:$port $folder";
+  $x .= " -ts1 ";
+  $x .= " -set 00100010='$name'";
+  $x .= " -set 00100020=$patID";
+  $x .= " -set 00080050=$accessionNumber";
+  $x .= " -set 00080030=$studyTime";
+  $x .= " -setuid $uidPrefix" if ($uidPrefix ne "");
+
+  `$x`;
+  die "Could not execute $x" if $?;
+}
+
 
 # # #
 # Database functions
