@@ -53,6 +53,15 @@ sub generate_date_time {
   return $t;
 }
 
+sub remove_folder {
+ my $folder = shift;
+
+ if (-e $folder) {
+  $x = "rm -r $folder";
+  `$x`;
+  die "Could not remove folder: $folder" if $?;
+ }
+}
 
 sub construct_hl7_orm_or_oru {
  my $output = shift;
@@ -115,6 +124,32 @@ sub xmit_hl7 {
     die "Could not execute: $x" if $?;
   }
 }
+
+# # #
+# DICOM functions
+# # #
+
+sub default_DICOM_params {
+ return("RSNA-ISN", "localhost", 4104);
+}
+
+sub extract_DICOM_attributes {
+  my $path = shift;
+
+  %attributeHash;
+  @tags = ("0008 0018", "0008 0050", "0010 0010", "0010 0020", "0020 000D", "0020 000E");
+  foreach $t(@tags) {
+    my $x = "/opt/mesa/bin/dcm_print_element $t $path";
+    my $y = `$x`; chomp $y;
+    $attributeHash{$t} = $y;
+  }
+  return %attributeHash;
+}
+
+
+# # #
+# Database functions
+# # #
 
 sub get_max_exam_id {
  my ($dbName) = @_;
