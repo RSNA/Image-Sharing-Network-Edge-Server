@@ -126,22 +126,8 @@ sub load_hash_parameters {
 }
 
 
-sub send_files
-{
-  my ($folder, $ae, $dcmHost, $port, $name, $patID, $accessionNumber) = @_;
-  my $studyTime = "120000";
-  my $x = "$DCM4CHE_HOME/bin/dcmsnd $ae" . "@" . "$dcmHost:$port $folder";
-  $x .= " -set 00100010='$name'";
-  $x .= " -set 00100020=$patID";
-  $x .= " -set 00080050=$accessionNumber";
-  $x .= " -set 00080030=$studyTime";
-
-  `$x`;
-  die "Could not execute $x" if $?;
-}
-
 sub p {
- my ($path, $name, $patientID, $accessionNumber) = @_;
+ my ($path, $name, $patientID, $accessionNumber, $xferSyntax) = @_;
 
 # print "$path\n";
  %h = image_sharing::extract_DICOM_attributes($path);
@@ -149,6 +135,7 @@ sub p {
  my $fName            = $h{"0010 0010"};
  my $fPatientID       = $h{"0010 0020"};
  my $fAccessionNumber = $h{"0008 0050"};
+ my $fXferSyntax      = $h{"0002 0010"};
 # print "$path  $studyUID\n";
  my $pass = 1;
  if ($fName ne $name) {
@@ -160,7 +147,11 @@ sub p {
   $pass = 0;
  }
  if ($fAccessionNumber ne $accessionNumber) {
-  print "Acession Number in file <$fPatientID> does not match expected <$patientID>\n";
+  print "Accession Number in file <$fAccessionNumber> does not match expected <$xferSyntax>\n";
+  $pass = 0;
+ }
+ if ($fXferSyntax ne $xferSyntax) {
+  print "Xfer Syntax in file <$fXferSyntax> does not match expected <$xferSyntax>\n";
   $pass = 0;
  }
  return $pass;
@@ -172,20 +163,21 @@ sub p {
 
  image_sharing::check_dicom_rcvr($ae, $dcmHost, $port);
 
- $folderDICOM = "/rsna/test-data/HitachiMR-2011-KIN/0A541B4B";
+ $folderDICOM = "/rsna/test-data/HitachiMR-2011-KIN-EVRLE/0A541B4B-EVRLE";
  $targetFolder= "/rsna/dcm/A-4001-01";
  image_sharing::remove_folder($targetFolder);
 
  ($name, $patID, $accessionNumber) = ("Waters^C", "A-4001-01", "A-4001-01-ACC");
- send_files($folderDICOM, $ae, $dcmHost, $port, $name, $patID, $accessionNumber);
+# image_sharing::cstore_EVRLE($folderDICOM, $ae, $dcmHost, $port, $name, $patID, $accessionNumber, "");
+ image_sharing::cstore($folderDICOM, $ae, $dcmHost, $port, $name, $patID, $accessionNumber, "");
  print "DICOM files transmitted\n";
 
- ($name, $patID, $accessionNumber) = ("Waters^C", "A-4001-01", "A-4001-01-ACC");
  @allFiles = <$targetFolder/A-4001-01-ACC/*>;
  $totalFiles = scalar(@allFiles);
  $totalPass = 0;
+ my $xferSyntax = "1.2.840.10008.1.2.1";	# EVRLE
  foreach $f(@allFiles) {
-  $totalPass += p($f, $name, $patID, $accessionNumber);
+  $totalPass += p($f, $name, $patID, $accessionNumber, $xferSyntax);
  }
 
   die "A-4001-01 fail: at least one file did not pass ($totalPass of $totalFiles did pass)\n"
