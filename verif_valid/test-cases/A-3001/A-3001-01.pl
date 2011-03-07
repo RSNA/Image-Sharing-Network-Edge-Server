@@ -5,23 +5,6 @@ use DBI;
 use lib "scripts";
 require image_sharing;
 
-sub select_patient {
- my ($dbName, $testMRN) = @_;
-
- @patient = image_sharing::select_patient_by_mrn($dbName, $testMRN);
- if (scalar(@patient) < 5) {
-  $x = scalar(@patient);
-  if ($x == 0) {
-   print "No patient record returned for MRN: $testMRN\n";
-  } else {
-   print "Row for patient with MRN: $testMRN has only $x columns.\n";
-   print " We expected at least 5\n";
-  }
-  die "Failed A-3001-01";
- }
- return @patient;
-}
-
 sub select_exam {
  my ($dbName, $pid) = @_;
 
@@ -71,7 +54,7 @@ sub dump_hints
  }
 
  $testMRN = "A-3001-01";
- @patient = select_patient("rsnadb", $testMRN);
+ @patient = image_sharing::select_patient_by_mrn("rsnadb", $testMRN);
  @exam    = select_exam("rsnadb", $patient[0]);
 
  print "Start patient data test\n";
