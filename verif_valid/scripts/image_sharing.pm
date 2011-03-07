@@ -136,7 +136,7 @@ sub default_DICOM_params {
 sub extract_DICOM_attributes {
   my $path = shift;
 
-  %attributeHash;
+  my %attributeHash;
   @tags = ("0002 0010", "0008 0018", "0008 0050", "0010 0010", "0010 0020", "0020 000D", "0020 000E");
   foreach $t(@tags) {
     my $x = "/opt/mesa/bin/dcm_print_element $t $path";
@@ -230,6 +230,75 @@ sub get_max_job_set_id {
   $dbh->disconnect();
   return $row[0];
 }
+
+sub get_job_sets_by_pid {
+ my ($dbName, $pid) = @_;
+
+  my $dsn = "dbi:Pg:dbname=$dbName";
+  my $dbh = DBI->connect($dsn);
+  my $str = "select job_set_id, email_address, delay_in_hrs, single_use_patient_id from job_sets where patient_id = '$pid';";
+
+  my @jobSets; my $idx = 0;
+  my $sth = $dbh->prepare($str);
+  $sth->execute();
+  my @row = $sth->fetchrow_array;
+  while (scalar(@row) == 4) {
+    $jobSets[$idx+0] = $row[0];
+    $jobSets[$idx+1] = $row[1];
+    $jobSets[$idx+2] = $row[2];
+    $jobSets[$idx+3] = $row[3];
+    $idx += 4;
+    @row = $sth->fetchrow_array;
+  }
+  $dbh->disconnect();
+  return @jobSets;
+}
+
+sub get_jobs_by_job_set_id {
+ my ($dbName, $jobSetID) = @_;
+
+  my $dsn = "dbi:Pg:dbname=$dbName";
+  my $dbh = DBI->connect($dsn);
+  my $str = "select job_id, exam_id, report_id, document_id from jobs where job_set_id = $jobSetID;";
+
+  my @jobs; my $idx = 0;
+  my $sth = $dbh->prepare($str);
+  $sth->execute();
+  my @row = $sth->fetchrow_array;
+  while (scalar(@row) == 4) {
+    $jobs[$idx+0] = $row[0];
+    $jobs[$idx+1] = $row[1];
+    $jobs[$idx+2] = $row[2];
+    $jobs[$idx+3] = $row[3];
+    $idx += 4;
+    @row = $sth->fetchrow_array;
+  }
+  $dbh->disconnect();
+  return @jobs;
+}
+
+sub get_transactions_by_job_id {
+ my ($dbName, $jobID) = @_;
+
+  my $dsn = "dbi:Pg:dbname=$dbName";
+  my $dbh = DBI->connect($dsn);
+  my $str = "select transaction_id, status_code, comments, modified_date from transactions where job_id = $jobID;";
+
+  my @transactions; my $idx = 0;
+  my $sth = $dbh->prepare($str);
+  $sth->execute();
+  my @row = $sth->fetchrow_array;
+  while (scalar(@row) == 4) {
+    $transactions[$idx+0] = $row[0];
+    $transactions[$idx+1] = $row[1];
+    $transactions[$idx+2] = $row[2];
+    $transactions[$idx+3] = $row[3];
+    $idx += 4;
+    @row = $sth->fetchrow_array;
+  }
+  return @transactions;
+}
+
 
 sub get_max_job_id {
  my ($dbName) = @_;
@@ -384,10 +453,57 @@ sub select_patient {
     my $x = scalar(@row);
     die "In select_patient, wrong number of columns returned. We expected 1 and received: $x";
   } else {
-    $sth->fetchrow_array;
+    @tmp = $sth->fetchrow_array;
   }
   $dbh->disconnect();
   return @row;
+}
+
+sub select_patients_no_consent {
+ my ($dbName) = @_;
+
+  my $dsn = "dbi:Pg:dbname=$dbName";
+  my $dbh = DBI->connect($dsn);
+  my $str = "select patient_id, mrn, patient_name, dob, sex from patients where consent_timestamp is null";
+
+  my @rtnPatients;
+  my $sth = $dbh->prepare($str);
+  $sth->execute();
+  my @row = $sth->fetchrow_array;
+  my $idx = 0;
+  while (scalar(@row) == 5) {
+    my $x = $row[1];
+    my $y = $row[2];
+    my $z = $row[3];
+    $rtnPatients[$idx] = $x . " : " . $z . " : " . $y; $idx++;
+    @row = $sth->fetchrow_array;
+  }
+  $dbh->disconnect();
+  return @rtnPatients;
+}
+
+sub select_patients_with_consent {
+ my ($dbName) = @_;
+
+  my $dsn = "dbi:Pg:dbname=$dbName";
+  my $dbh = DBI->connect($dsn);
+  my $str = "select patient_id, mrn, patient_name, dob, sex, consent_timestamp from patients where consent_timestamp is not null";
+
+  my @rtnPatients;
+  my $sth = $dbh->prepare($str);
+  $sth->execute();
+  my @row = $sth->fetchrow_array;
+  my $idx = 0;
+  while (scalar(@row) == 6) {
+    my $w = $row[1];
+    my $x = $row[2];
+    my $y = $row[3];
+    my $z = $row[5];
+    $rtnPatients[$idx] = $z . " : " . $w . " : " . $y . " : " . $x; $idx++;
+    @row = $sth->fetchrow_array;
+  }
+  $dbh->disconnect();
+  return @rtnPatients;
 }
 
 sub get_status_date_pairs_from_transactions {
