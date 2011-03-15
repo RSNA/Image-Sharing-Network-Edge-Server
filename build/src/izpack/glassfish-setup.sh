@@ -16,6 +16,7 @@ chown -R edge:edge $INSTALL_PATH &&
 chmod -R +x $INSTALL_PATH/glassfishv3/bin &&
 chmod -R +x $INSTALL_PATH/glassfishv3/glassfish/bin &&
 
+su edge -l -c "mkdir -p $INSTALL_PATH/glassfishv3/glassfish/lib/asadmin"
 su edge -l -c "$INSTALL_PATH/glassfishv3/bin/asadmin start-domain domain1" &&
 su edge -l -c "$INSTALL_PATH/glassfishv3/bin/asadmin create-jdbc-connection-pool --datasourceclassname org.postgresql.ds.PGConnectionPoolDataSource --restype javax.sql.ConnectionPoolDataSource --property 'User=$DBUSER:Password=$DBPASS:ServerName=$DBHOST:PortNumber=$DBPORT:DatabaseName=rsnadb' rsnadb" &&
 su edge -l -c "$INSTALL_PATH/glassfishv3/bin/asadmin create-jdbc-resource --connectionpoolid rsnadb jdbc/rsnadb" &&
