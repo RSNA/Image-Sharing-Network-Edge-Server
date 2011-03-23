@@ -5,7 +5,7 @@ use DBI;
 
 use lib "scripts";
 
-require xx;
+require image_sharing;
 
 sub usage_and_die()
 {
@@ -187,7 +187,10 @@ sub send_files
  @patient = image_sharing::select_patient("rsnadb", $patID);
  print "$patient[2] $patient[3]\n";
 
- send_files($tmpFolderDICOM, $ae, $dcmHost, $port, $name, $patID, $accessionNumber);
+ my $uidSuffix = "." . image_sharing::generate_date_time();
+ $uidSuffix = $uidSuffix . ":" . $uidSuffix . ":" . $uidSuffix;
+
+ image_sharing::cstore($tmpFolderDICOM, $ae, $dcmHost, $port, $name, $patID, $accessionNumber, $uidSuffix);
  print "DICOM files transmitted\n";
 
  my $examID = image_sharing::get_max_exam_id("rsnadb");
@@ -196,15 +199,15 @@ sub send_files
  $jobID += 1;
  my $userID = 9;		# Steve Moore
  my $singleUseID = "xx-single-use-" . $patID;
- image_sharing::insert_new_job_set("rsnadb", $patIndex, $userID, $singleUseID);
-
- my $jobSetID =  image_sharing::get_max_job_set_id("rsnadb");
- image_sharing::insert_new_job("rsnadb", $jobSetID, $examID);
-
- my $jobID =  image_sharing::get_max_job_id("rsnadb");
- $kiloBytes = $totalBytes / 1024;
- image_sharing::insert_new_transaction("rsnadb", $jobID, 29, $kiloBytes);
- image_sharing::insert_new_transaction("rsnadb", $jobID, 30, "V/V Ready to transfer");
- print "Database entries complete\n";
-
-# print "Max examID: $examID jobID: $jobID patID: $patIndex\n";
+##- image_sharing::insert_new_job_set("rsnadb", $patIndex, $userID, $singleUseID);
+##-
+##- my $jobSetID =  image_sharing::get_max_job_set_id("rsnadb");
+##- image_sharing::insert_new_job("rsnadb", $jobSetID, $examID);
+##-
+##- my $jobID =  image_sharing::get_max_job_id("rsnadb");
+##- $kiloBytes = $totalBytes / 1024;
+##- image_sharing::insert_new_transaction("rsnadb", $jobID, 29, $kiloBytes);
+##- image_sharing::insert_new_transaction("rsnadb", $jobID, 30, "V/V Ready to transfer");
+##- print "Database entries complete\n";
+##-
+##-# print "Max examID: $examID jobID: $jobID patID: $patIndex\n";

@@ -161,7 +161,7 @@ sub check_dicom_rcvr
 
 sub cstore
 {
-  my ($folder, $ae, $dcmHost, $port, $name, $patID, $accessionNumber, $uidPrefix) = @_;
+  my ($folder, $ae, $dcmHost, $port, $name, $patID, $accessionNumber, $uidSuffix) = @_;
   my $studyTime = "120000";
   my $x = "$main::DCM4CHE_HOME/bin/dcmsnd $ae" . "@" . "$dcmHost:$port $folder";
   $x .= " -ts1 ";
@@ -169,15 +169,16 @@ sub cstore
   $x .= " -set 00100020=$patID";
   $x .= " -set 00080050=$accessionNumber";
   $x .= " -set 00080030=$studyTime";
-  $x .= " -setuid $uidPrefix" if ($uidPrefix ne "");
+  $x .= " -setuid $uidSuffix" if ($uidSuffix ne "");
 
-  `$x`;
+  print "$x\n";
+  print `$x`;
   die "Could not execute $x" if $?;
 }
 
 sub cstore_EVRLE
 {
-  my ($folder, $ae, $dcmHost, $port, $name, $patID, $accessionNumber, $uidPrefix) = @_;
+  my ($folder, $ae, $dcmHost, $port, $name, $patID, $accessionNumber, $uidSuffix) = @_;
   my $studyTime = "120000";
 
   my $x = "/opt/mesa/bin/send_image -X 1.2.840.10008.1.2.1 -c $ae $dcmHost $port $folder";
