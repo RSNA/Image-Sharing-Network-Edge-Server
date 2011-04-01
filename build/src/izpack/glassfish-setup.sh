@@ -3,6 +3,8 @@ DBUSER=edge
 DBHOST=$1
 DBPORT=$2
 
+export AS_JAVA=$JAVA_HOME
+
 id -u edge > /dev/null 2>&1
 if [ "$?" -eq "1" ]; then
     useradd --system edge -d $INSTALL_PATH

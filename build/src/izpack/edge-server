@@ -24,6 +24,8 @@ USER=edge
 
 JAVA=$JAVA_HOME/bin/java
 
+export AS_JAVA=$JAVA_HOME
+
 . /lib/lsb/init-functions
 
 case $1 in
