@@ -125,21 +125,6 @@ sub load_hash_parameters {
  $h{"Z"} = $h{"Z"};
 }
 
-
-sub send_files
-{
-  my ($folder, $ae, $dcmHost, $port, $name, $patID, $accessionNumber) = @_;
-  my $studyTime = "120000";
-  my $x = "$DCM4CHE_HOME/bin/dcmsnd $ae" . "@" . "$dcmHost:$port $folder";
-  $x .= " -set 00100010='$name'";
-  $x .= " -set 00100020=$patID";
-  $x .= " -set 00080050=$accessionNumber";
-  $x .= " -set 00080030=$studyTime";
-
-  `$x`;
-  die "Could not execute $x" if $?;
-}
-
 sub p {
  my ($path, $name, $patientID, $accessionNumber) = @_;
 
@@ -169,15 +154,16 @@ sub p {
 ## Main starts here
  image_sharing::check_environment();
  ($ae, $dcmHost, $port) = image_sharing::default_DICOM_params();
+ ($defaultEdgeFolder)   = image_sharing::default_EDGE_params();
 
  image_sharing::check_dicom_rcvr($ae, $dcmHost, $port);
 
  $folderDICOM = "/rsna/test-data/HitachiMR-2011-KIN/4F1863BA";
- $targetFolder= "/rsna/dcm/A-4001-02";
+ $targetFolder= "$defaultEdgeFolder/dcm/A-4001-02";
  image_sharing::remove_folder($targetFolder);
 
  ($name, $patID, $accessionNumber) = ("Waters^C", "A-4001-02", "A-4001-02-ACC");
- send_files($folderDICOM, $ae, $dcmHost, $port, $name, $patID, $accessionNumber);
+ image_sharing::cstore($folderDICOM, $ae, $dcmHost, $port, $name, $patID, $accessionNumber, "");
  print "DICOM files transmitted\n";
 
  @allFiles = <$targetFolder/A-4001-02-ACC/*>;

@@ -160,11 +160,12 @@ sub p {
 ## Main starts here
  image_sharing::check_environment();
  ($ae, $dcmHost, $port) = image_sharing::default_DICOM_params();
+ ($defaultEdgeFolder)   = image_sharing::default_EDGE_params();
 
  image_sharing::check_dicom_rcvr($ae, $dcmHost, $port);
 
  $folderDICOM = "/rsna/test-data/GE-MG-Clunie-Set/001001-Study-1";
- $targetFolder= "/rsna/dcm/A-4001-12";
+ $targetFolder= "$defaultEdgeFolder/dcm/A-4001-12";
  image_sharing::remove_folder($targetFolder);
 
  ($name, $patID, $accessionNumber) = ("Waters^C", "A-4001-12", "A-4001-12-ACC");

@@ -160,11 +160,12 @@ sub p {
 ## Main starts here
  image_sharing::check_environment();
  ($ae, $dcmHost, $port) = image_sharing::default_DICOM_params();
+ ($defaultEdgeFolder)   = image_sharing::default_EDGE_params();
 
  image_sharing::check_dicom_rcvr($ae, $dcmHost, $port);
 
  $folderDICOM = "/rsna/test-data/HitachiMR-2011-KIN-EVRLE/0A541B4B-EVRLE";
- $targetFolder= "/rsna/dcm/A-4001-01";
+ $targetFolder= "$defaultEdgeFolder/dcm/A-4001-01";
  image_sharing::remove_folder($targetFolder);
 
  ($name, $patID, $accessionNumber) = ("Waters^C", "A-4001-01", "A-4001-01-ACC");
@@ -175,7 +176,8 @@ sub p {
  @allFiles = <$targetFolder/A-4001-01-ACC/*>;
  $totalFiles = scalar(@allFiles);
  $totalPass = 0;
- my $xferSyntax = "1.2.840.10008.1.2.1";	# EVRLE
+# my $xferSyntax = "1.2.840.10008.1.2.1";	# EVRLE
+ my $xferSyntax = "1.2.840.10008.1.2";		# IVRLE
  foreach $f(@allFiles) {
   $totalPass += p($f, $name, $patID, $accessionNumber, $xferSyntax);
  }
@@ -183,4 +185,4 @@ sub p {
   die "A-4001-01 fail: at least one file did not pass ($totalPass of $totalFiles did pass)\n"
  if ($totalPass != $totalFiles);
   
-  print "A-4001-01 pass\n";
+  print "A-4001-01 pass: $totalPass\n";
