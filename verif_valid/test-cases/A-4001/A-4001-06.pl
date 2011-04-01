@@ -160,11 +160,12 @@ sub p {
 ## Main starts here
  image_sharing::check_environment();
  ($ae, $dcmHost, $port) = image_sharing::default_DICOM_params();
+ ($defaultEdgeFolder)   = image_sharing::default_EDGE_params();
 
  image_sharing::check_dicom_rcvr($ae, $dcmHost, $port);
 
  $folderDICOM = "/rsna/test-data/FUJI95714-EVRLE";
- $targetFolder= "/rsna/dcm/A-4001-06";
+ $targetFolder= "$defaultEdgeFolder/dcm/A-4001-06";
  image_sharing::remove_folder($targetFolder);
 
  ($name, $patID, $accessionNumber) = ("Waters^F", "A-4001-06", "A-4001-06-ACC");

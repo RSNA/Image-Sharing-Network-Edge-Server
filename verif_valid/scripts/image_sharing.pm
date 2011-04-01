@@ -10,6 +10,10 @@ require Exporter;
 @EXPORT = qw(
 );
 
+sub default_EDGE_params {
+  return "/usr/local/edgeserver-1.0-SNAPSHOT";
+}
+
 sub check_environment {
  @ folders = ( "scripts", "db" );
  foreach $f(@folders) {
@@ -585,6 +589,12 @@ sub clear_db {
   my ($dbName) = @_;
 
   my $dsn = "dbi:Pg:dbname=$dbName";
+#  my $user = "postgres";
+#  my $pwd  = "N3K647A";
+#  my $pwd = "ea5be84642009230a6ae5a871a63c03b";
+#  my $user = "edge";
+#  my $pwd  = "d17bK4#M";
+#  my $dbh = DBI->connect($dsn, $user, $pwd);
   my $dbh = DBI->connect($dsn);
   die "Could not connect" if $?;
 

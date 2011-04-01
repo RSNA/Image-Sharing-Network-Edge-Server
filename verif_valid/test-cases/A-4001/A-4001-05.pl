@@ -52,11 +52,12 @@ print "$xferSyntax\n";
 ## Main starts here
  image_sharing::check_environment();
  ($ae, $dcmHost, $port) = image_sharing::default_DICOM_params();
+ ($defaultEdgeFolder)   = image_sharing::default_EDGE_params();
 
  image_sharing::check_dicom_rcvr($ae, $dcmHost, $port);
 
  $folderDICOM = "/rsna/test-data/ToshibaCT-2011/EVRLE";
- $targetFolder= "/rsna/dcm/A-4001-05";
+ $targetFolder= "$defaultEdgeFolder/dcm/A-4001-05";
  image_sharing::remove_folder($targetFolder);
 
  ($name, $patID, $accessionNumber) = ("Waters^D", "A-4001-05", "A-4001-05-ACC");
@@ -67,7 +68,7 @@ print "$xferSyntax\n";
  die "No files in target folder" if (scalar(@allFiles == 0));
  $totalFiles = scalar(@allFiles);
  $totalPass = 0;
- $xferSyntax = "1.2.840.10008.1.2.1";
+ $xferSyntax = "1.2.840.10008.1.2";
  foreach $f(@allFiles) {
   $totalPass += p($f, $name, $patID, $accessionNumber, $xferSyntax);
  }

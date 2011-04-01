@@ -55,6 +55,7 @@ sub dump_hints
 
  $testMRN = "A-3001-01";
  @patient = image_sharing::select_patient_by_mrn("rsnadb", $testMRN);
+ die "A-3001 select patient by MRN failed for MRN: $testMRN" if (scalar(@patient) == 0);
  @exam    = select_exam("rsnadb", $patient[0]);
 
  print "Start patient data test\n";

@@ -69,11 +69,12 @@ sub walk{
 ## Main starts here
  image_sharing::check_environment();
  ($ae, $dcmHost, $port) = image_sharing::default_DICOM_params();
+ ($defaultEdgeFolder)   = image_sharing::default_EDGE_params();
 
  image_sharing::check_dicom_rcvr($ae, $dcmHost, $port);
 
  $folderDICOM = "/rsna/test-data/HitachiMR-2011-KIN";
- $targetFolder= "/rsna/dcm/A-4001-03";
+ $targetFolder= "$defaultEdgeFolder/dcm/A-4001-03";
  image_sharing::remove_folder($targetFolder);
 
  ($name, $patID, $accessionNumber) = ("Waters^C", "A-4001-03", "A-4001-03-ACC");
