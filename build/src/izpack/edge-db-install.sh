@@ -14,4 +14,5 @@ echo "creating admin user to web interface, default password is 'changeme'"
 /usr/bin/env psql -w -h $DBHOST -p $DBPORT -U $SUPERUSER rsnadb <<EOF
 INSERT INTO users (user_login, user_name, email, crypted_password, salt, created_at, updated_at, role_id, modified_date)
 VALUES ('admin','Admin User','admin@example.com','bf5f41c22dc80df8ac01d7d8ab59ac904c3cc495','7335cc4d576fc77fecfdf0d986396c86904b3518',now(),now(),2,now());
+INSERT INTO configurations (key, value, modified_date) values ('tmp-dir-path','$INSTALL_PATH/tmp', now());
 EOF

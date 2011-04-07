@@ -52,7 +52,7 @@
 	<exclude name="izpack*.jar" />
       </fileset>
       <file src="version.txt" targetdir="$INSTALL_PATH"/>
-      <file src="${basedir}/../database/RSNADB_Schema.sql" targetdir="$INSTALL_PATH" />
+      <file src="${basedir}/../database/rsna.sql" targetdir="$INSTALL_PATH" />
       <file src="${basedir}/src/izpack/edge-db-install.sh" targetdir="$INSTALL_PATH/scripts" />
       <file src="${basedir}/src/izpack/database.properties" targetdir="$INSTALL_PATH/conf" />
       <file src="${basedir}/src/izpack/edge-server" targetdir="/etc/init.d" os="unix" />

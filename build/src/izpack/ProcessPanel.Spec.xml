@@ -7,7 +7,7 @@
       <arg>$database.host</arg>
       <arg>$database.port</arg>
       <arg>$database.superuser</arg>
-      <arg>$INSTALL_PATH/RSNADB_Schema.sql</arg>
+      <arg>$INSTALL_PATH/rsna.sql</arg>
     </executefile>
   </job>
   <job name="mirth setup">
