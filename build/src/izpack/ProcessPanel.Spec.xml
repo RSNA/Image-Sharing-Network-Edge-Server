@@ -8,6 +8,7 @@
       <arg>$database.port</arg>
       <arg>$database.superuser</arg>
       <arg>$INSTALL_PATH/rsna.sql</arg>
+      <arg>$INSTALL_PATH/tmp</arg>
     </executefile>
   </job>
   <job name="mirth setup">

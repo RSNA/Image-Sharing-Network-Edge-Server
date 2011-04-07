@@ -14,6 +14,7 @@ cp -v $INSTALL_PATH/scripts/domain.xml $INSTALL_PATH/glassfishv3/glassfish/domai
 mkdir -p $INSTALL_PATH/glassfishv3/glassfish/domains/domain1/lib &&
 cp -v $INSTALL_PATH/ext/postgresql-*.jar $INSTALL_PATH/glassfishv3/glassfish/domains/domain1/lib &&
 
+mkdir -p $INSTALL_PATH/tmp &&
 chown -R edge:edge $INSTALL_PATH &&
 chmod -R +x $INSTALL_PATH/glassfishv3/bin &&
 chmod -R +x $INSTALL_PATH/glassfishv3/glassfish/bin &&
