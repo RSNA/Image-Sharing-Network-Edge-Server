@@ -176,7 +176,7 @@ sub p {
  @allFiles = <$targetFolder/A-4001-12-ACC/*>;
  $totalFiles = scalar(@allFiles);
  $totalPass = 0;
- my $xferSyntax = "1.2.840.10008.1.2.1";	# EVRLE
+ my $xferSyntax = "1.2.840.10008.1.2";	# IVRLE
  foreach $f(@allFiles) {
   $totalPass += p($f, $name, $patID, $accessionNumber, $xferSyntax);
  }
