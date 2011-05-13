@@ -44,7 +44,7 @@
 </field>
 <field type="space" />
 <field type="text" variable="mirthdb.name">
-  <spec txt="Username for Mirth Database:" size="25" set="mirthdb" />
+  <spec txt="Mirth Database Name:" size="25" set="mirthdb" />
 </field>
 <field type="text" variable="mirthdb.username">
   <spec txt="Username for Mirth Database:" size="25" set="mirth" />
