@@ -1,30 +1,27 @@
-[submodule "admin-app"]
-	path = admin-app
-	url = git@rsna-nibib-code.mirtl.org:image-sharing/admin-app.git
 [submodule "documentation"]
 	path = documentation
-	url = git@rsna-nibib-code.mirtl.org:image-sharing/documentation.git
+	url = git://github.com/RSNA/isn-edge-server-documentation.git
 [submodule "hl7-receiver-app"]
 	path = hl7-receiver-app
-	url = git@rsna-nibib-code.mirtl.org:image-sharing/hl7-receiver-app.git
+	url = git://github.com/RSNA/isn-edge-server-hl7-receiver.git
 [submodule "prepare-content-app"]
 	path = prepare-content-app
-	url = git@rsna-nibib-code.mirtl.org:image-sharing/prepare-content-app.git
+	url = git://github.com/RSNA/isn-edge-server-prepare-content.git
 [submodule "token-app"]
 	path = token-app
-	url = git@rsna-nibib-code.mirtl.org:image-sharing/token-app.git
+	url = git://github.com/RSNA/isn-edge-server-token.git
 [submodule "transfer-content-app"]
 	path = transfer-content-app
-	url = git@rsna-nibib-code.mirtl.org:image-sharing/transfer-content-app.git
+	url = git://github.com/RSNA/isn-edge-server-transfer-content.git
 [submodule "database"]
 	path = database
-	url = git@rsna-nibib-code.mirtl.org:image-sharing/database.git
+	url = git://github.com/RSNA/isn-edge-server-database.git
 [submodule "rsna"]
 	path = rsna
-	url = git@rsna-nibib-code.mirtl.org:image-sharing/rsna.git
+	url = git://github.com/RSNA/isn-edge-server-rsna.git
 [submodule "core"]
 	path = core
-	url = git@rsna-nibib-code.mirtl.org:image-sharing/core.git
+	url = git://github.com/RSNA/isn-edge-server-core.git
 [submodule "receive-content-app"]
 	path = receive-content-app
-	url = git@rsna-nibib-code.mirtl.org:image-sharing/receive-content-app.git
+	url = git://github.com/RSNA/isn-edge-server-receive-content.git
