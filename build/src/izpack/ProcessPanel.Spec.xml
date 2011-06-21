@@ -1,0 +1,38 @@
+<processing>
+  <job name="install database">
+    <os family="unix" />
+    <executefile name="$INSTALL_PATH/scripts/edge-db-install.sh">
+      <env>DBPASSWD=$database.password</env>
+      <env>DBSUPERPASSWD=$database.superpassword</env>
+      <arg>$database.host</arg>
+      <arg>$database.port</arg>
+      <arg>$database.superuser</arg>
+      <arg>$INSTALL_PATH/rsna.sql</arg>
+      <arg>$INSTALL_PATH/tmp</arg>
+    </executefile>
+  </job>
+  <job name="mirth setup">
+    <createForPack name="Mirth" />
+    <os family="unix" />
+    <executefile name="$INSTALL_PATH/scripts/mirth-setup.sh">
+      <env>DBPASSWD=$mirthdb.password</env>
+      <env>DBSUPERPASSWD=$mirthdb.superpassword</env>
+      <arg>$mirthdb.host</arg>
+      <arg>$mirthdb.port</arg>
+      <arg>$mirthdb.name</arg>
+      <arg>$mirthdb.username</arg>
+      <arg>$database.superuser</arg>
+      <arg>$INSTALL_PATH/mirth</arg>
+    </executefile>
+  </job>
+  <job name="glassfish setup">
+    <os family="unix" />
+    <createForPack name="Glassfish" />
+    <executefile name="$INSTALL_PATH/scripts/glassfish-setup.sh">
+      <env>INSTALL_PATH=$INSTALL_PATH</env>
+      <env>DBPASS=$database.password</env>
+      <arg>$database.host</arg>
+      <arg>$database.port</arg>
+    </executefile>
+  </job>
+</processing>
