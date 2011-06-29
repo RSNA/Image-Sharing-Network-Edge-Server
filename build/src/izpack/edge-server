@@ -38,7 +38,7 @@ start)
 	    exit 1
 	fi
 
-	if start-stop-daemon -c $USER --start -d $RSNA_ROOT --quiet --oknodo -b --pidfile $PPID --exec $JAVA -- -server -jar $RSNA_ROOT/prep-content*.jar; then
+	if start-stop-daemon -c $USER --start -d $RSNA_ROOT --quiet -m --oknodo -b --pidfile $PPID --exec $JAVA -- -server -jar $RSNA_ROOT/prep-content*.jar; then
 	    log_progress_msg "prepare-content-app"
 	else
 	    log_end_msg 1
