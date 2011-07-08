@@ -25,6 +25,35 @@
 </field>
 </panel>
 <panel order="1">
+<field type="title" txt="Client Certificate Info" bold="true" size="1" />
+<field type="text" variable="keygen.server_name">
+  <spec txt="Full server name" size="25" set="$HOST_NAME" />
+</field>
+<field type="space" />
+<field type="text" variable="keygen.dn_ou">
+  <spec txt="Organisational Unit Name:" size="25" set="Dept" />
+</field>
+<field type="space" />
+<field type="text" variable="keygen.dn_o">
+  <spec txt="Organization Name" size="25" set="Org" />
+</field>
+<field type="space" />
+<field type="text" variable="keygen.dn_l">
+  <spec txt="Locality Name:" size="25" set="City" />
+</field>
+<field type="space" />
+<field type="text" variable="keygen.dn_st">
+    <spec txt="State Or Province Name (Full):" size="25" set="State" />
+</field>
+<field type="space" />
+<field type="text" variable="keygen.dn_c">
+    <spec txt="Country Name(2 character ISO code):" size="25" set="US" />
+</field>
+<field type="text" variable="keygen.days">
+    <spec txt="Number of days the certificate is valid:" size="25" set="1095" />
+</field>
+</panel>
+<panel order="2">
 <createForPack name="Mirth" />
 <field type="title" txt="Configure Mirth database connection" bold="true" size="1" />
 <field type="text" variable="mirthdb.host">

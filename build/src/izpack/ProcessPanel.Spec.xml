@@ -11,6 +11,19 @@
       <arg>$INSTALL_PATH/tmp</arg>
     </executefile>
   </job>
+  <job name="client key gen">
+    <os family="unix" />
+    <executefile name="$INSTALL_PATH/scripts/keygen.sh">
+      <env>INSTALL_PATH=$INSTALL_PATH</env>
+      <arg>$keygen.server_name</arg>
+      <arg>$keygen.dn_ou</arg>
+      <arg>$keygen.dn_o</arg>
+      <arg>$keygen.dn_l</arg>
+      <arg>$keygen.dn_st</arg>
+      <arg>$keygen.dn_c</arg>
+      <arg>$keygen.days</arg>
+    </executefile>
+  </job>
   <job name="mirth setup">
     <createForPack name="Mirth" />
     <os family="unix" />
