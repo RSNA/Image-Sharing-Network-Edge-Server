@@ -32,11 +32,11 @@
 
   <panels>
     <panel classname="HelloPanel"/>
+    <panel classname="TargetPanel" />
+    <panel classname="PacksPanel" />
     <panel classname="UserInputPanel" id="UserInputPanel.0" />
     <panel classname="UserInputPanel" id="UserInputPanel.1" />
     <panel classname="UserInputPanel" id="UserInputPanel.2" />
-    <panel classname="TargetPanel" />
-    <panel classname="PacksPanel" />
     <panel classname="SummaryPanel" />
     <panel classname="InstallPanel" />
     <panel classname="ProcessPanel" />
@@ -90,7 +90,9 @@
       <executable targetfile="$INSTALL_PATH/mirth/wrapper-linux-x86-32" stage="never" />
       <executable targetfile="$INSTALL_PATH/mirth/wrapper-linux-x86-64" stage="never" />
     </pack>
-
+    <pack name="Generate Client Certificate" required="no">
+      <description>Generate Client Certificate</description>
+    </pack>
   </packs>
 
 </installation>

@@ -24,7 +24,8 @@
   </spec>
 </field>
 </panel>
-<panel order="1">
+<panel order="2">
+<createForPack name="Generate Client Certificate" />
 <field type="title" txt="Client Certificate Info" bold="true" size="1" />
 <field type="text" variable="keygen.server_name">
   <spec txt="Full server name" size="25" set="$HOST_NAME" />
@@ -53,7 +54,7 @@
     <spec txt="Number of days the certificate is valid:" size="25" set="1095" />
 </field>
 </panel>
-<panel order="2">
+<panel order="1">
 <createForPack name="Mirth" />
 <field type="title" txt="Configure Mirth database connection" bold="true" size="1" />
 <field type="text" variable="mirthdb.host">

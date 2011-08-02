@@ -13,6 +13,7 @@
   </job>
   <job name="client key gen">
     <os family="unix" />
+    <createForPack name="Generate Client Certificate" />
     <executefile name="$INSTALL_PATH/scripts/keygen.sh">
       <env>INSTALL_PATH=$INSTALL_PATH</env>
       <arg>$keygen.server_name</arg>
