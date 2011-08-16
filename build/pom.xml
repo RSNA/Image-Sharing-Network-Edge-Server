@@ -126,6 +126,7 @@
 	  <finalName>edgeserver</finalName>
 	  <descriptors>
 	    <descriptor>src/main/assembly/build.xml</descriptor>
+	    <descriptor>src/main/assembly/retriveve-content.xml</descriptor>
 	  </descriptors>
 	</configuration>
 	<executions>
