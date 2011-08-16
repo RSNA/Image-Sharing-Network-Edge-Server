@@ -52,6 +52,7 @@
 	<include name="*.jar" />
 	<exclude name="izpack*.jar" />
       </fileset>
+      <file src="../edgeserver-RetrieveContent.zip" targetdir="$INSTALL_PATH"/>
       <file src="version.txt" targetdir="$INSTALL_PATH"/>
       <file src="${basedir}/../database/rsna.sql" targetdir="$INSTALL_PATH" />
       <file src="${basedir}/../hl7-receiver-app/Mirth Backup.xml" targetdir="$INSTALL_PATH" />
