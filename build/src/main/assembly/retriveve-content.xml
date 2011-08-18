@@ -9,7 +9,7 @@
   <includeBaseDirectory>false</includeBaseDirectory>
   <fileSets>
     <fileSet>
-      <directory>${project.basedir}/../receive-content-app/RetrieveContent/RetrieveContent/dist</directory>
+      <directory>${project.basedir}/../receive-content-app/RetrieveContent/dist</directory>
       <outputDirectory>/</outputDirectory>
       <includes>
 	<include>*</include>
