@@ -6,6 +6,8 @@ SUPERUSER=$3
 SQLFILE=$4
 TMPPATH=$5
 
+/usr/bin/env dropuser -w -h $DBHOST -p $DBPORT -U $SUPERUSER edge
+/usr/bin/env dropdb -w -h $DBHOST -p $DBPORT -U $SUPERUSER rsnadb
 echo "creating edge user"
 /usr/bin/env psql -w -h $DBHOST -p $DBPORT -U $SUPERUSER postgres -c "CREATE ROLE edge WITH NOSUPERUSER NOCREATEDB NOCREATEROLE LOGIN ENCRYPTED PASSWORD '$DBPASSWD'" &&
 echo "creating rsnadb database, ignore 'does not exist' errors"
