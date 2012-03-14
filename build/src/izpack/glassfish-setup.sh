@@ -5,6 +5,11 @@ DBPORT=$2
 
 export AS_JAVA=$JAVA_HOME
 
+if [ -d $INSTALL_PATH/glassfishv3 ]; then
+    echo "Glassfish exists, skipping"
+    exit 0
+fi
+
 userdel edge 2>&1
 
 id -u edge > /dev/null 2>&1
