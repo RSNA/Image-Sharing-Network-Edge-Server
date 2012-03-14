@@ -8,6 +8,11 @@ DBUSER=$4
 SUPERUSER=$5
 MIRTHROOT=$6
 
+if [ -d $INSTALL_PATH/mirth ]; then
+    echo "Mirth database exists, skipping"
+    exit 0
+fi
+
 echo "creating $DBUSER user"
 /usr/bin/env psql -w -h $DBHOST -p $DBPORT -U $SUPERUSER postgres -c "CREATE ROLE $DBUSER WITH NOSUPERUSER NOCREATEDB NOCREATEROLE LOGIN ENCRYPTED PASSWORD '$DBPASSWD'" &&
 echo "creating $DBNAME database"
