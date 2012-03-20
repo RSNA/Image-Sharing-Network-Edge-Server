@@ -37,6 +37,7 @@
     <panel classname="UserInputPanel" id="UserInputPanel.0" />
     <panel classname="UserInputPanel" id="UserInputPanel.1" />
     <panel classname="UserInputPanel" id="UserInputPanel.2" />
+    <panel classname="UserInputPanel" id="UserInputPanel.3" />
     <panel classname="SummaryPanel" />
     <panel classname="InstallPanel" />
     <panel classname="ProcessPanel" />
@@ -64,6 +65,7 @@
       <file src="${basedir}/src/izpack/prep-log4j.properties" targetdir="$INSTALL_PATH/conf" />
       <file src="${basedir}/src/izpack/transfer-log4j.properties" targetdir="$INSTALL_PATH/conf" />
       <file src="${basedir}/src/izpack/edge-server" targetdir="/etc/init.d" os="unix" />
+      <executable targetfile="$INSTALL_PATH/scripts/stop-edge-server.sh" stage="never" />
       <executable targetfile="$INSTALL_PATH/scripts/edge-db-install.sh" stage="never" />
       <executable targetfile="$INSTALL_PATH/scripts/keygen.sh" stage="never" os="unix" />
       <executable targetfile="/etc/init.d/edge-server" stage="never" os="unix" />

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 export PGPASSWORD=$DBSUPERPASSWD
 DBHOST=$1

@@ -1,4 +1,9 @@
 <processing>
+  <job name="stop server">
+    <os family="unix" />
+    <executefile name="$INSTALL_PATH/scripts/stop-edge-server.sh">
+    </executefile>
+  </job>
   <job name="install database">
     <os family="unix" />
     <executefile name="$INSTALL_PATH/scripts/edge-db-install.sh">

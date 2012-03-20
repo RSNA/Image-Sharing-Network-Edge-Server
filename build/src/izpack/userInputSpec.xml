@@ -1,5 +1,14 @@
 <userInput>
 <panel order="0">
+  <field type="title" txt="Are you upgrading from a previous verison?" bold="true" size="1" />
+  <field type="radio" variable="upgrade">
+    <spec>
+      <choice txt="Yes" id="upgrade.label.1" value="1 selected" />
+      <choice txt="No" id="upgrade.label.2" value="2 selected" set="true" />
+    </spec>
+  </field>
+</panel>
+<panel order="1">
 <field type="title" txt="Configure database connection" bold="true" size="1" />
 <field type="text" variable="database.host">
   <spec txt="Host:" size="25" set="localhost" />
@@ -54,7 +63,7 @@
     <spec txt="Number of days the certificate is valid:" size="25" set="1095" />
 </field>
 </panel>
-<panel order="1">
+<panel order="3">
 <createForPack name="Mirth" />
 <field type="title" txt="Configure Mirth database connection" bold="true" size="1" />
 <field type="text" variable="mirthdb.host">
