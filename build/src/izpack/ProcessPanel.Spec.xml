@@ -14,6 +14,8 @@
       <arg>$database.superuser</arg>
       <arg>$INSTALL_PATH/rsna.sql</arg>
       <arg>$INSTALL_PATH/tmp</arg>
+      <arg>$INSTALL_PATH/RSNADB_rollout_v2.1.0.sql</arg>
+      <arg>$upgrade</arg>
     </executefile>
   </job>
   <job name="client key gen">
