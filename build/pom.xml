@@ -46,8 +46,9 @@
   <modules>
     <module>../core</module>
     <module>../prepare-content-app</module>
-    <module>../transfer-content-app</module>
+    <module>../receive-content-app/RetrieveContent-maven</module>
     <module>../token-app</module>
+    <module>../transfer-content-app</module>
   </modules>
   <build>
     <defaultGoal>package</defaultGoal>
@@ -126,7 +127,6 @@
 	  <finalName>edgeserver</finalName>
 	  <descriptors>
 	    <descriptor>src/main/assembly/build.xml</descriptor>
-	    <descriptor>src/main/assembly/retriveve-content.xml</descriptor>
 	  </descriptors>
 	</configuration>
 	<executions>
