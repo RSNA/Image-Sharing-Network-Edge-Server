@@ -1,20 +1,21 @@
-#!/bin/sh
+#!/bin/bash
+echo "executing glassfish-setup.sh"
 DBUSER=edge
 DBHOST=$1
 DBPORT=$2
+UPGRADE=$3
 
 export AS_JAVA=$JAVA_HOME
 
-if [ -d $INSTALL_PATH/glassfishv3 ]; then
-    echo "Glassfish exists, skipping"
-    exit 0
-fi
+if [ "$UPGRADE" == '2' ]; then
 
-userdel edge 2>&1
+  userdel edge 2>&1
 
-id -u edge > /dev/null 2>&1
-if [ "$?" -eq "1" ]; then
-    useradd --system edge -d $INSTALL_PATH
+  id -u edge > /dev/null 2>&1
+  if [ "$?" -eq "1" ]; then
+      useradd --system edge -d $INSTALL_PATH
+  fi
+
 fi
 
 cp -v $INSTALL_PATH/scripts/domain.xml $INSTALL_PATH/glassfishv3/glassfish/domains/domain1/config
@@ -33,3 +34,5 @@ su edge -l -c "$INSTALL_PATH/glassfishv3/bin/asadmin create-jdbc-connection-pool
 su edge -l -c "$INSTALL_PATH/glassfishv3/bin/asadmin create-jdbc-resource --connectionpoolid rsnadb jdbc/rsnadb" &&
 su edge -l -c "$INSTALL_PATH/glassfishv3/bin/asadmin deploy --contextroot '/' $INSTALL_PATH/token-app.war" &&
 su edge -l -c "$INSTALL_PATH/glassfishv3/bin/asadmin stop-domain domain1"
+echo "completing glassfish-setup.sh"
+

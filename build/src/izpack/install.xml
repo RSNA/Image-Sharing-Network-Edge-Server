@@ -32,9 +32,9 @@
 
   <panels>
     <panel classname="HelloPanel"/>
+    <panel classname="UserInputPanel" id="UserInputPanel.0" />
     <panel classname="TargetPanel" />
     <panel classname="PacksPanel" />
-    <panel classname="UserInputPanel" id="UserInputPanel.0" />
     <panel classname="UserInputPanel" id="UserInputPanel.1" />
     <panel classname="UserInputPanel" id="UserInputPanel.2" />
     <panel classname="UserInputPanel" id="UserInputPanel.3" />
@@ -53,9 +53,9 @@
 	<include name="*.jar" />
 	<exclude name="izpack*.jar" />
       </fileset>
-      <file src="../edgeserver-RetrieveContent.zip" targetdir="$INSTALL_PATH"/>
       <file src="version.txt" targetdir="$INSTALL_PATH"/>
       <file src="${basedir}/../database/rsna.sql" targetdir="$INSTALL_PATH" />
+      <file src="${basedir}/../database/RSNADB_rollout_v2.1.0.sql" targetdir="$INSTALL_PATH" />
       <file src="${basedir}/../hl7-receiver-app/Mirth Backup.xml" targetdir="$INSTALL_PATH" />
       <file src="${basedir}/src/izpack/edge-db-install.sh" targetdir="$INSTALL_PATH/scripts" />
       <file src="${basedir}/src/izpack/keygen.sh" targetdir="$INSTALL_PATH/scripts" />
@@ -65,10 +65,12 @@
       <file src="${basedir}/src/izpack/prep-log4j.properties" targetdir="$INSTALL_PATH/conf" />
       <file src="${basedir}/src/izpack/transfer-log4j.properties" targetdir="$INSTALL_PATH/conf" />
       <file src="${basedir}/src/izpack/edge-server" targetdir="/etc/init.d" os="unix" />
-      <executable targetfile="$INSTALL_PATH/scripts/stop-edge-server.sh" stage="never" />
+      <file src="${basedir}/src/izpack/retrieve-content.zip" targetdir="$INSTALL_PATH/client_downloads" />
+      <file src="${basedir}/src/izpack/download-prep.sh" targetdir="$INSTALL_PATH/scripts" />
       <executable targetfile="$INSTALL_PATH/scripts/edge-db-install.sh" stage="never" />
       <executable targetfile="$INSTALL_PATH/scripts/keygen.sh" stage="never" os="unix" />
       <executable targetfile="/etc/init.d/edge-server" stage="never" os="unix" />
+      <executable targetfile="$INSTALL_PATH/scripts/download-prep.sh" stage="never" os="unix" />
       <parsable targetfile="$INSTALL_PATH/conf/database.properties" type="javaprop" />
       <parsable targetfile="$INSTALL_PATH/conf/prep-log4j.properties" type="javaprop" />
       <parsable targetfile="$INSTALL_PATH/conf/transfer-log4j.properties" type="javaprop" />
@@ -95,6 +97,9 @@
     </pack>
     <pack name="Generate Client Certificate" required="no">
       <description>Generate Client Certificate</description>
+    </pack>
+    <pack name="download-prep" required="no">
+      <description>Prepare client downloads</description>
     </pack>
   </packs>
 

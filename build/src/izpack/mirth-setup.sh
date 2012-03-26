@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "executing mirth-setup.sh"
+
 export PGPASSWORD=$DBSUPERPASSWD
 DBHOST=$1
 DBPORT=$2
@@ -7,8 +9,9 @@ DBNAME=$3
 DBUSER=$4
 SUPERUSER=$5
 MIRTHROOT=$6
+UPGRADE=$7
 
-if [ -d $INSTALL_PATH/mirth ]; then
+if [ "$UPGRADE" == '1' ] || [ -d $INSTALL_PATH/mirth ]; then
     echo "Mirth database exists, skipping"
     exit 0
 fi
@@ -29,3 +32,6 @@ EOF
 
 sed 's/database=.*/database=postgres/' < $MIRTHROOT/conf/mirth.properties > $MIRTHROOT/conf/mirth.properties.new &&
 mv $MIRTHROOT/conf/mirth.properties.new $MIRTHROOT/conf/mirth.properties
+
+echo "executing mirth-setup.sh"
+

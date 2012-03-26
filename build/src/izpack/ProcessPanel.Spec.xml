@@ -1,9 +1,4 @@
 <processing>
-  <job name="stop server">
-    <os family="unix" />
-    <executefile name="$INSTALL_PATH/scripts/stop-edge-server.sh">
-    </executefile>
-  </job>
   <job name="install database">
     <os family="unix" />
     <executefile name="$INSTALL_PATH/scripts/edge-db-install.sh">
@@ -30,6 +25,8 @@
       <arg>$keygen.dn_st</arg>
       <arg>$keygen.dn_c</arg>
       <arg>$keygen.days</arg>
+      <arg>$upgrade</arg>
+      <arg>"delta"</arg>
     </executefile>
   </job>
   <job name="mirth setup">
@@ -44,6 +41,7 @@
       <arg>$mirthdb.username</arg>
       <arg>$database.superuser</arg>
       <arg>$INSTALL_PATH/mirth</arg>
+      <arg>$upgrade</arg>
     </executefile>
   </job>
   <job name="glassfish setup">
@@ -54,6 +52,14 @@
       <env>DBPASS=$database.password</env>
       <arg>$database.host</arg>
       <arg>$database.port</arg>
+      <arg>$upgrade</arg>
+    </executefile>
+  </job>
+  <job name="client download prep">
+    <os family="unix" />
+    <createForPack name="download-prep" />
+    <executefile name="$INSTALL_PATH/scripts/download-prep.sh">
+      <env>INSTALL_PATH=$INSTALL_PATH</env>
     </executefile>
   </job>
 </processing>

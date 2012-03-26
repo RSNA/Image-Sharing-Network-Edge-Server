@@ -3,8 +3,8 @@
   <field type="title" txt="Are you upgrading from a previous verison?" bold="true" size="1" />
   <field type="radio" variable="upgrade">
     <spec>
-      <choice txt="Yes" id="upgrade.label.1" value="1 selected" />
-      <choice txt="No" id="upgrade.label.2" value="2 selected" set="true" />
+      <choice txt="Yes" value="1" />
+      <choice txt="No" value="2" set="true" />
     </spec>
   </field>
 </panel>
