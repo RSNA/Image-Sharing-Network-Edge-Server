@@ -60,20 +60,24 @@
       <file src="${basedir}/src/izpack/edge-db-install.sh" targetdir="$INSTALL_PATH/scripts" />
       <file src="${basedir}/src/izpack/keygen.sh" targetdir="$INSTALL_PATH/scripts" />
       <file src="${basedir}/src/izpack/database.properties" targetdir="$INSTALL_PATH/conf" />
+      <file src="${basedir}/../receive-content-app/RSNA/config/retrieve-content.properties" targetdir="$INSTALL_PATH/conf" />
       <file src="${basedir}/src/izpack/jvm-opts" targetdir="$INSTALL_PATH/conf" />
       <file src="${basedir}/src/izpack/truststore.jks" targetdir="$INSTALL_PATH/conf" />
       <file src="${basedir}/src/izpack/prep-log4j.properties" targetdir="$INSTALL_PATH/conf" />
       <file src="${basedir}/src/izpack/transfer-log4j.properties" targetdir="$INSTALL_PATH/conf" />
+      <file src="${basedir}/src/izpack/retrieve-log4j.properties" targetdir="$INSTALL_PATH/conf" />
       <file src="${basedir}/src/izpack/edge-server" targetdir="/etc/init.d" os="unix" />
-      <file src="${basedir}/src/izpack/retrieve-content.zip" targetdir="$INSTALL_PATH/client_downloads" />
+      <file src="${basedir}/target/edgeserver-install/retrieve-content/target/retrieve-content.zip" targetdir="$INSTALL_PATH/client_downloads" />
       <file src="${basedir}/src/izpack/download-prep.sh" targetdir="$INSTALL_PATH/scripts" />
       <executable targetfile="$INSTALL_PATH/scripts/edge-db-install.sh" stage="never" />
       <executable targetfile="$INSTALL_PATH/scripts/keygen.sh" stage="never" os="unix" />
       <executable targetfile="/etc/init.d/edge-server" stage="never" os="unix" />
       <executable targetfile="$INSTALL_PATH/scripts/download-prep.sh" stage="never" os="unix" />
       <parsable targetfile="$INSTALL_PATH/conf/database.properties" type="javaprop" />
+      <parsable targetfile="$INSTALL_PATH/conf/retrieve-content.properties" type="javaprop" />
       <parsable targetfile="$INSTALL_PATH/conf/prep-log4j.properties" type="javaprop" />
       <parsable targetfile="$INSTALL_PATH/conf/transfer-log4j.properties" type="javaprop" />
+      <parsable targetfile="$INSTALL_PATH/conf/retrieve-log4j.properties" type="javaprop" />
       <parsable targetfile="/etc/init.d/edge-server" os="unix" />
     </pack>
     <pack name="Glassfish" required="no">
