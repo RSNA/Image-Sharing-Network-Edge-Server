@@ -49,6 +49,7 @@
       <description>Edgeserver Installation</description>
       <fileset dir="token-app" targetdir="$INSTALL_PATH" />
       <fileset dir="ext" targetdir="$INSTALL_PATH/ext" />
+      <fileset dir="lib" targetdir="$INSTALL_PATH/lib" />
       <fileset dir="." targetdir="$INSTALL_PATH">
 	<include name="*.jar" />
 	<exclude name="izpack*.jar" />
