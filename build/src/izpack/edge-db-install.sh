@@ -12,16 +12,13 @@ UPGRADE=$7
 
 CURVERSION=`/usr/bin/env psql -w -h $DBHOST -p $DBPORT -U $SUPERUSER rsnadb -At -c "SELECT version FROM schema_version ORDER BY modified_date DESC LIMIT 1"`
 
-echo "Upgrade IS: $UPGRADE"
-echo "Current Verion IS: $CURVERSION"
-
 if [ "$UPGRADE" == '1' ] && [ "$CURVERSION" != "2.1.0" ]; then # upgrade from previous version
   echo "updating schema"
   /usr/bin/env psql -w -h $DBHOST -p $DBPORT -U $SUPERUSER rsnadb < $UPGFILE
   exit 0
 fi
 
-if [ "$UPGRADE" == '2' ]; then
+if [ "$UPGRADE" == '0' ]; then
   /usr/bin/env dropuser -w -h $DBHOST -p $DBPORT -U $SUPERUSER edge
   /usr/bin/env dropdb -w -h $DBHOST -p $DBPORT -U $SUPERUSER rsnadb
   echo "creating edge user"

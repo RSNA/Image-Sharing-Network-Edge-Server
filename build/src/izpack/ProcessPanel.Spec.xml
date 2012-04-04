@@ -62,4 +62,13 @@
       <env>INSTALL_PATH=$INSTALL_PATH</env>
     </executefile>
   </job>
+  <job name="retrieve content prep">
+    <os family="unix" />
+    <createForPack name="retrieve-prep" />
+    <executefile name="$INSTALL_PATH/scripts/retrieve-prep.sh">
+      <env>INSTALL_PATH=$INSTALL_PATH</env>
+      <arg>$upgrade</arg>
+    </executefile>
+  </job>
 </processing>
+

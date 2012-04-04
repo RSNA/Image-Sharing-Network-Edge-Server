@@ -4,7 +4,7 @@
   <field type="radio" variable="upgrade">
     <spec>
       <choice txt="Yes" value="1" />
-      <choice txt="No" value="2" set="true" />
+      <choice txt="No" value="0" set="true" />
     </spec>
   </field>
 </panel>
