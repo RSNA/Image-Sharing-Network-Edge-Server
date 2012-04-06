@@ -11,6 +11,7 @@
     <moduleSet>
       <excludes>
         <exclude>org.rsna.isn:token-app</exclude>
+        <exclude>org.rsna.isn:retrieve-app</exclude>
       </excludes>
       <binaries>
 	<unpack>false</unpack>
