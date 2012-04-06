@@ -14,7 +14,7 @@ if [ "$UPGRADE" == '0' ]; then
   chmod 755 $INSTALL_PATH/images
   chmod 755 $INSTALL_PATH/report
   chmod 755 $INSTALL_PATH/temp
-  chmod 755 $INSTALL_PATH/logs/retrieve-content.log
+  chmod 766 $INSTALL_PATH/logs/retrieve-content.log
 
   exit 0
 fi

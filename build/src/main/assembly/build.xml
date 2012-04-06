@@ -11,7 +11,6 @@
     <moduleSet>
       <excludes>
         <exclude>org.rsna.isn:token-app</exclude>
-        <exclude>org.rsna.isn:transfer-content-app</exclude>
       </excludes>
       <binaries>
 	<unpack>false</unpack>
@@ -52,20 +51,6 @@
 	  </fileSet>
 	</fileSets>
       </sources>
-    </moduleSet>
-    <moduleSet>
-      <includes>
-        <include>org.rsna.isn:transfer-content</include>
-      </includes>
-      <binaries>
-        <dependencySets>
-	  <dependencySet>
-            <unpack>false</unpack>
-	    <scope>runtime</scope>
-	    <outputDirectory>lib</outputDirectory>
-          </dependencySet>
-        </dependencySets>
-      </binaries>
     </moduleSet>
   </moduleSets>
   <dependencySets>
