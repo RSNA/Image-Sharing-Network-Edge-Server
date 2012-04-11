@@ -11,9 +11,9 @@ if [ "$UPGRADE" == '0' ]; then
 
   chown -R edge:edge $INSTALL_PATH
 
-  chmod 755 $INSTALL_PATH/images
-  chmod 755 $INSTALL_PATH/report
-  chmod 755 $INSTALL_PATH/temp
+  chmod 766 $INSTALL_PATH/images
+  chmod 766 $INSTALL_PATH/report
+  chmod 766 $INSTALL_PATH/temp
   chmod 766 $INSTALL_PATH/logs/retrieve-content.log
 
   exit 0
