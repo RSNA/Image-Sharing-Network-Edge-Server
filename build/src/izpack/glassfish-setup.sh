@@ -7,6 +7,8 @@ UPGRADE=$3
 
 export AS_JAVA=$JAVA_HOME
 
+echo "UPGRADE is $UPGRADE"
+
 if [ "$UPGRADE" == '0' ]; then
 
   userdel edge 2>&1

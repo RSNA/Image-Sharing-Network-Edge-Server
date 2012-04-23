@@ -11,6 +11,8 @@ SUPERUSER=$5
 MIRTHROOT=$6
 UPGRADE=$7
 
+echo "UPGRADE is $UPGRADE"
+
 if [ "$UPGRADE" == '1' ] || [ -d $INSTALL_PATH/mirth ]; then
     echo "Mirth database exists, skipping"
     exit 0

@@ -1,6 +1,10 @@
 #!/bin/bash
 
+echo "executing retrieve-prep.sh"
+
 UPGRADE=$1
+
+echo "UPGRADE is $UPGRADE"
 
 if [ "$UPGRADE" == '0' ]; then
   mkdir $INSTALL_PATH/images
@@ -11,11 +15,13 @@ if [ "$UPGRADE" == '0' ]; then
 
   chown -R edge:edge $INSTALL_PATH
 
-  chmod 766 $INSTALL_PATH/images
-  chmod 766 $INSTALL_PATH/report
-  chmod 766 $INSTALL_PATH/temp
-  chmod 766 $INSTALL_PATH/logs/retrieve-content.log
+  chmod 777 $INSTALL_PATH/images
+  chmod 777 $INSTALL_PATH/report
+  chmod 777 $INSTALL_PATH/temp
+  chmod 777 $INSTALL_PATH/logs/retrieve-content.log
 
   exit 0
 fi
+
+echo "completing retrieve-prep.sh"
 

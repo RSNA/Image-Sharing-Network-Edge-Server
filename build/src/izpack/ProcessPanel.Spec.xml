@@ -70,5 +70,13 @@
       <arg>$upgrade</arg>
     </executefile>
   </job>
+  <job name="version cleanup">
+    <os family="unix" />
+    <createForPack name="version-cleanup" />
+    <executefile name="$INSTALL_PATH/scripts/version-cleanup.sh">
+      <env>INSTALL_PATH=$INSTALL_PATH</env>
+      <arg>$upgrade</arg>
+    </executefile>
+  </job>
 </processing>
 

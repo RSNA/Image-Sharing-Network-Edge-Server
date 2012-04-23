@@ -14,6 +14,8 @@ TEST=$9
 
 DN="CN=$DN_SERVER_NAME, OU=${DN_OU/,/\\,}, O=${DN_O/,/\\,}, L=${DN_L/,/\\,}, ST=${DN_ST/,/\\,}, C=$DN_C"
 
+echo "UPGRADE is $UPGRADE"
+
 echo "Generating client certificate..."
 
 if [ "$UPGRADE" == '1' ] || [ -f $INSTALL_PATH/conf/keystore.jks ]
