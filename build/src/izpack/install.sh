@@ -2,7 +2,7 @@
 
 A=$(ps aux | grep [e]dgeserver | awk '{print $2}')
 
-if [ "$A" != "" ]; then
+if [ -n "$A" ]; then
   sudo service edge-server stop
 fi
 
