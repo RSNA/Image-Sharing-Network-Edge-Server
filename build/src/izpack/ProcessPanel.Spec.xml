@@ -1,6 +1,7 @@
 <processing>
   <job name="install database">
     <os family="unix" />
+    <executeForPack name="Edgeserver" />
     <executefile name="$INSTALL_PATH/scripts/edge-db-install.sh">
       <env>DBPASSWD=$database.password</env>
       <env>DBSUPERPASSWD=$database.superpassword</env>
@@ -15,7 +16,7 @@
   </job>
   <job name="client key gen">
     <os family="unix" />
-    <createForPack name="Generate Client Certificate" />
+    <executeForPack name="Generate Client Certificate" />
     <executefile name="$INSTALL_PATH/scripts/keygen.sh">
       <env>INSTALL_PATH=$INSTALL_PATH</env>
       <arg>$keygen.server_name</arg>
@@ -30,7 +31,7 @@
     </executefile>
   </job>
   <job name="mirth setup">
-    <createForPack name="Mirth" />
+    <executeForPack name="Mirth" />
     <os family="unix" />
     <executefile name="$INSTALL_PATH/scripts/mirth-setup.sh">
       <env>DBPASSWD=$mirthdb.password</env>
@@ -46,7 +47,7 @@
   </job>
   <job name="glassfish setup">
     <os family="unix" />
-    <createForPack name="Glassfish" />
+    <executeForPack name="Glassfish" />
     <executefile name="$INSTALL_PATH/scripts/glassfish-setup.sh">
       <env>INSTALL_PATH=$INSTALL_PATH</env>
       <env>DBPASS=$database.password</env>
@@ -57,14 +58,14 @@
   </job>
   <job name="client download prep">
     <os family="unix" />
-    <createForPack name="download-prep" />
+    <executeForPack name="download-prep" />
     <executefile name="$INSTALL_PATH/scripts/download-prep.sh">
       <env>INSTALL_PATH=$INSTALL_PATH</env>
     </executefile>
   </job>
   <job name="retrieve content prep">
     <os family="unix" />
-    <createForPack name="retrieve-prep" />
+    <executeForPack name="retrieve-prep" />
     <executefile name="$INSTALL_PATH/scripts/retrieve-prep.sh">
       <env>INSTALL_PATH=$INSTALL_PATH</env>
       <arg>$upgrade</arg>
@@ -72,7 +73,7 @@
   </job>
   <job name="version cleanup">
     <os family="unix" />
-    <createForPack name="version-cleanup" />
+    <executeForPack name="version-cleanup" />
     <executefile name="$INSTALL_PATH/scripts/version-cleanup.sh">
       <env>INSTALL_PATH=$INSTALL_PATH</env>
       <arg>$upgrade</arg>
