@@ -30,6 +30,13 @@
     <res id="ProcessPanel.Spec.xml" src="${basedir}/src/izpack/ProcessPanel.Spec.xml" />
   </resources>
 
+  <conditions>
+    <condition type="variable" id="upgradeinstall">
+      <name>upgrade</name>
+      <value>1</value>
+    </condition>
+  </conditions>
+
   <panels>
     <panel classname="HelloPanel"/>
     <panel classname="UserInputPanel" id="UserInputPanel.0" />
@@ -91,7 +98,7 @@
       <file src="${basedir}/src/izpack/glassfish-setup.sh" targetdir="$INSTALL_PATH/scripts" />
       <executable targetfile="$INSTALL_PATH/scripts/glassfish-setup.sh" stage="never" />
     </pack>
-    <pack name="Mirth" required="no">
+    <pack name="Mirth" required="no" condition="!upgradeinstall">
       <description>Mirth Installation</description>
       <file unpack="true" src="mirth-1.8.2.4472.zip" targetdir="$INSTALL_PATH/mirth" />
       <file src="${basedir}/src/izpack/mirth-setup.sh" targetdir="$INSTALL_PATH/scripts" />
@@ -103,7 +110,7 @@
       <executable targetfile="$INSTALL_PATH/mirth/wrapper-linux-x86-32" stage="never" />
       <executable targetfile="$INSTALL_PATH/mirth/wrapper-linux-x86-64" stage="never" />
     </pack>
-    <pack name="Generate Client Certificate" required="no">
+    <pack name="Generate Client Certificate" required="no" condition="!upgradeinstall">
       <description>Generate Client Certificate</description>
     </pack>
     <pack name="download-prep" required="no">
@@ -112,7 +119,7 @@
     <pack name="retrieve-prep" required="no">
       <description>Prepare Retrieve Content Application</description>
     </pack>
-    <pack name="version-cleanup" required="no">
+    <pack name="version-cleanup" required="no" condition="upgradeinstall">
       <description>Cleanup Previous Module Versions</description>
     </pack>
 </packs>
