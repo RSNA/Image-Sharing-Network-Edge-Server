@@ -16,7 +16,7 @@
     <izpack.standalone.compiler.version>4.3.4</izpack.standalone.compiler.version>
     <app.group>${project.groupId}</app.group>
     <app.title>${project.name}</app.title>
-    <app.subpath>${project.artifactId}-${project.version}</app.subpath>
+    <app.subpath>${project.artifactId}</app.subpath>
     <app.version>${project.version}</app.version>
     <glassfish.version>3.0.1</glassfish.version>
     <mirth.version>1.8.2.4472</mirth.version>
