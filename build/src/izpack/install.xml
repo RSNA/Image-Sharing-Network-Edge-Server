@@ -74,15 +74,12 @@
       <file src="${basedir}/src/izpack/transfer-log4j.properties" targetdir="$INSTALL_PATH/conf" />
       <file src="${basedir}/src/izpack/retrieve-log4j.properties" targetdir="$INSTALL_PATH/conf" />
       <file src="${basedir}/src/izpack/edge-server" targetdir="/etc/init.d" os="unix" />
-      <file src="${basedir}/target/edgeserver-install/retrieve-content/target/retrieve-content.zip" targetdir="$INSTALL_PATH/client_downloads" />
       <file src="${basedir}/src/izpack/download-prep.sh" targetdir="$INSTALL_PATH/scripts" />
-      <file src="${basedir}/src/izpack/retrieve-prep.sh" targetdir="$INSTALL_PATH/scripts" />
       <file src="${basedir}/src/izpack/version-cleanup.sh" targetdir="$INSTALL_PATH/scripts" />
       <executable targetfile="$INSTALL_PATH/scripts/edge-db-install.sh" stage="never" />
       <executable targetfile="$INSTALL_PATH/scripts/keygen.sh" stage="never" os="unix" />
       <executable targetfile="/etc/init.d/edge-server" stage="never" os="unix" />
       <executable targetfile="$INSTALL_PATH/scripts/download-prep.sh" stage="never" os="unix" />
-      <executable targetfile="$INSTALL_PATH/scripts/retrieve-prep.sh" stage="never" os="unix" />
       <executable targetfile="$INSTALL_PATH/scripts/version-cleanup.sh" stage="never" os="unix" />
       <parsable targetfile="$INSTALL_PATH/conf/database.properties" type="javaprop" />
       <parsable targetfile="$INSTALL_PATH/conf/retrieve-content.properties" type="javaprop" />
@@ -115,9 +112,6 @@
     </pack>
     <pack name="download-prep" required="no">
       <description>Prepare Client Downloads</description>
-    </pack>
-    <pack name="retrieve-prep" required="no">
-      <description>Prepare Retrieve Content Application</description>
     </pack>
     <pack name="version-cleanup" required="no" condition="upgradeinstall">
       <description>Cleanup Previous Module Versions</description>

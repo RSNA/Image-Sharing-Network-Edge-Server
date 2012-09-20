@@ -11,7 +11,6 @@
     <moduleSet>
       <excludes>
         <exclude>org.rsna.isn:token-app</exclude>
-        <exclude>org.rsna.isn:retrieve-app</exclude>
       </excludes>
       <binaries>
 	<unpack>false</unpack>
@@ -33,21 +32,6 @@
 	  <fileSet>
 	    <includes>
 	      <include>token-app.war</include>
-	    </includes>
-	  </fileSet>
-	</fileSets>
-      </sources>
-    </moduleSet>
-    <moduleSet>
-      <includes>
-	<include>org.rsna.isn:retrieve-content</include>
-      </includes>
-      <sources>
-	<fileSets>
-          <fileSet>
-	    <includes>
-              <include>target/retrieve-content.zip</include>
-              <include>target/retrieve-content</include>
 	    </includes>
 	  </fileSet>
 	</fileSets>

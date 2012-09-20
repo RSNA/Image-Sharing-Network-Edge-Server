@@ -4,7 +4,7 @@
 
   <groupId>org.rsna.isn</groupId>
   <artifactId>edgeserver</artifactId>
-  <version>2.1.0</version>
+  <version>3.0.0</version>
   <packaging>pom</packaging>
 
   <name>RSNA Edgeserver</name>
@@ -46,7 +46,6 @@
   <modules>
     <module>../core</module>
     <module>../prepare-content-app</module>
-    <module>../receive-content-app/RetrieveContent-maven</module>
     <module>../token-app</module>
     <module>../transfer-content-app</module>
   </modules>

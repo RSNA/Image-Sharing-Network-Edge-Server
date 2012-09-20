@@ -63,14 +63,6 @@
       <env>INSTALL_PATH=$INSTALL_PATH</env>
     </executefile>
   </job>
-  <job name="retrieve content prep">
-    <os family="unix" />
-    <executeForPack name="retrieve-prep" />
-    <executefile name="$INSTALL_PATH/scripts/retrieve-prep.sh">
-      <env>INSTALL_PATH=$INSTALL_PATH</env>
-      <arg>$upgrade</arg>
-    </executefile>
-  </job>
   <job name="version cleanup">
     <os family="unix" />
     <executeForPack name="version-cleanup" />
