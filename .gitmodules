@@ -25,3 +25,6 @@
 [submodule "receive-content-app"]
 	path = receive-content-app
 	url = git://github.com/RSNA/isn-edge-server-receive-content.git
+[submodule "CTP"]
+	path = CTP
+	url = git://github.com/RSNA/CTP-ISN-Installer.git
