@@ -6,7 +6,7 @@ if [ -n "$A" ]; then
   sudo service edge-server stop
 fi
 
-java -jar edgeserver-3.0.0-standard.jar
+java -jar ${app.subpath}-${app.version}-standard.jar
 java -jar ISN-installer.jar
 
 sudo service edge-server start

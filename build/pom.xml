@@ -122,19 +122,33 @@
 	<groupId>org.apache.maven.plugins</groupId>
 	<artifactId>maven-assembly-plugin</artifactId>
 	<version>2.2-beta-5</version>
-	<configuration>
-	  <finalName>edgeserver</finalName>
-	  <descriptors>
-	    <descriptor>src/main/assembly/build.xml</descriptor>
-	  </descriptors>
-	</configuration>
 	<executions>
 	  <execution>
 	    <id>make-assembly</id>
+	    <phase>prepare-package</phase>
+	    <goals>
+	      <goal>single</goal>
+	    </goals>
+	    <configuration>
+	      <finalName>edgeserver</finalName>
+	      <descriptors>
+		<descriptor>src/main/assembly/build.xml</descriptor>
+	      </descriptors>
+	    </configuration>
+	  </execution>
+	  <execution>
+	    <id>make-zip</id>
 	    <phase>package</phase>
 	    <goals>
 	      <goal>single</goal>
 	    </goals>
+	    <configuration>
+	      <finalName>edgeserver-${project.version}</finalName>
+	      <appendAssemblyId>false</appendAssemblyId>
+	      <descriptors>
+		<descriptor>src/main/assembly/zip.xml</descriptor>
+	      </descriptors>
+	    </configuration>
 	  </execution>
 	</executions>
       </plugin>
@@ -145,21 +159,38 @@
 	<version>1.1</version>
 	<executions>
 	  <execution>
+	    <id>git-version</id>
 	    <phase>compile</phase>
 	    <goals>
 	      <goal>exec</goal>
 	    </goals>
+	    <configuration>
+	      <executable>git</executable>
+	      <arguments>
+		<argument>describe</argument>
+		<argument>--always</argument>
+		<argument>--dirty</argument>
+	      </arguments>
+	      <outputFile>${staging.dir}/version.txt</outputFile>
+	    </configuration>
+	  </execution>
+	  <execution>
+	    <id>sha256-zip</id>
+	    <phase>package</phase>
+	    <goals>
+	      <goal>exec</goal>
+	    </goals>
+	    <configuration>
+	      <executable>sha256sum</executable>
+	      <arguments>
+		<argument>-b</argument>
+		<argument>${project.artifactId}-${project.version}.zip</argument>
+	      </arguments>
+	      <outputFile>${project.build.directory}/${project.artifactId}-${project.version}.zip.sha256</outputFile>
+	      <workingDirectory>${project.build.directory}</workingDirectory>
+	    </configuration>
 	  </execution>
 	</executions>
-	<configuration>
-	  <executable>git</executable>
-	  <arguments>
-	    <argument>describe</argument>
-	    <argument>--always</argument>
-	    <argument>--dirty</argument>
-	  </arguments>
-	  <outputFile>${staging.dir}/version.txt</outputFile>
-	</configuration>
       </plugin>
 
       <plugin>
@@ -172,7 +203,7 @@
         <executions>
           <execution>
 	    <id>standard-installer</id>
-            <phase>package</phase>
+            <phase>prepare-package</phase>
             <goals>
               <goal>izpack</goal>
             </goals>
