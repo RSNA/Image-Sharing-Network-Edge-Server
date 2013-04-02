@@ -4,7 +4,7 @@
 \d exams
 \d exams_exam_id_seq
 \d hipaa_audit_accession_numbers
-\d hipaa_audit_accession_numbers_id_seq | sequence | edge
+\d hipaa_audit_accession_numbers_id_seq
 \d hipaa_audit_mrns
 \d hipaa_audit_mrns_id_seq
 \d hipaa_audit_views
