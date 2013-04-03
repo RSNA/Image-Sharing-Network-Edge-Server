@@ -31,7 +31,7 @@ if [ "$UPGRADE" == '0' ]; then
   echo "creating admin user to web interface, default password is 'changeme'"
   /usr/bin/env psql -w -h $DBHOST -p $DBPORT -U $SUPERUSER rsnadb <<EOF
 INSERT INTO users (user_login, user_name, email, crypted_password, salt, created_at, updated_at, role_id, modified_date)
-VALUES ('admin','Admin User','admin@example.com','bf5f41c22dc80df8ac01d7d8ab59ac904c3cc495','7335cc4d576fc77fecfdf0d986396c86904b3518',now(),now(),2,now());
+VALUES ('admin','Admin User','admin@example.com','0265195cc1b2c7ac3160783afb81980920cace88','9faa7cc72fb798a3ca2330a2e4560859abfa0351',now(),now(),2,now());
 INSERT INTO configurations (key, value, modified_date) values ('tmp-dir-path','$TMPPATH', now());
 EOF
   exit 0
