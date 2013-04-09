@@ -1,17 +1,17 @@
 #!/bin/csh
 
-if ($2 == "") then
- echo "This script, delta_terse.csh, takes two file arguments"
+if ($1 == "") then
+ echo "This script, delta_terse.csh, takes one file argument"
  exit
 endif
 
-if ($3 != "") then
- echo "This script, delta_terse.csh, takes two file arguments"
+if ($2 != "") then
+ echo "This script, delta_terse.csh, takes one file argument"
  exit
 endif
 
-diff $1 $2 > /dev/null
+diff $1 /usr/local/edgeserver/$1 > /dev/null
 
 if ($status != 0) then
- echo DIFF $1 $2
+ echo DIFF $1 /usr/local/edgeserver/$1
 endif
