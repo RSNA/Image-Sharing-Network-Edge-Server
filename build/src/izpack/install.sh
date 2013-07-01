@@ -15,7 +15,8 @@ java -jar "$INSTALL_SCRIPT_DIR/${app.subpath}-${app.version}-standard.jar"
 mkdir -p $CTP_DIR &&
 cp -v $INSTALL_SCRIPT_DIR/ISN-installer.jar $CTP_DIR &&
 cd $CTP_DIR &&
-java -jar ISN-installer.jar
+java -jar ISN-installer.jar &&
+chown -R edge:edge $CTP_DIR
 
 sudo service edge-server start
 
