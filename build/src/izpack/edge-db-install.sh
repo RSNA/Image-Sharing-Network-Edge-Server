@@ -16,7 +16,7 @@ echo "UPGRADE is $UPGRADE"
 
 if [ "$UPGRADE" == '1' ] && [ "$CURVERSION" != "2.1.0" ]; then # upgrade from previous version
   echo "updating schema"
-  /usr/bin/env psql -w -h $DBHOST -p $DBPORT -U $SUPERUSER rsnadb < $UPGFILE
+  /usr/bin/env psql -w -h $DBHOST -p $DBPORT -U $SUPERUSER rsnadb < "$UPGFILE"
   exit 0
 fi
 
