@@ -1,0 +1,9 @@
+                   Table "public.roles"
+      Column      |         Type          |   Modifiers   
+------------------+-----------------------+---------------
+ role_id          | integer               | not null
+ role_description | character varying(50) | not null
+ modified_date    | time with time zone   | default now()
+Indexes:
+    "pk_role_id" PRIMARY KEY, btree (role_id)
+
