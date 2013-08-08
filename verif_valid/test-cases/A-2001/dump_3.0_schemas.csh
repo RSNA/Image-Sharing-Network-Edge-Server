@@ -21,5 +21,5 @@ foreach i ( \
 )
  echo $i
  echo "\d $i;" > /tmp/schema_def.sql
- psql rsnadb < /tmp/schema_def.sql > data/3.0_schema/$i.schema.txt
+ psql rsnadb < /tmp/schema_def.sql > data/2.1_schema/$i.schema.txt
 end
