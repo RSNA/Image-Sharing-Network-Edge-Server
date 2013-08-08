@@ -584,6 +584,24 @@ sub select_exam_by_patient_id {
   return @row;
 }
 
+sub select_schema_version{
+ my ($dbName) = @_;
+
+  my $dsn = "dbi:Pg:dbname=$dbName";
+  my $dbh = DBI->connect($dsn);
+  my $str = "select version from schema_version;";
+
+  my $sth = $dbh->prepare($str);
+  $sth->execute();
+  my @row = $sth->fetchrow_array;
+  if (scalar(@row) != 1) {
+  } else {
+    $sth->fetchrow_array;
+  }
+  $dbh->disconnect();
+  return $row[0];
+}
+
 
 sub clear_db {
   my ($dbName) = @_;
