@@ -18,5 +18,9 @@ require image_sharing;
   print "Test A-2001-03(a) fails.\n";
   print "Schema version is expected to be 3.1.0, not $schemaVersion.\n";
   exit(1);
+ } else {
+  print "Test passes: proper schema version detected: $schemaVersion\n";
+  print "Go check the actual schema defintions (part b)\n";
  }
+
 
