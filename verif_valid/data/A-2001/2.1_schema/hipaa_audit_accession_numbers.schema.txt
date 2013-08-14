@@ -1,0 +1,10 @@
+                                       Table "public.hipaa_audit_accession_numbers"
+      Column      |           Type           |                                 Modifiers                                  
+------------------+--------------------------+----------------------------------------------------------------------------
+ id               | integer                  | not null default nextval('hipaa_audit_accession_numbers_id_seq'::regclass)
+ view_id          | integer                  | 
+ accession_number | character varying(100)   | 
+ modified_date    | timestamp with time zone | default now()
+Indexes:
+    "pk_hipaa_audit_accession_number_id" PRIMARY KEY, btree (id)
+

@@ -1,0 +1,19 @@
+                                         Table "public.exams"
+      Column      |           Type           |                        Modifiers                        
+------------------+--------------------------+---------------------------------------------------------
+ exam_id          | integer                  | not null default nextval('exams_exam_id_seq'::regclass)
+ accession_number | character varying(50)    | not null
+ patient_id       | integer                  | not null
+ exam_description | character varying(256)   | 
+ modified_date    | timestamp with time zone | default now()
+Indexes:
+    "pk_exam_id" PRIMARY KEY, btree (exam_id)
+    "uq_exam" UNIQUE, btree (accession_number, patient_id)
+    "exams_accession_number_idx" btree (accession_number)
+Foreign-key constraints:
+    "fk_patient_id" FOREIGN KEY (patient_id) REFERENCES patients(patient_id)
+Referenced by:
+    TABLE "jobs" CONSTRAINT "fk_exam_id" FOREIGN KEY (exam_id) REFERENCES exams(exam_id)
+    TABLE "studies" CONSTRAINT "fk_exam_id" FOREIGN KEY (exam_id) REFERENCES exams(exam_id)
+    TABLE "reports" CONSTRAINT "fk_exam_id" FOREIGN KEY (exam_id) REFERENCES exams(exam_id)
+

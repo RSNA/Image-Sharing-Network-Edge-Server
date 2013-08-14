@@ -1,0 +1,5 @@
+# cancel.var
+# This is one line that gives a new order status: CA for cancel
+# This .var file will be appended to the end of an existing order
+# .var file so we can build a cancel message
+$ORDER_STATUS$ = CA

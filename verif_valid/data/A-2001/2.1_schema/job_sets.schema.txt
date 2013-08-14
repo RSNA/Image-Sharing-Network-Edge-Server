@@ -1,0 +1,19 @@
+                                             Table "public.job_sets"
+        Column         |           Type           |                           Modifiers                           
+-----------------------+--------------------------+---------------------------------------------------------------
+ job_set_id            | integer                  | not null default nextval('job_sets_job_set_id_seq'::regclass)
+ patient_id            | integer                  | not null
+ user_id               | integer                  | not null
+ email_address         | character varying(255)   | 
+ modified_date         | timestamp with time zone | default now()
+ delay_in_hrs          | integer                  | default 72
+ single_use_patient_id | character varying(64)    | not null
+Indexes:
+    "pk_job_set_id" PRIMARY KEY, btree (job_set_id)
+    "uq_single_use_patient_id" UNIQUE, btree (single_use_patient_id)
+Foreign-key constraints:
+    "fk_patient_id" FOREIGN KEY (patient_id) REFERENCES patients(patient_id)
+    "fk_user_id" FOREIGN KEY (user_id) REFERENCES users(user_id)
+Referenced by:
+    TABLE "jobs" CONSTRAINT "fk_job_set_id" FOREIGN KEY (job_set_id) REFERENCES job_sets(job_set_id)
+
