@@ -11,6 +11,6 @@ foreach i ( \
  echo $i
  echo "\d $i;" > /tmp/schema_def.sql
  psql rsnadb < /tmp/schema_def.sql > $OUTPUT_FOLDER/$i.schema.txt
- diff $INPUT_FOLDER/$i.schema.txt $OUTPUT_FOLDER/$i.schema.txt > $OUTPUT_FOLDER/$i.delta.txt
+ diff -b $INPUT_FOLDER/$i.schema.txt $OUTPUT_FOLDER/$i.schema.txt > $OUTPUT_FOLDER/$i.delta.txt
 end
 
