@@ -26,8 +26,8 @@ configurations;
 devices;
  device_id | ae_title  | host  | port_number |     modified_date      
 -----------+-----------+-------+-------------+------------------------
-        36 | MOORE-ONE | m-one | 104         | 2013-03-30 11:00:00-05
-        37 | MOORE-TWO | m-two | 1112        | 2013-04-01 12:00:00-05
+       100 | MOORE-ONE | m-one | 104         | 2013-03-30 11:00:00-05
+       200 | MOORE-TWO | m-two | 1112        | 2013-04-01 12:00:00-05
 (2 rows)
 
 patients;
