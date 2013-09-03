@@ -1,0 +1,88 @@
+users;
+ user_id | user_login | user_name  |       email       |             crypted_password             |                   salt                   |          created_at           |          updated_at           | remember_token | remember_token_expires_at | role_id |         modified_date         | active 
+---------+------------+------------+-------------------+------------------------------------------+------------------------------------------+-------------------------------+-------------------------------+----------------+---------------------------+---------+-------------------------------+--------
+      10 | admin      | Admin User | admin@example.com | bf5f41c22dc80df8ac01d7d8ab59ac904c3cc495 | 7335cc4d576fc77fecfdf0d986396c86904b3518 | 2012-04-25 12:59:56.960298-05 | 2012-04-25 12:59:56.960298-05 |                |                           |       2 | 2012-04-25 12:59:56.960298-05 | t
+      20 | test       | Test User  | test@example.com  | password                                 | salt                                     | 2013-04-01 13:50:00-05        | 2013-04-01 13:50:00-05        |                |                           |       2 | 2013-04-01 13:50:00-05        | t
+(2 rows)
+
+configurations;
+           key           |   value    |         modified_date         
+-------------------------+------------+-------------------------------
+ consent-expired-days    | TEST-VALUE | 2012-03-13 15:56:06.768-05
+ iti41-endpoint-uri      | TEST-VALUE | 2011-03-14 20:41:19.216294-05
+ iti41-endpoint-uri-test | TEST-VALUE | 2011-02-03 19:10:33.864317-06
+ iti41-socket-timeout    | TEST-VALUE | 2011-04-05 12:10:46.354824-05
+ iti41-source-id         | TEST-VALUE | 2010-12-20 13:17:12.478876-06
+ iti8-pix-uri            | TEST-VALUE | 2011-03-14 20:37:44.484487-05
+ iti8-reg-uri            | TEST-VALUE | 2011-03-14 20:38:09.214142-05
+ scp-ae-title            | TEST-VALUE | 2011-01-10 18:35:16.668828-06
+ scp-port                | TEST-VALUE | 2012-03-13 15:57:33.549-05
+ scp-release-timeout     | TEST-VALUE | 2012-03-13 15:57:33.549-05
+ scp-request-timeout     | TEST-VALUE | 2012-03-13 15:57:33.549-05
+ scu-ae-title            | TEST-VALUE | 2011-01-10 18:43:13.369949-06
+ tmp-dir-path            | TEST-VALUE | 2013-08-08 15:05:49.816564-05
+(13 rows)
+
+devices;
+ device_id | ae_title  | host  | port_number |     modified_date      
+-----------+-----------+-------+-------------+------------------------
+        36 | MOORE-ONE | m-one | 104         | 2013-03-30 11:00:00-05
+        37 | MOORE-TWO | m-two | 1112        | 2013-04-01 12:00:00-05
+(2 rows)
+
+patients;
+ patient_id |  mrn   | patient_name |    dob     | sex | street | city | state | zip_code |     modified_date      |   consent_timestamp    
+------------+--------+--------------+------------+-----+--------+------+-------+----------+------------------------+------------------------
+          1 | MRN-01 | Name^One     | 1962-01-25 | M   | Street | STL  | MO    | 63111    | 2013-03-30 11:00:00-05 | 2013-03-30 11:15:00-05
+          2 | MRN-02 | Name^Two     | 1988-12-04 | F   | E Lake | Chi  | IL    | 60500    | 2013-04-01 11:00:00-05 | 2013-04-01 11:15:00-05
+(2 rows)
+
+exams;
+ exam_id | accession_number | patient_id | exam_description |     modified_date      
+---------+------------------+------------+------------------+------------------------
+       1 | ACC-ONE          |          1 | Exam Desc - 1    | 2013-03-30 11:00:00-05
+       2 | ACC-TWO          |          2 | Exam Desc - 2    | 2013-04-01 12:00:00-05
+(2 rows)
+
+reports;
+ report_id | exam_id | proc_code | status |    status_timestamp    |   report_text    |   signer    |   dictator    | transcriber |     modified_date      
+-----------+---------+-----------+--------+------------------------+------------------+-------------+---------------+-------------+------------------------
+         1 |       1 | N         | C      | 2013-03-30 13:30:00-05 | One: Report text | One: Signer | One: Dictator | One:_Trans  | 2013-03-30 13:31:00-05
+         2 |       2 | N         | C      | 2013-04-01 13:30:00-05 | Two: Report text | Two: Signer | Two: Dictator | One:_Trans  | 2013-04-01 13:31:00-05
+(2 rows)
+
+studies;
+ study_id | study_uid | exam_id | study_description |     study_date      |     modified_date      
+----------+-----------+---------+-------------------+---------------------+------------------------
+        1 | 1.2.1     |       1 | One: Study Desc   | 2013-03-30 14:40:00 | 2013-03-30 13:41:00-05
+        2 | 1.2.2     |       2 | Two: Study Desc   | 2013-04-01 14:40:00 | 2013-04-01 13:41:00-05
+(2 rows)
+
+hipaa_audit_accession_numbers ;
+ id | view_id | accession_number |     modified_date      
+----+---------+------------------+------------------------
+  1 |       1 | ACC-ONE          | 2013-03-30 13:00:00-05
+  2 |       2 | ACC-TWO          | 2013-04-01 13:00:00-05
+(2 rows)
+
+job_sets;
+ job_set_id | patient_id | user_id |  email_address  |     modified_date      | delay_in_hrs | single_use_patient_id 
+------------+------------+---------+-----------------+------------------------+--------------+-----------------------
+          1 |          1 |      10 | job-1@gmail.com | 2013-03-30 14:00:00-05 |           10 | hash-one
+          2 |          2 |      20 | job-2@gmail.com | 2013-04-01 14:00:00-05 |           20 | hash-two
+(2 rows)
+
+jobs;
+ job_id | job_set_id | exam_id | report_id |  document_id  |     modified_date      
+--------+------------+---------+-----------+---------------+------------------------
+      1 |          1 |       1 |         1 | document ID 1 | 2013-03-30 15:00:00-05
+      2 |          2 |       2 |         2 | document ID 2 | 2013-04-01 15:00:00-05
+(2 rows)
+
+transactions;
+ transaction_id | job_id | status_code |      comments      |     modified_date      
+----------------+--------+-------------+--------------------+------------------------
+              1 |      1 |         -33 | Transaction test 1 | 2013-07-31 12:01:01-05
+              2 |      2 |         -20 | Transaction test 2 | 2013-08-31 12:01:01-05
+(2 rows)
+
