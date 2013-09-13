@@ -46,7 +46,7 @@ sub send_DICOM {
   my($uidSuffix, $name, $id, $acc) = split("\t", $im);
   $uidSuffix = $uidSuffix . image_sharing::generate_date_time();
   $uidSuffix = $uidSuffix . ":" . $uidSuffix . ":" . $uidSuffix;
-  my $inputFolder = "$MESA_TARGET/storage/modality/CR/CR1/CR1S1";
+  my $inputFolder = "$MESA_TARGET/storage/modality/MR/MR6/MR6S1";
   image_sharing::cstore($inputFolder, $ae, $host, $port, $name, $id, $acc, $uidSuffix);
  }
 
