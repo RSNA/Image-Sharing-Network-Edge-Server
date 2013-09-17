@@ -32,6 +32,11 @@ sub fill_variables{
 	"A-5006-xx-2",
 	"A-5006-xx-3",
 	"A-5006-xx-4",
+
+	"A-5006-yy-1",
+	"A-5006-yy-2",
+	"A-5006-yy-3",
+	"A-5006-yy-4",
  );
  foreach $f(@files) {
   print "$f\n" if ($verbose);
