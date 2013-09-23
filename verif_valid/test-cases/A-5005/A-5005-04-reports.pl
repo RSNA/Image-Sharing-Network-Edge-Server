@@ -23,6 +23,7 @@ require image_sharing;
 # Washington
 	"A-5005-04-1-oru",
 # Lincoln
+	"A-5005-04-2a-complete",
 # Grant
 	"A-5005-04-3a-oru",
 # Johnson
