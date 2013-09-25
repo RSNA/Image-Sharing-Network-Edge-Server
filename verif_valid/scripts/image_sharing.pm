@@ -47,13 +47,51 @@ sub compute_file_lengths {
 sub generate_date_time {
   ($sec,$min,$hour,$mday,$mon,$year) = localtime(time);
   $year += 1900; $mon++;
-  $mon  = "0" . $mon  if ($mon  < 9);
-  $mday = "0" . $mday if ($mday < 9);
-  $hour = "0" . $hour if ($hour < 9);
-  $min  = "0" . $min  if ($min  < 9);
-  $sec  = "0" . $sec  if ($sec  < 9);
+  $mon  = "0" . $mon  if ($mon  < 10);
+  $mday = "0" . $mday if ($mday < 10);
+  $hour = "0" . $hour if ($hour < 10);
+  $min  = "0" . $min  if ($min  < 10);
+  $sec  = "0" . $sec  if ($sec  < 10);
 
-  my $t = $year . $mon . $mday . $hour . $min . $sec;
+#  my $t = $year . $mon . $mday . $hour . $min . $sec;
+  my $t = $year . $mon . $mday . $hour . $min;
+  return $t;
+}
+
+sub generate_date_time_with_delta {
+  my ($hourDelta) = @_;
+  ($sec,$min,$hour,$mday,$mon,$year) = localtime(time);
+  $hour -= $hourDelta;
+  if ($hour < 0) {
+    $hour += 24;
+    $mday--;
+  }
+  if ($mday < 1) {
+    $mday = 27;
+    $mon--;
+  }
+  if ($mon < 1) {
+   $mon += 12;
+   $year --;
+  }
+  if ($mday < 1) {
+    $mday = 27;
+    $mon--;
+  }
+  if ($mon < 1) {
+   $mon += 12;
+   $year --;
+  }
+
+  $year += 1900; $mon++;
+  $mon  = "0" . $mon  if ($mon  < 10);
+  $mday = "0" . $mday if ($mday < 10);
+  $hour = "0" . $hour if ($hour < 10);
+  $min  = "0" . $min  if ($min  < 10);
+  $sec  = "0" . $sec  if ($sec  < 10);
+
+#  my $t = $year . $mon . $mday . $hour . $min . $sec;
+  my $t = $year . $mon . $mday . $hour . $min;
   return $t;
 }
 
