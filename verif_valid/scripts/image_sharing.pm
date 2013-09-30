@@ -667,6 +667,40 @@ sub clear_db {
   $dbh->disconnect();
 }
 
+sub get_column_descriptions {
+  my ($dbName, $tableName) = @_;
+
+  my $dsn = "dbi:Pg:dbname=$dbName";
+  my $dbh = DBI->connect($dsn);
+  my $str = "select column_name, data_type from information_schema.columns where table_name = '$tableName' order by column_name;";
+
+  my $sth = $dbh->prepare($str);
+  $sth->execute();
+  my @columns;
+  my $idx = 0;
+  while (@row = $sth->fetchrow_array) {
+    my $s = "$row[0] / $row[1]";
+    $columns[$idx++] = $s;
+  }
+  $dbh->disconnect();
+  return @columns;
+}
+
+sub get_view_description {
+  my ($dbName, $viewName) = @_;
+
+  my $dsn = "dbi:Pg:dbname=$dbName";
+  my $dbh = DBI->connect($dsn);
+  my $str = "select view_definition from information_schema.views   where table_name = '$viewName';";
+
+  my $sth = $dbh->prepare($str);
+  $sth->execute();
+  @row = $sth->fetchrow_array;
+  $sth->fetchrow_array;
+  $dbh->disconnect();
+  return $row[0];
+}
+
 sub append_patient_hash_global {
  my $gPID = shift;
  my $gMRN = shift;
