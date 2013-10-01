@@ -656,7 +656,7 @@ sub clear_db {
 
   @tableNames = ( "hipaa_audit_accession_numbers",
 	"hipaa_audit_mrns", "transactions", "jobs",
-	"job_sets", "reports", "exams", "patients");
+	"job_sets", "reports", "studies", "exams", "patients");
 
   foreach $t(@tableNames) {
     my $str = "delete from $t;";
