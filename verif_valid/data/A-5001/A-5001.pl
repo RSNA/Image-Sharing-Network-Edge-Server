@@ -16,6 +16,7 @@ sub fill_variables {
 
  print F "\$DATE_TIME\$ = $dt\n";
  print F "\$ORDER_EFFECTIVE_DATE\$ = $dt\n";
+ print F "\$UPDATE_DATE_TIME\$ = $dt\n";
 
  close F;
 }
@@ -41,11 +42,13 @@ sub fill_variables {
   mesa_msgs::create_hl7("$f-orm");
   print "Created: $f-orm\n" if ($verbose);
 
-  mesa_msgs::create_text_file(
-	"$f.var",		# This is the output
+  mesa_msgs::create_text_file_2_var_files(
+	"$f-oru.txt",		# This is the output
 	"../ihe_oru.tpl",	# Template for an O01 message
-	"$f-oru.txt");		# Input with order information
-  mesa_msgs::create_hl7("$f-oru");
+	"$f.var",		# Input file 1
+	$tmp);			# Second input
+  
+mesa_msgs::create_hl7("$f-oru");
   print "Created: $f-oru\n" if ($verbose);
 
  }

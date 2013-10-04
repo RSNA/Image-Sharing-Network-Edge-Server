@@ -656,7 +656,7 @@ sub clear_db {
 
   @tableNames = ( "hipaa_audit_accession_numbers",
 	"hipaa_audit_mrns", "transactions", "jobs",
-	"job_sets", "reports", "exams", "patients");
+	"job_sets", "reports", "studies", "exams", "patients");
 
   foreach $t(@tableNames) {
     my $str = "delete from $t;";
@@ -665,6 +665,40 @@ sub clear_db {
     die "Could not execute $str" if $?;
   }
   $dbh->disconnect();
+}
+
+sub get_column_descriptions {
+  my ($dbName, $tableName) = @_;
+
+  my $dsn = "dbi:Pg:dbname=$dbName";
+  my $dbh = DBI->connect($dsn);
+  my $str = "select column_name, data_type from information_schema.columns where table_name = '$tableName' order by column_name;";
+
+  my $sth = $dbh->prepare($str);
+  $sth->execute();
+  my @columns;
+  my $idx = 0;
+  while (@row = $sth->fetchrow_array) {
+    my $s = "$row[0] / $row[1]";
+    $columns[$idx++] = $s;
+  }
+  $dbh->disconnect();
+  return @columns;
+}
+
+sub get_view_description {
+  my ($dbName, $viewName) = @_;
+
+  my $dsn = "dbi:Pg:dbname=$dbName";
+  my $dbh = DBI->connect($dsn);
+  my $str = "select view_definition from information_schema.views   where table_name = '$viewName';";
+
+  my $sth = $dbh->prepare($str);
+  $sth->execute();
+  @row = $sth->fetchrow_array;
+  $sth->fetchrow_array;
+  $dbh->disconnect();
+  return $row[0];
 }
 
 sub append_patient_hash_global {

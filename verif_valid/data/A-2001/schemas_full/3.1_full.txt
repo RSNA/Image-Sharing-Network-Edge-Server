@@ -1,0 +1,117 @@
+Schema version: 3.1.0
+
+Table Definitions
+
+ -- hipaa_audit_accession_numbers -- 
+accession_number / character varying
+id / integer
+modified_date / timestamp with time zone
+view_id / integer
+
+ -- hipaa_audit_mrns -- 
+id / integer
+modified_date / timestamp with time zone
+mrn / character varying
+view_id / integer
+
+ -- transactions -- 
+comments / character varying
+job_id / integer
+modified_date / timestamp with time zone
+status_code / integer
+transaction_id / integer
+
+ -- jobs -- 
+document_id / character varying
+exam_id / integer
+job_id / integer
+job_set_id / integer
+modified_date / timestamp with time zone
+remaining_retries / integer
+report_id / integer
+
+ -- job_sets -- 
+delay_in_hrs / integer
+email_address / character varying
+job_set_id / integer
+modified_date / timestamp with time zone
+patient_id / integer
+send_on_complete / boolean
+single_use_patient_id / character varying
+user_id / integer
+
+ -- reports -- 
+dictator / character varying
+exam_id / integer
+modified_date / timestamp with time zone
+proc_code / character varying
+report_id / integer
+report_text / text
+signer / character varying
+status / character varying
+status_timestamp / timestamp with time zone
+transcriber / character varying
+
+ -- exams -- 
+accession_number / character varying
+exam_description / character varying
+exam_id / integer
+modified_date / timestamp with time zone
+patient_id / integer
+
+ -- patients -- 
+city / character varying
+consent_timestamp / timestamp with time zone
+dob / date
+email_address / character varying
+modified_date / timestamp with time zone
+mrn / character varying
+patient_id / integer
+patient_name / character varying
+rsna_id / character varying
+sex / character
+state / character varying
+street / character varying
+zip_code / character varying
+
+ -- v_exam_status -- 
+accession_number / character varying
+city / character varying
+dictator / character varying
+dob / date
+exam_description / character varying
+exam_id / integer
+mrn / character varying
+patient_id / integer
+patient_name / character varying
+report_id / integer
+report_text / text
+sex / character
+signer / character varying
+state / character varying
+status / character varying
+status_timestamp / timestamp with time zone
+street / character varying
+transcriber / character varying
+zip_code / character varying
+
+ -- v_job_status -- 
+comments / character varying
+delay_in_hrs / integer
+exam_id / integer
+job_id / integer
+job_set_id / integer
+last_transaction_timestamp / timestamp with time zone
+remaining_retries / integer
+send_on_complete / boolean
+single_use_patient_id / character varying
+status / integer
+status_message / character varying
+
+View Definitions
+
+ -- v_exam_status -- 
+SELECT p.patient_id, p.mrn, p.patient_name, p.dob, p.sex, p.street, p.city, p.state, p.zip_code, e.exam_id, e.accession_number, e.exam_description, r.report_id, r.status, r.status_timestamp, r.report_text, r.dictator, r.transcriber, r.signer FROM ((patients p JOIN exams e ON ((p.patient_id = e.patient_id))) JOIN (SELECT r1.report_id, r1.exam_id, r1.proc_code, r1.status, r1.status_timestamp, r1.report_text, r1.signer, r1.dictator, r1.transcriber, r1.modified_date FROM reports r1 WHERE (r1.report_id = (SELECT r2.report_id FROM reports r2 WHERE (r2.exam_id = r1.exam_id) ORDER BY r2.status_timestamp DESC, r2.modified_date DESC LIMIT 1))) r ON ((e.exam_id = r.exam_id)));
+
+ -- v_job_status -- 
+SELECT js.job_set_id, j.job_id, j.exam_id, js.delay_in_hrs, t.status, t.status_message, t.modified_date AS last_transaction_timestamp, js.single_use_patient_id, t.comments, js.send_on_complete, j.remaining_retries FROM ((jobs j JOIN job_sets js ON ((j.job_set_id = js.job_set_id))) JOIN (SELECT t1.job_id, t1.status_code AS status, sc.description AS status_message, t1.comments, t1.modified_date FROM (transactions t1 JOIN status_codes sc ON ((t1.status_code = sc.status_code))) WHERE (t1.modified_date = (SELECT max(t2.modified_date) AS max FROM transactions t2 WHERE (t2.job_id = t1.job_id)))) t ON ((j.job_id = t.job_id)));
