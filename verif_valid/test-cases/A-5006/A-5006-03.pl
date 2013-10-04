@@ -36,10 +36,10 @@ sub send_DICOM {
  my ($ae, $host, $port) = @_;
 
  @image_sets = (
-	".999.10\tElm^Will\tA-5006-yy-1\tA-5006-yy-1F",
-	".999.20\tBeech^Robert\tA-5006-yy-2\tA-5006-yy-2F",
-	".999.30\tPine^Sarah\tA-5006-yy-3\tA-5006-yy-3F",
-	".999.40\tRerdwood^Karen\tA-5006-yy-4\tA-5006-yy-4F",
+	".999.11\tTurner^Will\tA-5006-yy-1\tA-5006-yy-1F",
+	".999.21\tWarner^Robert\tA-5006-yy-2\tA-5006-yy-2F",
+	".999.31\tCoolidge^Sarah\tA-5006-yy-3\tA-5006-yy-3F",
+	".999.41\tMango^Karen\tA-5006-yy-4\tA-5006-yy-4F",
  );
 
  foreach $im(@image_sets) {
