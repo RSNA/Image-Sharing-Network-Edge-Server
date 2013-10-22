@@ -61,6 +61,7 @@
 	<exclude name="izpack*.jar" />
       </fileset>
       <file src="version.txt" targetdir="$INSTALL_PATH"/>
+      <file src="${basedir}/src/izpack/rsna.properties" targetdir="/tmp" />
       <file src="${basedir}/../database/rsna.sql" targetdir="$INSTALL_PATH" />
       <file src="${basedir}/../database/RSNADB rollout v3.1.0.sql" targetdir="$INSTALL_PATH" />
       <file src="${basedir}/../hl7-receiver-app/Mirth Backup.xml" targetdir="$INSTALL_PATH" />
@@ -86,6 +87,7 @@
       <parsable targetfile="$INSTALL_PATH/conf/prep-log4j.properties" type="javaprop" />
       <parsable targetfile="$INSTALL_PATH/conf/transfer-log4j.properties" type="javaprop" />
       <parsable targetfile="$INSTALL_PATH/conf/retrieve-log4j.properties" type="javaprop" />
+      <parsable targetfile="/tmp/rsna.properties" type="javaprop" />
       <parsable targetfile="/etc/init.d/edge-server" os="unix" />
     </pack>
     <pack name="Glassfish" required="no">
