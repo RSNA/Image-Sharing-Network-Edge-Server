@@ -13,7 +13,8 @@ set -e
 
 umask 022
 
-export RSNA_ROOT=$rsna.root
+. /etc/rsna.conf
+export RSNA_ROOT
 
 mkdir -p $RSNA_ROOT/tmp/pids
 
@@ -53,9 +54,6 @@ start)
 	   exit 1
 	fi
 
-	log_daemon_msg "Starting CTP"
-	/etc/init.d/ctpService start
-
 	if su edge -l -c "$RSNA_ROOT/mirth/mirth-daemon start"; then log_progress_msg "mirth"
 	else
 	   log_end_msg 1
@@ -80,9 +78,6 @@ stop)
 	else
 	   log_end_msg 1
 	fi
-
-	log_daemon_msg "Stopping CTP"
-	/etc/init.d/ctpService stop
 
 	if su edge -l -c "$RSNA_ROOT/mirth/mirth-daemon stop"; then log_progress_msg "mirth"
 	else
