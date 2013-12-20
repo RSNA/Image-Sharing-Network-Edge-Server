@@ -45,6 +45,7 @@
     <panel classname="UserInputPanel" id="UserInputPanel.1" />
     <panel classname="UserInputPanel" id="UserInputPanel.2" />
     <panel classname="UserInputPanel" id="UserInputPanel.3" />
+    <panel classname="UserInputPanel" id="UserInputPanel.4" />
     <panel classname="SummaryPanel" />
     <panel classname="InstallPanel" />
     <panel classname="ProcessPanel" />

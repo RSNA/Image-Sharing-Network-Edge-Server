@@ -9,6 +9,12 @@
   </field>
 </panel>
 <panel order="1">
+<field type="title" txt="Java path configuration" bold="true" size="1" />
+<field type="text" variable="java.home">
+  <spec txt="JAVA_HOME:" size="25" set="$JAVA_HOME" />
+</field>
+</panel>
+<panel order="2">
 <field type="title" txt="Configure database connection" bold="true" size="1" />
 <field type="text" variable="database.host">
   <spec txt="Host:" size="25" set="localhost" />
@@ -33,7 +39,7 @@
   </spec>
 </field>
 </panel>
-<panel order="2">
+<panel order="3">
 <createForPack name="Generate Client Certificate" />
 <field type="title" txt="Client Certificate Info" bold="true" size="1" />
 <field type="text" variable="keygen.server_name">
@@ -63,7 +69,7 @@
     <spec txt="Number of days the certificate is valid:" size="25" set="1095" />
 </field>
 </panel>
-<panel order="3">
+<panel order="4">
 <createForPack name="Mirth" />
 <field type="title" txt="Configure Mirth database connection" bold="true" size="1" />
 <field type="text" variable="mirthdb.host">
