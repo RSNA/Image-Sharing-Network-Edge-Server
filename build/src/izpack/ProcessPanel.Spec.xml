@@ -6,14 +6,17 @@
     <executefile name="$INSTALL_PATH/scripts/edge-db-install.sh">
       <env>DBPASSWD=$database.password</env>
       <env>DBSUPERPASSWD=$database.superpassword</env>
+      <env>INSTALL_PATH=$INSTALL_PATH</env>
       <arg>$database.host</arg>
       <arg>$database.port</arg>
       <arg>$database.superuser</arg>
       <arg>$INSTALL_PATH/rsna.sql</arg>
       <arg>$INSTALL_PATH/tmp</arg>
-      <arg>$INSTALL_PATH/RSNADB rollout v3.1.0.sql</arg>
+      <arg>$APP_VER</arg>
       <arg>$upgrade</arg>
     </executefile>
+    <onFail previous="true" next="false" />
+    <onSuccess previous="true" next="true" />
   </job>
   <job name="client key gen">
     <os family="unix" />
