@@ -28,3 +28,6 @@
 [submodule "CTP"]
 	path = CTP
 	url = git://github.com/RSNA/CTP-ISN-Installer.git
+[submodule "send-email-app"]
+	path = send-email-app
+	url = https://github.com/RSNA/isn-send-email.git
