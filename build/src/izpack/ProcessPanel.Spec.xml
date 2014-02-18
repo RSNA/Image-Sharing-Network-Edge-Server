@@ -1,4 +1,5 @@
 <processing>
+  <logfiledir>$INSTALL_PATH</logfiledir>
   <job name="install database">
     <os family="unix" />
     <executeForPack name="Edgeserver" />

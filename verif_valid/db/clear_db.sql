@@ -1,4 +1,5 @@
 delete from hipaa_audit_accession_numbers;
+delete from hipaa_audit_views;
 delete from hipaa_audit_mrns;
 delete from transactions;
 delete from jobs;
