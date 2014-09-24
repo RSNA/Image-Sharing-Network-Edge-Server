@@ -31,3 +31,6 @@
 [submodule "send-email-app"]
 	path = send-email-app
 	url = https://github.com/RSNA/isn-send-email.git
+[submodule "utilization-report-app"]
+	path = utilization-report-app
+	url = https://github.com/RSNA/isn-utilization-report.git
