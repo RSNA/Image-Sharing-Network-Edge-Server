@@ -32,10 +32,8 @@ if [ "$UPGRADE" == '0' ]; then
   echo "creating rsnadb database, ignore 'does not exist' errors"
   /usr/bin/env createdb -w -h $DBHOST -p $DBPORT -U $SUPERUSER -O edge rsnadb &&
   /usr/bin/env psql -v ON_ERROR_STOP=1 --pset pager=off -X -q -w -h $DBHOST -p $DBPORT -U $SUPERUSER rsnadb < $SQLFILE || exit 1
-  echo "creating admin user to web interface, default password is 'changeme'"
+  echo "creating admin user to web interface, default password is 'password'"
   /usr/bin/env psql -v ON_ERROR_STOP=1 --pset pager=off -X -q -w -h $DBHOST -p $DBPORT -U $SUPERUSER rsnadb <<EOF
-INSERT INTO users (user_login, user_name, email, crypted_password, salt, created_at, updated_at, role_id, modified_date)
-VALUES ('admin','Admin User','admin@example.com','0265195cc1b2c7ac3160783afb81980920cace88','9faa7cc72fb798a3ca2330a2e4560859abfa0351',now(),now(),2,now());
 INSERT INTO configurations (key, value, modified_date) values ('tmp-dir-path','$TMPPATH', now());
 EOF
   exit 0

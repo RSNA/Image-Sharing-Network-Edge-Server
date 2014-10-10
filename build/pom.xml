@@ -4,7 +4,7 @@
 
   <groupId>org.rsna.isn</groupId>
   <artifactId>edgeserver</artifactId>
-  <version>3.1.0</version>
+  <version>3.2.0-t1</version>
   <packaging>pom</packaging>
 
   <name>RSNA Edgeserver</name>
@@ -18,9 +18,30 @@
     <app.title>${project.name}</app.title>
     <app.subpath>${project.artifactId}</app.subpath>
     <app.version>${project.version}</app.version>
-    <glassfish.version>3.0.1</glassfish.version>
+    <torquebox.version>3.x.incremental.1870</torquebox.version>
     <mirth.version>1.8.2.4472</mirth.version>
+    <openam.version>11.0.0</openam.version>
+    <openam.agent-version>4.0.0-20141009</openam.agent-version>
   </properties>
+  <repositories>
+    <repository>
+      <id>rsna-isn-thirdparty</id>
+      <name>RSNA ISN Thirdparty Repo</name>
+      <url>https://raw.github.com/RSNA/isn-maven-repo/master/thirdparty/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+
+    <repository>
+      <id>forgerock</id>
+      <name>Forgerock Maven Repo</name>
+      <url>http://maven.forgerock.org/repo/releases/</url>
+      <snapshots>
+	<enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
 
   <dependencies>
     <dependency>
@@ -31,14 +52,38 @@
     </dependency>
     <dependency>
       <groupId>org.rsna.isn</groupId>
-      <artifactId>glassfish</artifactId>
-      <version>${glassfish.version}</version>
+      <artifactId>torquebox</artifactId>
+      <version>${torquebox.version}</version>
       <type>zip</type>
     </dependency>
     <dependency>
       <groupId>org.rsna.isn</groupId>
       <artifactId>mirth</artifactId>
       <version>${mirth.version}</version>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>org.rsna.isn</groupId>
+      <artifactId>openam-jboss-agent</artifactId>
+      <version>${openam.agent-version}</version>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>org.forgerock.openam</groupId>
+      <artifactId>openam-server</artifactId>
+      <version>${openam.version}</version>
+      <type>war</type>
+    </dependency>
+    <dependency>
+      <groupId>org.forgerock.openam</groupId>
+      <artifactId>openam-configurator-tool</artifactId>
+      <version>${openam.version}</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.forgerock.openam</groupId>
+      <artifactId>openam-distribution-ssoadmintools</artifactId>
+      <version>${openam.version}</version>
       <type>zip</type>
     </dependency>
   </dependencies>
@@ -48,6 +93,8 @@
     <module>../prepare-content-app</module>
     <module>../token-app</module>
     <module>../transfer-content-app</module>
+    <module>../utilization-report-app</module>
+    <module>../openam-token-app-auth</module>
   </modules>
   <build>
     <defaultGoal>package</defaultGoal>
@@ -62,17 +109,18 @@
 	    ${project.build.directory}
 	  </stagingDirectory>
 	  <createChecksum>true</createChecksum>
+	  <skipChecksumVerification>false</skipChecksumVerification>
 	  <force>false</force>
 	  <artifactItems>
 	    <artifactItem>
 	      <groupId>org.rsna.isn</groupId>
-	      <artifactId>glassfish</artifactId>
-	      <version>${glassfish.version}</version>
+	      <artifactId>torquebox</artifactId>
+	      <version>${torquebox.version}</version>
 	      <packaging>zip</packaging>
 	      <downloadUrl>
-		http://download.java.net/glassfish/{version}/release/glassfish-{version}-web.zip
+		http://torquebox.org/builds/1870/torquebox-dist-bin.zip
 	      </downloadUrl>
-	      <checksum>ccd6b19b76eb9201c119b21f8f6978dd671959c7</checksum>
+	      <checksum>20514dd381a69c289997f66fc05e4c686f7833d7</checksum>
 	    </artifactItem>
 	    <artifactItem>
 	      <groupId>org.rsna.isn</groupId>

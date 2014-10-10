@@ -10,6 +10,7 @@ if [ -n "$A" ]; then
   sudo service edge-server stop
 fi
 
+export RSNA_ES_HOST=$(hostname -f)
 java -jar "$INSTALL_SCRIPT_DIR/${app.subpath}-${app.version}-standard.jar"
 
 . /etc/rsna.conf

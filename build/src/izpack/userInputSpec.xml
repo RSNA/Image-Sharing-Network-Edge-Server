@@ -101,4 +101,19 @@
   </spec>
 </field>
 </panel>
+<panel order="5">
+<createForPack name="TorqueBox" />
+<field type="title" txt="Configure TorqueBox/OpenAM" bold="true" size="1" />
+<field type="text" variable="server.host">
+  <spec txt="Server Hostname:" size="25" set="${ENV[RSNA_ES_HOST]}" />
+</field>
+<field type="text" variable="openam.cookie">
+  <spec txt="Login Cookie Domain:" size="25" set="${ENV[RSNA_ES_HOST]}" />
+</field>
+<field type="password" variable="openam.admin_pwd">
+  <spec>
+    <pwd txt="OpenAM amAdmin User Password:" size="25" set="$openam.admin_pwd" />
+  </spec>
+</field>
+</panel>
 </userInput>

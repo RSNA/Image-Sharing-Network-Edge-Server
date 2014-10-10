@@ -49,10 +49,10 @@
       <arg>$upgrade</arg>
     </executefile>
   </job>
-  <job name="glassfish setup">
+  <job name="torquebox setup">
     <os family="unix" />
-    <executeForPack name="Glassfish" />
-    <executefile name="$INSTALL_PATH/scripts/glassfish-setup.sh">
+    <executeForPack name="TorqueBox" />
+    <executefile name="$INSTALL_PATH/scripts/torquebox-setup.sh">
       <env>INSTALL_PATH=$INSTALL_PATH</env>
       <env>DBPASS=$database.password</env>
       <arg>$database.host</arg>

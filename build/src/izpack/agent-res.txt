@@ -1,0 +1,8 @@
+# Agent User Response File
+HOME_DIR= ${rsna.root}/torquebox-${torquebox.version}/jboss
+INSTANCE_NAME= standalone
+GLOBAL_MODULE= true
+AM_SERVER_URL= http://${server.host}:3000/openam
+AGENT_URL= ${server.host}:3000/agentapp
+AGENT_PROFILE_NAME= TorqueBoxAgent
+AGENT_PASSWORD_FILE= ${rsna.root}/conf/amagentpwd.txt

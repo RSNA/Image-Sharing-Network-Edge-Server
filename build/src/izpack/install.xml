@@ -23,6 +23,7 @@
 
   <dynamicvariables>
     <variable name="rsna.root" value="$INSTALL_PATH" />
+    <variable name="torquebox.version" value="${torquebox.version}" />
   </dynamicvariables>
 
   <resources>
@@ -46,6 +47,7 @@
     <panel classname="UserInputPanel" id="UserInputPanel.2" />
     <panel classname="UserInputPanel" id="UserInputPanel.3" />
     <panel classname="UserInputPanel" id="UserInputPanel.4" />
+    <panel classname="UserInputPanel" id="UserInputPanel.5" />
     <panel classname="SummaryPanel" />
     <panel classname="InstallPanel" />
     <panel classname="ProcessPanel" />
@@ -77,14 +79,14 @@
       <file src="${basedir}/src/izpack/prep-log4j.properties" targetdir="$INSTALL_PATH/conf" />
       <file src="${basedir}/src/izpack/transfer-log4j.properties" targetdir="$INSTALL_PATH/conf" />
       <file src="${basedir}/src/izpack/retrieve-log4j.properties" targetdir="$INSTALL_PATH/conf" />
-      <file src="${basedir}/src/izpack/edge-server" targetdir="/etc/init.d" os="unix" />
+      <file src="${basedir}/src/izpack/edge-server.conf" targetdir="/etc/init" os="unix" />
       <file src="${basedir}/src/izpack/download-prep.sh" targetdir="$INSTALL_PATH/scripts" />
       <file src="${basedir}/src/izpack/version-cleanup.sh" targetdir="$INSTALL_PATH/scripts" />
       <executable targetfile="$INSTALL_PATH/scripts/edge-db-install.sh" stage="never" />
       <executable targetfile="$INSTALL_PATH/scripts/keygen.sh" stage="never" os="unix" />
-      <executable targetfile="/etc/init.d/edge-server" stage="never" os="unix" />
       <executable targetfile="$INSTALL_PATH/scripts/download-prep.sh" stage="never" os="unix" />
       <executable targetfile="$INSTALL_PATH/scripts/version-cleanup.sh" stage="never" os="unix" />
+      <parsable targetfile="/etc/init/edge-server.conf" type="shell" os="unix" />
       <parsable targetfile="$INSTALL_PATH/conf/database.properties" type="javaprop" />
       <parsable targetfile="$INSTALL_PATH/conf/retrieve-content.properties" type="javaprop" />
       <parsable targetfile="$INSTALL_PATH/conf/prep-log4j.properties" type="javaprop" />
@@ -92,12 +94,24 @@
       <parsable targetfile="$INSTALL_PATH/conf/retrieve-log4j.properties" type="javaprop" />
       <parsable targetfile="/etc/rsna.conf" os="unix" />
     </pack>
-    <pack name="Glassfish" required="no">
-      <description>Glassfish Installation</description>
-      <file unpack="true" src="glassfish-3.0.1.zip" targetdir="$INSTALL_PATH" />
-      <file src="${basedir}/src/izpack/domain.xml" targetdir="$INSTALL_PATH/scripts" />
-      <file src="${basedir}/src/izpack/glassfish-setup.sh" targetdir="$INSTALL_PATH/scripts" />
-      <executable targetfile="$INSTALL_PATH/scripts/glassfish-setup.sh" stage="never" />
+    <pack name="TorqueBox" required="yes">
+      <description>TorqueBox Installation</description>
+      <file unpack="true" src="torquebox-${torquebox.version}.zip" targetdir="$INSTALL_PATH" />
+      <file unpack="true" src="openam-distribution-ssoadmintools-${openam.version}.zip" targetdir="$INSTALL_PATH/ssoadm" />
+      <file unpack="true" src="openam-jboss-agent-${openam.agent-version}.zip" targetdir="$INSTALL_PATH" />
+      <file src="${basedir}/src/izpack/torquebox-setup.sh" targetdir="$INSTALL_PATH/scripts" />
+      <file src="openam-server-${openam.version}.war" targetdir="$INSTALL_PATH" />
+      <file src="openam-configurator-tool-${openam.version}.jar" targetdir="$INSTALL_PATH" />
+      <file src="${basedir}/src/izpack/jboss-deployment-structure.xml" targetdir="$INSTALL_PATH/scripts" />
+      <file src="${basedir}/src/izpack/jboss-deploy-agent.xml" targetdir="$INSTALL_PATH/scripts" />
+      <file src="${basedir}/src/izpack/openam.config" targetdir="$INSTALL_PATH/scripts" />
+      <file src="${basedir}/src/izpack/agent-res.txt" targetdir="$INSTALL_PATH/scripts" />
+      <file src="${basedir}/src/izpack/agent-module.xml" targetdir="$INSTALL_PATH/scripts" />
+      <executable targetfile="$INSTALL_PATH/scripts/torquebox-setup.sh" stage="never" />
+      <parsable targetfile="$INSTALL_PATH/scripts/torquebox-setup.sh" type="shell" />
+      <parsable targetfile="$INSTALL_PATH/scripts/bootstrap.properties" type="javaprop" />
+      <parsable targetfile="$INSTALL_PATH/scripts/openam.config" type="javaprop" />
+      <parsable targetfile="$INSTALL_PATH/scripts/agent-res.txt" type="javaprop" />
     </pack>
     <pack name="Mirth" required="no" condition="!upgradeinstall">
       <description>Mirth Installation</description>

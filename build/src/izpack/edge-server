@@ -34,12 +34,6 @@ export AS_JAVA=$JAVA_HOME
 case $1 in
 start)
 	log_daemon_msg "Starting Edge server"
-	if su edge -l -c "$RSNA_ROOT/glassfishv3/bin/asadmin start-domain domain1"; then
-	    log_progress_msg "token-app"
-	else
-	    log_end_msg 1
-	    exit 1
-	fi
 
 	if start-stop-daemon -c $USER --start -d $RSNA_ROOT --quiet -m --oknodo -b --pidfile $PPID --exec $JAVA -- -server $PREPARE_JVM_OPTS -jar $RSNA_ROOT/prep-content*.jar ; then
 	    log_progress_msg "prepare-content-app"
@@ -62,12 +56,6 @@ start)
 	log_end_msg 0
         ;;
 stop)
-	log_daemon_msg "Stopping Edge server"
-	if su edge -l -c "$RSNA_ROOT/glassfishv3/bin/asadmin stop-domain domain1"; then
-	    log_progress_msg "token-app"
-	else
-	    log_end_msg 1
-	fi
 	if start-stop-daemon --stop --quiet --oknodo --pidfile $PPID; then
 	    log_progress_msg "prepare-content-app"
 	else
