@@ -48,6 +48,7 @@
     <panel classname="UserInputPanel" id="UserInputPanel.3" />
     <panel classname="UserInputPanel" id="UserInputPanel.4" />
     <panel classname="UserInputPanel" id="UserInputPanel.5" />
+    <panel classname="UserInputPanel" id="UserInputPanel.6" />
     <panel classname="SummaryPanel" />
     <panel classname="InstallPanel" />
     <panel classname="ProcessPanel" />
@@ -124,6 +125,16 @@
       <executable targetfile="$INSTALL_PATH/mirth/shell.sh" stage="never" />
       <executable targetfile="$INSTALL_PATH/mirth/wrapper-linux-x86-32" stage="never" />
       <executable targetfile="$INSTALL_PATH/mirth/wrapper-linux-x86-64" stage="never" />
+    </pack>
+    <pack name="Utilization Reporting" required="no">
+      <description>Utilization Reporting</description>
+      <fileset dir="." targetdir="$INSTALL_PATH">
+	<include name="utilization-report-*.jar" />
+      </fileset>
+      <file src="${basedir}/src/izpack/edge-cron" targetdir="/etc/cron.d" />
+      <file src="${basedir}/src/izpack/utilization-config.sh" targetdir="$INSTALL_PATH/scripts" />
+      <parsable targetfile="/etc/cron.d/edge-cron" type="shell" />
+      <executable targetfile="$INSTALL_PATH/scripts/utilization-config.sh" stage="never" />
     </pack>
     <pack name="Generate Client Certificate" required="no" condition="!upgradeinstall">
       <description>Generate Client Certificate</description>

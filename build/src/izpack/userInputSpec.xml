@@ -116,4 +116,12 @@
   </spec>
 </field>
 </panel>
+<panel order="6">
+<createForPack name="Utilization Reporting" />
+<field type="title" txt="Utilization Reporting" bold="true" size="1" />
+<field type="staticText" align="left" txt="Configuration File:"/>
+<field type="file" variable="utilization.configfile">
+  <spec txt="" size="25" set="" />
+</field>
+</panel>
 </userInput>
