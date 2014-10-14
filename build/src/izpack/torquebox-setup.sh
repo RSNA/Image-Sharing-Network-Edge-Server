@@ -42,7 +42,7 @@ $JBOSS_CLI -c "deployment-overlay add --name=AgentOverlay --content=/WEB-INF/jbo
 
 # FIXME if upgrade mod openam.war with token auth
 
-cp -v $INSTALL_PATH/openam-server-%{openam.version}.jar $TORQUEBOX_HOME/jboss/standalone/deployments/openam.war &&
+cp -v $INSTALL_PATH/openam-server-%{openam.version}.war $TORQUEBOX_HOME/jboss/standalone/deployments/openam.war &&
 sleep 5 &&
 $JAVA_HOME/bin/java -jar $INSTALL_PATH/openam-configurator-tool-%{openam.version}.jar -f $INSTALL_PATH/scripts/openam.config 
 echo %{openam.admin_pwd} > $INSTALL_PATH/conf/ampwd.txt
