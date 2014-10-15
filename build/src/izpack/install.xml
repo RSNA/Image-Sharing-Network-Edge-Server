@@ -108,6 +108,7 @@
       <file src="${basedir}/src/izpack/openam.config" targetdir="$INSTALL_PATH/scripts" />
       <file src="${basedir}/src/izpack/agent-res.txt" targetdir="$INSTALL_PATH/scripts" />
       <file src="${basedir}/src/izpack/agent-module.xml" targetdir="$INSTALL_PATH/scripts" />
+      <file src="${basedir}/src/izpack/bootstrap.properties" targetdir="$INSTALL_PATH/scripts" />
       <executable targetfile="$INSTALL_PATH/scripts/torquebox-setup.sh" stage="never" />
       <parsable targetfile="$INSTALL_PATH/scripts/torquebox-setup.sh" type="shell" />
       <parsable targetfile="$INSTALL_PATH/scripts/bootstrap.properties" type="javaprop" />
