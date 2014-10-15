@@ -5,7 +5,7 @@ DBHOST=$1
 DBPORT=$2
 UPGRADE=$3
 
-if [ "$UPGRADE" == '0' ]; then
+if [ "x$UPGRADE" != 'x1' ]; then
     useradd --system edge -d $INSTALL_PATH
 fi
 
