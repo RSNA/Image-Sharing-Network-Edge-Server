@@ -24,7 +24,7 @@ if [ "$UPGRADE" == "1" ] && [ "x$CURVERSION" != "x$INSTALLER_DBVERSION" ]; then 
     exit 0
 fi
 
-if [ "$UPGRADE" == '0' ]; then
+if [ "x$UPGRADE" != 'x1' ]; then
   /usr/bin/env dropuser -w -h $DBHOST -p $DBPORT -U $SUPERUSER edge
   /usr/bin/env dropdb -w -h $DBHOST -p $DBPORT -U $SUPERUSER rsnadb
   echo "creating edge user"

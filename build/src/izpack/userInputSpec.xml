@@ -112,7 +112,7 @@
 </field>
 <field type="password" variable="openam.admin_pwd">
   <spec>
-    <pwd txt="OpenAM amAdmin User Password:" size="25" set="$openam.admin_pwd" />
+    <pwd txt="OpenAM amAdmin User Password:" size="25" set="" />
   </spec>
 </field>
 </panel>
