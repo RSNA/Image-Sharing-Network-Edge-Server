@@ -13,7 +13,7 @@ if grep -q SECRET_KEY_BASE /etc/rsna.conf ; then
     echo "SECRET_KEY_BASE is already set in /etc/rsna.conf"
 else
     echo "Setting SECRET_KEY_BASE in /etc/rsna.conf"
-    echo SECRET_KEY_BASE=$(dd if=/dev/urandom bs=1024 count=1 | sha512sum | awk -c '{print $1;}') >> /etc/rsna.conf
+    echo SECRET_KEY_BASE=$(dd if=/dev/urandom bs=1024 count=1 | sha512sum | gawk '{print $1;}') >> /etc/rsna.conf
 fi
 
 TORQUEBOX_HOME=$INSTALL_PATH/torquebox-%{torquebox.version}
@@ -49,7 +49,7 @@ echo %{openam.admin_pwd} > $INSTALL_PATH/conf/ampwd.txt
 chmod 400 $INSTALL_PATH/conf/ampwd.txt
 chown edge $INSTALL_PATH/conf/ampwd.txt 
 
-AGENT_PWD=$(dd if=/dev/urandom bs=1024 count=1 | sha1sum | awk -c '{print $1;}')
+AGENT_PWD=$(dd if=/dev/urandom bs=1024 count=1 | sha1sum | gawk '{print $1;}')
 echo $AGENT_PWD > $INSTALL_PATH/conf/amagentpwd.txt
 chmod 400 $INSTALL_PATH/conf/amagentpwd.txt
 chown edge $INSTALL_PATH/conf/amagentpwd.txt 
