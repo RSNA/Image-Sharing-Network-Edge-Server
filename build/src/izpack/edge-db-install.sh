@@ -29,9 +29,7 @@ if [ "x$UPGRADE" != 'x1' ]; then
   /usr/bin/env dropdb -w -h $DBHOST -p $DBPORT -U $SUPERUSER rsnadb
   echo "creating edge user"
   /usr/bin/env psql -v ON_ERROR_STOP=1 --pset pager=off -X -q -w -h $DBHOST -p $DBPORT -U $SUPERUSER postgres -c "CREATE ROLE edge WITH NOSUPERUSER NOCREATEDB NOCREATEROLE LOGIN ENCRYPTED PASSWORD '$DBPASSWD'" &&
-  echo "creating rsnadb database, ignore 'does not exist' errors"
-  /usr/bin/env createdb -w -h $DBHOST -p $DBPORT -U $SUPERUSER -O edge rsnadb &&
-  /usr/bin/env psql -v ON_ERROR_STOP=1 --pset pager=off -X -q -w -h $DBHOST -p $DBPORT -U $SUPERUSER rsnadb < $SQLFILE || exit 1
+  /usr/bin/env psql -v ON_ERROR_STOP=1 --pset pager=off -X -q -w -h $DBHOST -p $DBPORT -U $SUPERUSER postgres < $SQLFILE || exit 1
   echo "creating admin user to web interface, default password is 'password'"
   /usr/bin/env psql -v ON_ERROR_STOP=1 --pset pager=off -X -q -w -h $DBHOST -p $DBPORT -U $SUPERUSER rsnadb <<EOF
 INSERT INTO configurations (key, value, modified_date) values ('tmp-dir-path','$TMPPATH', now());
