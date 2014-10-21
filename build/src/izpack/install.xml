@@ -24,6 +24,7 @@
   <dynamicvariables>
     <variable name="rsna.root" value="$INSTALL_PATH" />
     <variable name="torquebox.version" value="${torquebox.version}" />
+    <variable name="openam.version" value="${openam.version}" />
   </dynamicvariables>
 
   <resources>
