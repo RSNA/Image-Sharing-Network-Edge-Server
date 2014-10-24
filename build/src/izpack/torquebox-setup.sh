@@ -28,7 +28,18 @@ chmod +x $JBOSS_CLI &&
 chmod +x $TORQUEBOX_HOME/jboss/bin/standalone.sh &&
 
 start edge-server
-sleep 10
+echo
+echo -n "waiting for edge-server to start."
+for i in {1..10}
+do
+    if netstat -an46 | grep -q :9990 ; then
+	echo
+	echo "edge-server started."
+	break
+    fi
+    sleep 5
+    echo -n "."
+done
 
 if ! $JBOSS_CLI -c "ls /subsystem=datasources" 2>&1 > /dev/null ; then
     $JBOSS_CLI -c "/subsystem=datasources:add"
