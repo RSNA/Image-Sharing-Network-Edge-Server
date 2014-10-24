@@ -30,7 +30,7 @@ chmod +x $TORQUEBOX_HOME/jboss/bin/standalone.sh &&
 edge_start_wait() {
     for i in {1..10}
     do
-	if netstat -an46 | grep -q :9990 ; then
+	if netstat -an46 | grep -q :9999 ; then
 	    echo
 	    echo "edge-server started."
 	    break
