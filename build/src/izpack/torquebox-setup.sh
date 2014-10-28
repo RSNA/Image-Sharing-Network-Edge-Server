@@ -6,7 +6,7 @@ DBPORT=$2
 UPGRADE=$3
 
 if [ "x$UPGRADE" != 'x1' ]; then
-    useradd --system edge -d $INSTALL_PATH
+    useradd --system edge -s /bin/bash -d $INSTALL_PATH
 fi
 
 if grep -q SECRET_KEY_BASE /etc/rsna.conf ; then
