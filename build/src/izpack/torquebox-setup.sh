@@ -62,7 +62,6 @@ wait_for_file() {
 
 
 edge_start &
-EDGE_PID=$!
 
 echo
 echo -n "waiting for edge-server to start."
@@ -132,9 +131,8 @@ mv $AGENT_MOD $AGENT_MOD.old
 cp -v $INSTALL_PATH/scripts/agent-module.xml $AGENT_MOD
 $INSTALL_PATH/j2ee_agents/jboss_v7_agent/bin/agentadmin --install --acceptLicense --useResponse $INSTALL_PATH/scripts/agent-res.txt
 
-kill -HUP $EDGE_PID
+pkill -U edge java
 edge_start &
-EDGE_PID=$!
 edge_start_wait
 
 echo "Deploying TokenApp"
@@ -142,6 +140,6 @@ $JBOSS_CLI -c "deploy $INSTALL_PATH/token-app.knob"
 
 wait_for_file $TORQUEBOX_HOME/jboss/standalone/deployments/token-app.knob.deployed
 
-kill -HUP $EDGE_PID
+pkill -U edge java
 
 echo "completing torquebox-setup.sh"
