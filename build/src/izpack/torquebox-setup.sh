@@ -27,6 +27,16 @@ chown -R edge:edge $INSTALL_PATH &&
 chmod +x $JBOSS_CLI &&
 chmod +x $TORQUEBOX_HOME/jboss/bin/standalone.sh &&
 
+edge_start() {
+    bash <<EOF
+  su - edge
+  . /etc/rsna.conf
+  export RSNA_ROOT
+  export SECRET_KEY_BASE
+  %{rsna.root}/torquebox-%{torquebox.version}/jboss/bin/standalone.sh -b %{server.host} -Dhttp.port=3000 > /dev/null 2>&1
+EOF
+}
+
 edge_start_wait() {
     for i in {1..10}
     do
@@ -51,7 +61,9 @@ wait_for_file() {
 }
 
 
-start edge-server
+edge_start &
+EDGE_PID=$!
+
 echo
 echo -n "waiting for edge-server to start."
 edge_start_wait
@@ -120,8 +132,9 @@ mv $AGENT_MOD $AGENT_MOD.old
 cp -v $INSTALL_PATH/scripts/agent-module.xml $AGENT_MOD
 $INSTALL_PATH/j2ee_agents/jboss_v42_agent/bin/agentadmin --install --acceptLicense --useResponse $INSTALL_PATH/scripts/agent-res.txt
 
-restart edge-server
-sleep 5
+kill -HUP $EDGE_PID
+edge_start &
+EDGE_PID=$!
 edge_start_wait
 
 echo "Deploying TokenApp"
@@ -129,6 +142,6 @@ $JBOSS_CLI -c "deploy $INSTALL_PATH/token-app.knob"
 
 wait_for_file $TORQUEBOX_HOME/jboss/standalone/deployments/token-app.knob.deployed
 
-stop edge-server
+kill -HUP $EDGE_PID
 
 echo "completing torquebox-setup.sh"
