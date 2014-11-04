@@ -113,7 +113,7 @@ sed -e $(sed_e 'JAVA_HOME' "$JAVA_HOME") \
     -e $(sed_e 'LOG_DIR' "$INSTALL_PATH/ssoadm/log") \
     -e $(sed_e 'DEBUG_DIR' "$INSTALL_PATH/ssoadm/debug") \
     -e $(sed_e 'AM_VERSION' "OpenAM %{openam.version}") \
-    < $INSTALL_PATH/ssoadm/template/unix/ssoadm.template > $SSOADM
+    < $INSTALL_PATH/ssoadm/template/unix/bin/ssoadm.template > $SSOADM
 
 chmod +x $SSOADM
 
@@ -130,7 +130,7 @@ echo "Installing OpenAM Agent."
 AGENT_MOD=$INSTALL_PATH/j2ee_agents/jboss_v7_agent/config/module.xml
 mv $AGENT_MOD $AGENT_MOD.old
 cp -v $INSTALL_PATH/scripts/agent-module.xml $AGENT_MOD
-$INSTALL_PATH/j2ee_agents/jboss_v42_agent/bin/agentadmin --install --acceptLicense --useResponse $INSTALL_PATH/scripts/agent-res.txt
+$INSTALL_PATH/j2ee_agents/jboss_v7_agent/bin/agentadmin --install --acceptLicense --useResponse $INSTALL_PATH/scripts/agent-res.txt
 
 kill -HUP $EDGE_PID
 edge_start &
