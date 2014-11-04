@@ -16,6 +16,7 @@ else
     echo SECRET_KEY_BASE=$(dd if=/dev/urandom bs=1024 count=1 | sha512sum | awk '{print $1;}') >> /etc/rsna.conf
 fi
 
+. /etc/rsna.conf
 TORQUEBOX_HOME=$INSTALL_PATH/torquebox-%{torquebox.version}
 JBOSS_CLI=$TORQUEBOX_HOME/jboss/bin/jboss-cli.sh
 POSTGRES_JAR=$(ls $INSTALL_PATH/ext/postgresql-*.jar)
@@ -129,6 +130,7 @@ echo "Installing OpenAM Agent."
 AGENT_MOD=$INSTALL_PATH/j2ee_agents/jboss_v7_agent/config/module.xml
 mv $AGENT_MOD $AGENT_MOD.old
 cp -v $INSTALL_PATH/scripts/agent-module.xml $AGENT_MOD
+chmod +x $INSTALL_PATH/j2ee_agents/jboss_v7_agent/bin/agentadmin
 $INSTALL_PATH/j2ee_agents/jboss_v7_agent/bin/agentadmin --install --acceptLicense --useResponse $INSTALL_PATH/scripts/agent-res.txt
 
 pkill -U edge java
