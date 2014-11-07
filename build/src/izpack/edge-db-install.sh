@@ -17,7 +17,7 @@ export PGOPTIONS='--client-min-messages=warning'
 if [ "$UPGRADE" == "1" ] && [ "x$CURVERSION" != "x$INSTALLER_DBVERSION" ]; then # upgrade from previous version
     OLDIFS=$IFS
     IFS=$'\n'
-    SQLUPDFILES=$(ls $INSTALL_PATH/RSNADB?rollout*.sql | sort | grep --no-group-separator -A100 "$CURVERSION" | tail -n +2)
+    SQLUPDFILES=$(ls $INSTALL_PATH/RSNADB?rollout*.sql | sort | grep -A100 "$CURVERSION" | sed '/^--$/d' | tail -n +2)
     echo "updating schema" $SQLUPDFILES
     sed -e 's/\xef\xbb\xbf//g' $SQLUPDFILES | /usr/bin/env psql -v ON_ERROR_STOP=1 --pset pager=off -q -X -1 -w -h $DBHOST -p $DBPORT -U $SUPERUSER rsnadb || exit 1
     IFS=$OLDIFS
