@@ -126,6 +126,8 @@ $JBOSS_CLI -c '/subsystem=ee:write-attribute(name="global-modules",value=[{"name
 $JBOSS_CLI -c '/subsystem=datasources/jdbc-driver=postgres:add(driver-name="postgres",driver-module-name="org.postgres",driver-class-name=org.postgresql.Driver)'
 $JBOSS_CLI -c "data-source add --jndi-name=java:/rsnadbDS --name=rsnadbPool --connection-url=jdbc:postgresql://$DBHOST:$DBPORT/rsnadb --driver-name=postgres --user-name=$DBUSER --password=$DBPASS"
 
+echo "Stopping edge-server"
+pkill -U edge java
 echo "Installing OpenAM Agent."
 AGENT_MOD=$INSTALL_PATH/j2ee_agents/jboss_v7_agent/config/module.xml
 mv $AGENT_MOD $AGENT_MOD.old
@@ -133,7 +135,6 @@ cp -v $INSTALL_PATH/scripts/agent-module.xml $AGENT_MOD
 chmod +x $INSTALL_PATH/j2ee_agents/jboss_v7_agent/bin/agentadmin
 $INSTALL_PATH/j2ee_agents/jboss_v7_agent/bin/agentadmin --install --acceptLicense --useResponse $INSTALL_PATH/scripts/agent-res.txt
 
-pkill -U edge java
 edge_start &
 edge_start_wait
 
