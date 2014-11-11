@@ -107,12 +107,12 @@ sed_e() {
     echo "s/@$1@/$(sed -e 's/[\/&]/\\&/g' <<<$2)/g"
 }
 
-sed -e $(sed_e 'JAVA_HOME' "$JAVA_HOME") \
-    -e $(sed_e 'CONFIG_DIR' "$INSTALL_PATH/openam-cfg") \
-    -e $(sed_e 'TOOLS_HOME' "$INSTALL_PATH/ssoadm") \
-    -e $(sed_e 'LOG_DIR' "$INSTALL_PATH/ssoadm/log") \
-    -e $(sed_e 'DEBUG_DIR' "$INSTALL_PATH/ssoadm/debug") \
-    -e $(sed_e 'AM_VERSION' "OpenAM %{openam.version}") \
+sed -e "$(sed_e 'JAVA_HOME' "$JAVA_HOME")" \
+    -e "$(sed_e 'CONFIG_DIR' "$INSTALL_PATH/openam-cfg")" \
+    -e "$(sed_e 'TOOLS_HOME' "$INSTALL_PATH/ssoadm")" \
+    -e "$(sed_e 'LOG_DIR' "$INSTALL_PATH/ssoadm/log")" \
+    -e "$(sed_e 'DEBUG_DIR' "$INSTALL_PATH/ssoadm/debug")" \
+    -e "$(sed_e 'AM_VERSION' "OpenAM %{openam.version}")" \
     < $INSTALL_PATH/ssoadm/template/unix/bin/ssoadm.template > $SSOADM
 
 chmod +x $SSOADM
