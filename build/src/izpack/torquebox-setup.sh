@@ -28,16 +28,6 @@ chown -R edge:edge $INSTALL_PATH &&
 chmod +x $JBOSS_CLI &&
 chmod +x $TORQUEBOX_HOME/jboss/bin/standalone.sh &&
 
-edge_start() {
-    bash <<EOF
-  su - edge
-  . /etc/rsna.conf
-  export RSNA_ROOT
-  export SECRET_KEY_BASE
-  %{rsna.root}/torquebox-%{torquebox.version}/jboss/bin/standalone.sh -b %{server.host} -Dhttp.port=3000 > /dev/null 2>&1
-EOF
-}
-
 edge_start_wait() {
     for i in {1..10}
     do
@@ -62,7 +52,7 @@ wait_for_file() {
 }
 
 
-edge_start &
+start edge_server
 
 echo
 echo -n "waiting for edge-server to start."
@@ -127,7 +117,7 @@ $JBOSS_CLI -c '/subsystem=datasources/jdbc-driver=postgres:add(driver-name="post
 $JBOSS_CLI -c "data-source add --jndi-name=java:/rsnadbDS --name=rsnadbPool --connection-url=jdbc:postgresql://$DBHOST:$DBPORT/rsnadb --driver-name=postgres --user-name=$DBUSER --password=$DBPASS"
 
 echo "Stopping edge-server"
-pkill -U edge java
+stop edge-server
 echo "Installing OpenAM Agent."
 AGENT_MOD=$INSTALL_PATH/j2ee_agents/jboss_v7_agent/config/module.xml
 mv $AGENT_MOD $AGENT_MOD.old
@@ -135,7 +125,7 @@ cp -v $INSTALL_PATH/scripts/agent-module.xml $AGENT_MOD
 chmod +x $INSTALL_PATH/j2ee_agents/jboss_v7_agent/bin/agentadmin
 $INSTALL_PATH/j2ee_agents/jboss_v7_agent/bin/agentadmin --install --acceptLicense --useResponse $INSTALL_PATH/scripts/agent-res.txt
 
-edge_start &
+start edge-server
 edge_start_wait
 
 echo "Deploying TokenApp"
@@ -143,6 +133,6 @@ $JBOSS_CLI -c "deploy $INSTALL_PATH/token-app.knob"
 
 wait_for_file $TORQUEBOX_HOME/jboss/standalone/deployments/token-app.knob.deployed
 
-pkill -U edge java
+stop edge-server
 
 echo "completing torquebox-setup.sh"
