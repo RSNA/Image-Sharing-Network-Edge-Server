@@ -52,7 +52,7 @@ wait_for_file() {
 }
 
 
-start edge_server
+start edge-server
 
 echo
 echo -n "waiting for edge-server to start."
