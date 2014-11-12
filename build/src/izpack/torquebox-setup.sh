@@ -125,14 +125,7 @@ cp -v $INSTALL_PATH/scripts/agent-module.xml $AGENT_MOD
 chmod +x $INSTALL_PATH/j2ee_agents/jboss_v7_agent/bin/agentadmin
 $INSTALL_PATH/j2ee_agents/jboss_v7_agent/bin/agentadmin --install --acceptLicense --useResponse $INSTALL_PATH/scripts/agent-res.txt
 
-start edge-server
-edge_start_wait
-
 echo "Deploying TokenApp"
-$JBOSS_CLI -c "deploy $INSTALL_PATH/token-app.knob"
-
-wait_for_file $TORQUEBOX_HOME/jboss/standalone/deployments/token-app.knob.deployed
-
-stop edge-server
+cp -v $INSTALL_PATH/token-app.knob $TORQUEBOX_HOME/jboss/standalone/deployments/token-app.knob
 
 echo "completing torquebox-setup.sh"
