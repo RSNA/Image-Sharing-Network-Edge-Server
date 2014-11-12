@@ -28,9 +28,9 @@ if [ "x$UPGRADE" != 'x1' ]; then
   /usr/bin/env dropuser -w -h $DBHOST -p $DBPORT -U $SUPERUSER edge
   /usr/bin/env dropdb -w -h $DBHOST -p $DBPORT -U $SUPERUSER rsnadb
   echo "creating edge user"
-  /usr/bin/env psql -v ON_ERROR_STOP=1 --pset pager=off -X -q -w -h $DBHOST -p $DBPORT -U $SUPERUSER postgres -c "CREATE ROLE edge WITH NOSUPERUSER NOCREATEDB NOCREATEROLE LOGIN ENCRYPTED PASSWORD '$DBPASSWD'" &&
-  /usr/bin/env psql -v ON_ERROR_STOP=1 --pset pager=off -X -q -w -h $DBHOST -p $DBPORT -U $SUPERUSER postgres < $SQLFILE || exit 1
-  /usr/bin/env psql -v ON_ERROR_STOP=1 --pset pager=off -X -q -w -h $DBHOST -p $DBPORT -U $SUPERUSER rsnadb <<EOF
+  /usr/bin/env psql -v ON_ERROR_STOP=0 --pset pager=off -X -q -w -h $DBHOST -p $DBPORT -U $SUPERUSER postgres -c "CREATE ROLE edge WITH NOSUPERUSER NOCREATEDB NOCREATEROLE LOGIN ENCRYPTED PASSWORD '$DBPASSWD'" &&
+  /usr/bin/env psql -v ON_ERROR_STOP=0 --pset pager=off -X -q -w -h $DBHOST -p $DBPORT -U $SUPERUSER postgres < $SQLFILE || exit 1
+  /usr/bin/env psql -v ON_ERROR_STOP=0 --pset pager=off -X -q -w -h $DBHOST -p $DBPORT -U $SUPERUSER rsnadb <<EOF
 INSERT INTO configurations (key, value, modified_date) values ('tmp-dir-path','$TMPPATH', now());
 EOF
   exit 0
