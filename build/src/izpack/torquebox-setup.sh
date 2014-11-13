@@ -110,7 +110,7 @@ sed -e "$(sed_e 'JAVA_HOME' "$JAVA_HOME")" \
 chmod +x $SSOADM
 
 $SSOADM update-server-cfg -u amAdmin -f %{rsna.root}/conf/ampwd.txt -s default -a com.iplanet.am.cookie.name=RSNA_SSO
-$SSOADM create-agent -u amAdmin -f %{rsna.root}/conf/ampwd.txt -e / -t J2EEAgent -b TorqueBoxAgent -s %{server.host}:3000/openam -g http://%{server.host}:3000/agentapp -v -a userpassword=$AGENT_PWD com.iplanet.am.cookie.name=RSNA_SSO
+$SSOADM create-agent -u amAdmin -f %{rsna.root}/conf/ampwd.txt -e / -t J2EEAgent -b TorqueBoxAgent -s http://%{server.host}:3000/openam -g http://%{server.host}:3000/agentapp -v -a userpassword=$AGENT_PWD com.iplanet.am.cookie.name=RSNA_SSO
 
 echo "Adding Postgres Module and DataSource"
 $JBOSS_CLI -c "module add --name=org.postgres --resources=$POSTGRES_JAR --dependencies=javax.api\,javax.transaction.api"
@@ -126,6 +126,7 @@ mv $AGENT_MOD $AGENT_MOD.old
 cp -v $INSTALL_PATH/scripts/agent-module.xml $AGENT_MOD
 chmod +x $INSTALL_PATH/j2ee_agents/jboss_v7_agent/bin/agentadmin
 $INSTALL_PATH/j2ee_agents/jboss_v7_agent/bin/agentadmin --install --acceptLicense --useResponse $INSTALL_PATH/scripts/agent-res.txt
+chown -R edge:edge $INSTALL_PATH/j2ee_agents/jboss_v7_agent
 
 echo "Deploying TokenApp"
 cp -v $INSTALL_PATH/token-app.knob $TORQUEBOX_HOME/jboss/standalone/deployments/token-app.knob
