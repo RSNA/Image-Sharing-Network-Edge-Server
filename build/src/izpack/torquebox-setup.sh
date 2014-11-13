@@ -16,6 +16,8 @@ else
     echo SECRET_KEY_BASE=$(dd if=/dev/urandom bs=1024 count=1 | sha512sum | awk '{print $1;}') >> /etc/rsna.conf
 fi
 
+echo OPENAM_URL=http://%{server.host}:3000/openam >> /etc/rsna.conf
+
 . /etc/rsna.conf
 TORQUEBOX_HOME=$INSTALL_PATH/torquebox-%{torquebox.version}
 JBOSS_CLI=$TORQUEBOX_HOME/jboss/bin/jboss-cli.sh
