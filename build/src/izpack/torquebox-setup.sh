@@ -130,5 +130,6 @@ chown -R edge:edge $INSTALL_PATH/j2ee_agents/jboss_v7_agent
 
 echo "Deploying TokenApp"
 cp -v $INSTALL_PATH/token-app.knob $TORQUEBOX_HOME/jboss/standalone/deployments/token-app.knob
+touch $TORQUEBOX_HOME/jboss/standalone/deployments/token-app.knob.dodeploy
 
 echo "completing torquebox-setup.sh"
