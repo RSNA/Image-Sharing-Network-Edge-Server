@@ -80,6 +80,7 @@
       <file src="${basedir}/src/izpack/truststore.jks" targetdir="$INSTALL_PATH/conf" />
       <file src="${basedir}/src/izpack/prep-log4j.properties" targetdir="$INSTALL_PATH/conf" />
       <file src="${basedir}/src/izpack/transfer-log4j.properties" targetdir="$INSTALL_PATH/conf" />
+      <file src="${basedir}/src/izpack/token-log4j.properties" targetdir="$INSTALL_PATH/conf" />
       <file src="${basedir}/src/izpack/retrieve-log4j.properties" targetdir="$INSTALL_PATH/conf" />
       <file src="${basedir}/src/izpack/edge-server.conf" targetdir="/etc/init" os="unix" />
       <file src="${basedir}/src/izpack/download-prep.sh" targetdir="$INSTALL_PATH/scripts" />
@@ -94,6 +95,7 @@
       <parsable targetfile="$INSTALL_PATH/conf/prep-log4j.properties" type="javaprop" />
       <parsable targetfile="$INSTALL_PATH/conf/transfer-log4j.properties" type="javaprop" />
       <parsable targetfile="$INSTALL_PATH/conf/retrieve-log4j.properties" type="javaprop" />
+      <parsable targetfile="$INSTALL_PATH/conf/token-log4j.properties" type="javaprop" />
       <parsable targetfile="/etc/rsna.conf" os="unix" />
     </pack>
     <pack name="TorqueBox" required="yes">
