@@ -22,5 +22,7 @@ cd $CTP_DIR &&
 java -jar ISN-installer.jar &&
 chown -R edge:edge $CTP_DIR
 
-sudo service edge-server start
+update-rc.d edge-server defaults
+/etc/init.d/edge-server start
+service edge-server start
 
