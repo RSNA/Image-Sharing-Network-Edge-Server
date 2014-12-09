@@ -112,6 +112,17 @@ chmod +x $SSOADM
 $SSOADM update-server-cfg -u amAdmin -f %{rsna.root}/conf/ampwd.txt -s default -a com.iplanet.am.cookie.name=RSNA_SSO
 $SSOADM create-agent -u amAdmin -f %{rsna.root}/conf/ampwd.txt -e / -t J2EEAgent -b TorqueBoxAgent -s http://%{server.host}:3000/openam -g http://%{server.host}:3000/agentapp -v -a userpassword=$AGENT_PWD com.iplanet.am.cookie.name=RSNA_SSO
 
+echo "Creating admin user and Groups"
+$SSOADM create-identity -u amAdmin -f %{rsna.root}/conf/ampwd.txt -e / -t Group -i Admin
+$SSOADM create-identity -u amAdmin -f %{rsna.root}/conf/ampwd.txt -e / -t Group -i Super
+$SSOADM create-identity -u amAdmin -f %{rsna.root}/conf/ampwd.txt -e / -t Group -i Export
+$SSOADM create-identity -u amAdmin -f %{rsna.root}/conf/ampwd.txt -e / -t Group -i Import
+$SSOADM create-identity -u amAdmin -f %{rsna.root}/conf/ampwd.txt -e / -t User -i admin -a givenname=Admin sn=Admin userpassword=password
+$SSOADM add-member -u amAdmin -f %{rsna.root}/conf/ampwd.txt -e / -t Group -i Admin -m admin -y User
+# cleanup default users
+$SSOADM delete-identities -u amAdmin -f %{rsna.root}/conf/ampwd.txt -e / -t User -i demo
+$SSOADM delete-identities -u amAdmin -f %{rsna.root}/conf/ampwd.txt -e / -t User -i anonymous
+
 echo "Adding Postgres Module and DataSource"
 $JBOSS_CLI -c "module add --name=org.postgres --resources=$POSTGRES_JAR --dependencies=javax.api\,javax.transaction.api"
 $JBOSS_CLI -c '/subsystem=ee:write-attribute(name="global-modules",value=[{"name"=>"org.postgres","slot"=>"main"}])'
