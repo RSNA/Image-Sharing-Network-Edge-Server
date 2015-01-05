@@ -105,15 +105,11 @@
       <description>TorqueBox Installation</description>
       <file unpack="true" src="torquebox-${torquebox.version}.zip" targetdir="$INSTALL_PATH" />
       <file unpack="true" src="openam-distribution-ssoadmintools-${openam.version}.zip" targetdir="$INSTALL_PATH/ssoadm" />
-      <file unpack="true" src="openam-jboss-agent-${openam.agent-version}.zip" targetdir="$INSTALL_PATH" />
       <file src="${basedir}/src/izpack/torquebox-setup.sh" targetdir="$INSTALL_PATH/scripts" />
       <file src="openam-server-${openam.version}.war" targetdir="$INSTALL_PATH" />
       <file src="openam-configurator-tool-${openam.version}.jar" targetdir="$INSTALL_PATH" />
       <file src="${basedir}/src/izpack/jboss-deployment-structure.xml" targetdir="$INSTALL_PATH/scripts" />
-      <file src="${basedir}/src/izpack/jboss-deploy-agent.xml" targetdir="$INSTALL_PATH/scripts" />
       <file src="${basedir}/src/izpack/openam.config" targetdir="$INSTALL_PATH/scripts" />
-      <file src="${basedir}/src/izpack/agent-res.txt" targetdir="$INSTALL_PATH/scripts" />
-      <file src="${basedir}/src/izpack/agent-module.xml" targetdir="$INSTALL_PATH/scripts" />
       <file src="${basedir}/src/izpack/bootstrap.properties" targetdir="$INSTALL_PATH/scripts" />
       <executable targetfile="$INSTALL_PATH/scripts/torquebox-setup.sh" stage="never" />
       <parsable targetfile="$INSTALL_PATH/scripts/torquebox-setup.sh" type="shell" />

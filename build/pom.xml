@@ -21,7 +21,6 @@
     <torquebox.version>3.x.incremental.1870</torquebox.version>
     <mirth.version>1.8.2.4472</mirth.version>
     <openam.version>11.0.0</openam.version>
-    <openam.agent-version>4.0.0-20141009</openam.agent-version>
   </properties>
   <repositories>
     <repository>
@@ -66,12 +65,6 @@
       <groupId>org.rsna.isn</groupId>
       <artifactId>mirth</artifactId>
       <version>${mirth.version}</version>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>org.rsna.isn</groupId>
-      <artifactId>openam-jboss-agent</artifactId>
-      <version>${openam.agent-version}</version>
       <type>zip</type>
     </dependency>
     <dependency>
