@@ -115,7 +115,6 @@
       <parsable targetfile="$INSTALL_PATH/scripts/torquebox-setup.sh" type="shell" />
       <parsable targetfile="$INSTALL_PATH/scripts/bootstrap.properties" type="javaprop" />
       <parsable targetfile="$INSTALL_PATH/scripts/openam.config" type="javaprop" />
-      <parsable targetfile="$INSTALL_PATH/scripts/agent-res.txt" type="javaprop" />
     </pack>
     <pack name="Mirth" required="no" condition="!upgradeinstall">
       <description>Mirth Installation</description>
