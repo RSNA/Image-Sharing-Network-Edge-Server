@@ -21,7 +21,7 @@ echo OPENAM_URL=http://%{server.host}:3000/openam >> /etc/rsna.conf
 . /etc/rsna.conf
 TORQUEBOX_HOME=$INSTALL_PATH/torquebox-%{torquebox.version}
 JBOSS_CLI=$TORQUEBOX_HOME/jboss/bin/jboss-cli.sh
-POSTGRES_JAR=$(ls $INSTALL_PATH/ext/postgresql-*.jar)
+POSTGRES_JAR=$(ls $INSTALL_PATH/ext/postgresql-*.jar | tail -1)
 
 mkdir -p $INSTALL_PATH/logs &&
 mkdir -p $INSTALL_PATH/tmp &&
