@@ -72,7 +72,15 @@ fi
 echo "Adding OpenAM Overlays"
 $JBOSS_CLI -c "deployment-overlay add --name=OpenAMOverlay --content=/WEB-INF/classes/bootstrap.properties=$INSTALL_PATH/scripts/bootstrap.properties\,/WEB-INF/jboss-deployment-structure.xml=$INSTALL_PATH/scripts/jboss-deployment-structure.xml --deployments=openam.war"
 
-# FIXME if upgrade mod openam.war with token auth
+if [ "x$UPGRADE" == 'x1' ]; then
+    apt-get -y install zip unzip
+    mkdir -p $INSTALL_PATH/upauth/WEB-INF/lib
+    cp -v $INSTALL_PATH/openam-token-app-auth-*.jar $INSTALL_PATH/upauth/WEB-INF/lib
+    pushd $INSTALL_PATH/upauth
+    zip $INSTALL_PATH/openam-server-%{openam.version}.war WEB-INF/lib/*
+    unzip $INSTALL_PATH/openam-token-app-auth-*.jar amAuthTokenAppAuth.xml
+    popd
+fi
 
 echo "Deploying OpenAM war"
 cp -v $INSTALL_PATH/openam-server-%{openam.version}.war $TORQUEBOX_HOME/jboss/standalone/deployments/openam.war &&
@@ -115,7 +123,17 @@ delete-identities -e / -t User -i demo
 delete-identities -e / -t User -i anonymous
 EOF
 
-echo "Creating admin user and Groups"
+if [ "x$UPGRADE" == 'x1' ]; then
+    cat <<EOF >> /tmp/ssoadm.batch
+create-svc --xmlfile $INSTALL_PATH/upauth/amAuthTokenAppAuth.xml
+register-auth-module --authmodule org.rsna.isn.openam.TokenAppAuth
+create-auth-instance -e / -t TokenAppAuth -m TokenAppAuth
+update-auth-cfg-entr -e / --name ldapService -a "TokenAppAuth|SUFFICIENT|" "DataStore|REQUIRED|iplanet-am-auth-shared-state-enabled=true shared-state-enabled=true iplanet-am-auth-shared-state-behavior-pattern=useFirstPass"
+set-svc-attrs -e / -s iPlanetAMAuthService -a iplanet-am-auth-dynamic-profile-creation=true
+EOF
+fi
+
+echo "Configuring OpenAM and Creating admin user and Groups"
 
 $SSOADM do-batch -u amAdmin -f %{rsna.root}/conf/ampwd.txt -c -Z /tmp/ssoadm.batch
 
