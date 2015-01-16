@@ -133,15 +133,21 @@ set-svc-attrs -e / -s iPlanetAMAuthService -a iplanet-am-auth-dynamic-profile-cr
 EOF
 fi
 
-echo "Configuring OpenAM and Creating admin user and Groups"
-
-$SSOADM do-batch -u amAdmin -f %{rsna.root}/conf/ampwd.txt -c -Z /tmp/ssoadm.batch
-
 echo "Adding Postgres Module and DataSource"
 $JBOSS_CLI -c "module add --name=org.postgres --resources=$POSTGRES_JAR --dependencies=javax.api\,javax.transaction.api"
 $JBOSS_CLI -c '/subsystem=ee:write-attribute(name="global-modules",value=[{"name"=>"org.postgres","slot"=>"main"}])'
 $JBOSS_CLI -c '/subsystem=datasources/jdbc-driver=postgres:add(driver-name="postgres",driver-module-name="org.postgres",driver-class-name=org.postgresql.Driver)'
 $JBOSS_CLI -c "data-source add --jndi-name=java:/rsnadbDS --name=rsnadbPool --connection-url=jdbc:postgresql://$DBHOST:$DBPORT/rsnadb --driver-name=postgres --user-name=$DBUSER --password=$DBPASS"
+
+echo
+echo -n "waiting for edge-server to restart."
+restart edge-server
+sleep 5
+edge_start_wait
+
+echo "Configuring OpenAM and Creating admin user and Groups"
+
+$SSOADM do-batch -u amAdmin -f %{rsna.root}/conf/ampwd.txt -c -Z /tmp/ssoadm.batch
 
 echo "Deploying TokenApp"
 cp -v $INSTALL_PATH/token-app.knob $TORQUEBOX_HOME/jboss/standalone/deployments/token-app.knob
