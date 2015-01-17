@@ -125,11 +125,9 @@ EOF
 
 if [ "x$UPGRADE" == 'x1' ]; then
     cat <<EOF >> /tmp/ssoadm.batch
+set-svc-attrs -e / -s iPlanetAMAuthService -a iplanet-am-auth-dynamic-profile-creation=true
 create-svc --xmlfile $INSTALL_PATH/upauth/amAuthTokenAppAuth.xml
 register-auth-module --authmodule org.rsna.isn.openam.TokenAppAuth
-create-auth-instance -e / -t TokenAppAuth -m TokenAppAuth
-update-auth-cfg-entr -e / --name ldapService -a "TokenAppAuth|SUFFICIENT|" "DataStore|REQUIRED|iplanet-am-auth-shared-state-enabled=true shared-state-enabled=true iplanet-am-auth-shared-state-behavior-pattern=useFirstPass"
-set-svc-attrs -e / -s iPlanetAMAuthService -a iplanet-am-auth-dynamic-profile-creation=true
 EOF
 fi
 
@@ -139,15 +137,23 @@ $JBOSS_CLI -c '/subsystem=ee:write-attribute(name="global-modules",value=[{"name
 $JBOSS_CLI -c '/subsystem=datasources/jdbc-driver=postgres:add(driver-name="postgres",driver-module-name="org.postgres",driver-class-name=org.postgresql.Driver)'
 $JBOSS_CLI -c "data-source add --jndi-name=java:/rsnadbDS --name=rsnadbPool --connection-url=jdbc:postgresql://$DBHOST:$DBPORT/rsnadb --driver-name=postgres --user-name=$DBUSER --password=$DBPASS"
 
+echo "Configuring OpenAM and Creating admin user and Groups"
+
+$SSOADM do-batch -u amAdmin -f %{rsna.root}/conf/ampwd.txt -c -Z /tmp/ssoadm.batch
+
 restart edge-server
 sleep 5
 edge_start_wait
 
 wait_for_file $TORQUEBOX_HOME/jboss/standalone/deployments/openam.war.deployed
 
-echo "Configuring OpenAM and Creating admin user and Groups"
-
-$SSOADM do-batch -u amAdmin -f %{rsna.root}/conf/ampwd.txt -c -Z /tmp/ssoadm.batch
+if [ "x$UPGRADE" == 'x1' ]; then
+    cat <<EOF > /tmp/ssoadm.batch
+create-auth-instance -e / -t TokenAppAuth -m TokenAppAuth
+update-auth-cfg-entr -e / --name ldapService -a "TokenAppAuth|SUFFICIENT|" "DataStore|REQUIRED|iplanet-am-auth-shared-state-enabled=true shared-state-enabled=true iplanet-am-auth-shared-state-behavior-pattern=useFirstPass"
+EOF
+    $SSOADM do-batch -u amAdmin -f %{rsna.root}/conf/ampwd.txt -c -Z /tmp/ssoadm.batch
+fi
 
 echo "Deploying TokenApp"
 cp -v $INSTALL_PATH/token-app.knob $TORQUEBOX_HOME/jboss/standalone/deployments/token-app.knob
