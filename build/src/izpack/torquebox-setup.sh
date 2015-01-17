@@ -148,11 +148,9 @@ edge_start_wait
 wait_for_file $TORQUEBOX_HOME/jboss/standalone/deployments/openam.war.deployed
 
 if [ "x$UPGRADE" == 'x1' ]; then
-    cat <<EOF > /tmp/ssoadm.batch
-create-auth-instance -e / -t TokenAppAuth -m TokenAppAuth
-update-auth-cfg-entr -e / --name ldapService -a "TokenAppAuth|SUFFICIENT|" "DataStore|REQUIRED|iplanet-am-auth-shared-state-enabled=true shared-state-enabled=true iplanet-am-auth-shared-state-behavior-pattern=useFirstPass"
-EOF
-    $SSOADM do-batch -u amAdmin -f %{rsna.root}/conf/ampwd.txt -c -Z /tmp/ssoadm.batch
+    $SSOADM create-auth-instance -u amAdmin -f %{rsna.root}/conf/ampwd.txt -e / -t TokenAppAuth -m TokenAppAuth
+    sleep 5
+    $SSOADM update-auth-cfg-entr -u amAdmin -f %{rsna.root}/conf/ampwd.txt -e / --name ldapService -a "TokenAppAuth|SUFFICIENT|" "DataStore|REQUIRED|iplanet-am-auth-shared-state-enabled=true shared-state-enabled=true iplanet-am-auth-shared-state-behavior-pattern=useFirstPass"
 fi
 
 echo "Deploying TokenApp"
