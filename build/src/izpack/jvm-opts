@@ -1,2 +1,2 @@
-PREPARE_JVM_OPTS="-Xmx256M"
-TRANSFER_JVM_OPTS="-Xmx1024M"
+PREPARE_JVM_OPTS="-Xmx256M -Djava.awt.headless=true"
+TRANSFER_JVM_OPTS="-Xmx1024M -Djava.awt.headless=true"
