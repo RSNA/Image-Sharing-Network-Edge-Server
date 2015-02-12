@@ -117,8 +117,12 @@ create-identity -e / -t Group -i Admin
 create-identity -e / -t Group -i Super
 create-identity -e / -t Group -i Export
 create-identity -e / -t Group -i Import
+create-identity -e / -t Group -i Read
 create-identity -e / -t User -i admin -a givenname=Admin sn=Admin userpassword=password
 add-member -e / -t Group -i Admin -m admin -y User
+add-member -e / -t Group -i Export -m admin -y User
+add-member -e / -t Group -i Import -m admin -y User
+add-member -e / -t Group -i Read -m admin -y User
 delete-identities -e / -t User -i demo
 delete-identities -e / -t User -i anonymous
 EOF
