@@ -94,6 +94,7 @@
     <module>../transfer-content-app</module>
     <module>../utilization-report-app</module>
     <module>../openam-token-app-auth</module>
+    <module>../send-email-app</module>
   </modules>
   <build>
     <defaultGoal>package</defaultGoal>
