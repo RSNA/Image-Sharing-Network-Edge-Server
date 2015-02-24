@@ -22,13 +22,13 @@ Indexes:
     Column     |  Type   |         Value         
 ---------------+---------+-----------------------
  sequence_name | name    | devices_device_id_seq
- last_value    | bigint  | 1
+ last_value    | bigint  | 5
  start_value   | bigint  | 1
  increment_by  | bigint  | 1
  max_value     | bigint  | 9223372036854775807
  min_value     | bigint  | 1
  cache_value   | bigint  | 1
- log_cnt       | bigint  | 0
+ log_cnt       | bigint  | 29
  is_cycled     | boolean | f
  is_called     | boolean | t
 
