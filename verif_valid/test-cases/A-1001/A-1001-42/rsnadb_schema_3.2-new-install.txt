@@ -1,0 +1,512 @@
+              Table "public.configurations"
+    Column     |           Type           |   Modifiers   
+---------------+--------------------------+---------------
+ key           | character varying        | not null
+ value         | character varying        | not null
+ modified_date | timestamp with time zone | default now()
+Indexes:
+    "pk_key" PRIMARY KEY, btree (key)
+
+                                         Table "public.devices"
+    Column     |           Type           |                          Modifiers                          
+---------------+--------------------------+-------------------------------------------------------------
+ device_id     | integer                  | not null default nextval('devices_device_id_seq'::regclass)
+ ae_title      | character varying(256)   | not null
+ host          | character varying(256)   | not null
+ port_number   | character varying(10)    | not null
+ modified_date | timestamp with time zone | default now()
+Indexes:
+    "pk_device_id" PRIMARY KEY, btree (device_id)
+
+     Sequence "public.devices_device_id_seq"
+    Column     |  Type   |         Value         
+---------------+---------+-----------------------
+ sequence_name | name    | devices_device_id_seq
+ last_value    | bigint  | 1
+ start_value   | bigint  | 1
+ increment_by  | bigint  | 1
+ max_value     | bigint  | 9223372036854775807
+ min_value     | bigint  | 1
+ cache_value   | bigint  | 1
+ log_cnt       | bigint  | 0
+ is_cycled     | boolean | f
+ is_called     | boolean | t
+
+                                         Table "public.exams"
+      Column      |           Type           |                        Modifiers                        
+------------------+--------------------------+---------------------------------------------------------
+ exam_id          | integer                  | not null default nextval('exams_exam_id_seq'::regclass)
+ accession_number | character varying(50)    | not null
+ patient_id       | integer                  | not null
+ exam_description | character varying(256)   | 
+ modified_date    | timestamp with time zone | default now()
+Indexes:
+    "pk_exam_id" PRIMARY KEY, btree (exam_id)
+    "uq_exam" UNIQUE, btree (accession_number, patient_id)
+    "exams_accession_number_idx" btree (accession_number)
+Foreign-key constraints:
+    "fk_patient_id" FOREIGN KEY (patient_id) REFERENCES patients(patient_id)
+Referenced by:
+    TABLE "jobs" CONSTRAINT "fk_exam_id" FOREIGN KEY (exam_id) REFERENCES exams(exam_id)
+    TABLE "studies" CONSTRAINT "fk_exam_id" FOREIGN KEY (exam_id) REFERENCES exams(exam_id)
+    TABLE "reports" CONSTRAINT "fk_exam_id" FOREIGN KEY (exam_id) REFERENCES exams(exam_id)
+
+      Sequence "public.exams_exam_id_seq"
+    Column     |  Type   |        Value        
+---------------+---------+---------------------
+ sequence_name | name    | exams_exam_id_seq
+ last_value    | bigint  | 101
+ start_value   | bigint  | 1
+ increment_by  | bigint  | 1
+ max_value     | bigint  | 9223372036854775807
+ min_value     | bigint  | 1
+ cache_value   | bigint  | 1
+ log_cnt       | bigint  | 0
+ is_cycled     | boolean | f
+ is_called     | boolean | t
+
+                                       Table "public.hipaa_audit_accession_numbers"
+      Column      |           Type           |                                 Modifiers                                  
+------------------+--------------------------+----------------------------------------------------------------------------
+ id               | integer                  | not null default nextval('hipaa_audit_accession_numbers_id_seq'::regclass)
+ view_id          | integer                  | 
+ accession_number | character varying(100)   | 
+ modified_date    | timestamp with time zone | default now()
+Indexes:
+    "pk_hipaa_audit_accession_number_id" PRIMARY KEY, btree (id)
+
+     Sequence "public.hipaa_audit_accession_numbers_id_seq"
+    Column     |  Type   |                Value                 
+---------------+---------+--------------------------------------
+ sequence_name | name    | hipaa_audit_accession_numbers_id_seq
+ last_value    | bigint  | 388
+ start_value   | bigint  | 1
+ increment_by  | bigint  | 1
+ max_value     | bigint  | 9223372036854775807
+ min_value     | bigint  | 1
+ cache_value   | bigint  | 1
+ log_cnt       | bigint  | 0
+ is_cycled     | boolean | f
+ is_called     | boolean | t
+
+                                     Table "public.hipaa_audit_mrns"
+    Column     |           Type           |                           Modifiers                           
+---------------+--------------------------+---------------------------------------------------------------
+ id            | integer                  | not null default nextval('hipaa_audit_mrns_id_seq'::regclass)
+ view_id       | integer                  | 
+ mrn           | character varying(100)   | 
+ modified_date | timestamp with time zone | default now()
+Indexes:
+    "pk_hipaa_audit_mrn_id" PRIMARY KEY, btree (id)
+
+     Sequence "public.hipaa_audit_mrns_id_seq"
+    Column     |  Type   |          Value          
+---------------+---------+-------------------------
+ sequence_name | name    | hipaa_audit_mrns_id_seq
+ last_value    | bigint  | 2220
+ start_value   | bigint  | 1
+ increment_by  | bigint  | 1
+ max_value     | bigint  | 9223372036854775807
+ min_value     | bigint  | 1
+ cache_value   | bigint  | 1
+ log_cnt       | bigint  | 0
+ is_cycled     | boolean | f
+ is_called     | boolean | t
+
+                                        Table "public.hipaa_audit_views"
+       Column        |           Type           |                           Modifiers                            
+---------------------+--------------------------+----------------------------------------------------------------
+ id                  | integer                  | not null default nextval('hipaa_audit_views_id_seq'::regclass)
+ requesting_ip       | character varying(15)    | 
+ requesting_username | character varying(100)   | 
+ requesting_uri      | text                     | 
+ modified_date       | timestamp with time zone | default now()
+Indexes:
+    "pk_hipaa_audit_view_id" PRIMARY KEY, btree (id)
+
+     Sequence "public.hipaa_audit_views_id_seq"
+    Column     |  Type   |          Value           
+---------------+---------+--------------------------
+ sequence_name | name    | hipaa_audit_views_id_seq
+ last_value    | bigint  | 1676
+ start_value   | bigint  | 1
+ increment_by  | bigint  | 1
+ max_value     | bigint  | 9223372036854775807
+ min_value     | bigint  | 1
+ cache_value   | bigint  | 1
+ log_cnt       | bigint  | 32
+ is_cycled     | boolean | f
+ is_called     | boolean | t
+
+                                             Table "public.job_sets"
+        Column         |           Type           |                           Modifiers                           
+-----------------------+--------------------------+---------------------------------------------------------------
+ job_set_id            | integer                  | not null default nextval('job_sets_job_set_id_seq'::regclass)
+ patient_id            | integer                  | not null
+ user_id               | integer                  | not null
+ email_address         | character varying(255)   | 
+ modified_date         | timestamp with time zone | default now()
+ delay_in_hrs          | integer                  | default 72
+ single_use_patient_id | character varying(64)    | not null
+ send_on_complete      | boolean                  | not null default false
+ access_code           | character varying(64)    | 
+ send_to_site          | boolean                  | not null default false
+Indexes:
+    "pk_job_set_id" PRIMARY KEY, btree (job_set_id)
+Foreign-key constraints:
+    "fk_patient_id" FOREIGN KEY (patient_id) REFERENCES patients(patient_id)
+    "fk_user_id" FOREIGN KEY (user_id) REFERENCES users(user_id)
+Referenced by:
+    TABLE "jobs" CONSTRAINT "fk_job_set_id" FOREIGN KEY (job_set_id) REFERENCES job_sets(job_set_id)
+
+     Sequence "public.job_sets_job_set_id_seq"
+    Column     |  Type   |          Value          
+---------------+---------+-------------------------
+ sequence_name | name    | job_sets_job_set_id_seq
+ last_value    | bigint  | 112
+ start_value   | bigint  | 1
+ increment_by  | bigint  | 1
+ max_value     | bigint  | 9223372036854775807
+ min_value     | bigint  | 1
+ cache_value   | bigint  | 1
+ log_cnt       | bigint  | 0
+ is_cycled     | boolean | f
+ is_called     | boolean | t
+
+                                         Table "public.jobs"
+      Column       |           Type           |                       Modifiers                       
+-------------------+--------------------------+-------------------------------------------------------
+ job_id            | integer                  | not null default nextval('jobs_job_id_seq'::regclass)
+ job_set_id        | integer                  | not null
+ exam_id           | integer                  | not null
+ report_id         | integer                  | 
+ document_id       | character varying(100)   | 
+ remaining_retries | integer                  | not null
+ modified_date     | timestamp with time zone | default now()
+Indexes:
+    "pk_job_id" PRIMARY KEY, btree (job_id)
+    "jobs_job_set_id" btree (job_set_id)
+Foreign-key constraints:
+    "fk_exam_id" FOREIGN KEY (exam_id) REFERENCES exams(exam_id)
+    "fk_job_set_id" FOREIGN KEY (job_set_id) REFERENCES job_sets(job_set_id)
+    "fk_report_id" FOREIGN KEY (report_id) REFERENCES reports(report_id)
+Referenced by:
+    TABLE "transactions" CONSTRAINT "fk_job_id" FOREIGN KEY (job_id) REFERENCES jobs(job_id)
+
+       Sequence "public.jobs_job_id_seq"
+    Column     |  Type   |        Value        
+---------------+---------+---------------------
+ sequence_name | name    | jobs_job_id_seq
+ last_value    | bigint  | 114
+ start_value   | bigint  | 1
+ increment_by  | bigint  | 1
+ max_value     | bigint  | 9223372036854775807
+ min_value     | bigint  | 1
+ cache_value   | bigint  | 1
+ log_cnt       | bigint  | 0
+ is_cycled     | boolean | f
+ is_called     | boolean | t
+
+                                         Table "public.patient_merge_events"
+     Column     |           Type           |                                Modifiers                                
+----------------+--------------------------+-------------------------------------------------------------------------
+ event_id       | integer                  | not null default nextval('patient_merge_events_event_id_seq'::regclass)
+ old_mrn        | character varying(50)    | not null
+ new_mrn        | character varying(50)    | not null
+ old_patient_id | integer                  | not null
+ new_patient_id | integer                  | not null
+ status         | integer                  | not null default 0
+ modified_date  | timestamp with time zone | default now()
+Indexes:
+    "pk_event_id" PRIMARY KEY, btree (event_id)
+
+     Sequence "public.patient_merge_events_event_id_seq"
+    Column     |  Type   |               Value               
+---------------+---------+-----------------------------------
+ sequence_name | name    | patient_merge_events_event_id_seq
+ last_value    | bigint  | 1
+ start_value   | bigint  | 1
+ increment_by  | bigint  | 1
+ max_value     | bigint  | 9223372036854775807
+ min_value     | bigint  | 1
+ cache_value   | bigint  | 1
+ log_cnt       | bigint  | 0
+ is_cycled     | boolean | f
+ is_called     | boolean | f
+
+                                           Table "public.patients"
+      Column       |           Type           |                           Modifiers                           
+-------------------+--------------------------+---------------------------------------------------------------
+ patient_id        | integer                  | not null default nextval('patients_patient_id_seq'::regclass)
+ mrn               | character varying(50)    | not null
+ patient_name      | character varying        | 
+ dob               | date                     | 
+ sex               | character(1)             | 
+ street            | character varying        | 
+ city              | character varying(50)    | 
+ state             | character varying(30)    | 
+ zip_code          | character varying(30)    | 
+ email_address     | character varying(255)   | 
+ rsna_id           | character varying(64)    | 
+ modified_date     | timestamp with time zone | default now()
+ consent_timestamp | timestamp with time zone | 
+Indexes:
+    "pk_patient_id" PRIMARY KEY, btree (patient_id)
+    "patients_mrn_ix" UNIQUE, btree (mrn)
+    "patients_dob_idx" btree (dob)
+    "patients_patient_name_idx" btree (patient_name)
+Referenced by:
+    TABLE "job_sets" CONSTRAINT "fk_patient_id" FOREIGN KEY (patient_id) REFERENCES patients(patient_id)
+    TABLE "exams" CONSTRAINT "fk_patient_id" FOREIGN KEY (patient_id) REFERENCES patients(patient_id)
+
+     Sequence "public.patients_patient_id_seq"
+    Column     |  Type   |          Value          
+---------------+---------+-------------------------
+ sequence_name | name    | patients_patient_id_seq
+ last_value    | bigint  | 90
+ start_value   | bigint  | 1
+ increment_by  | bigint  | 1
+ max_value     | bigint  | 9223372036854775807
+ min_value     | bigint  | 1
+ cache_value   | bigint  | 1
+ log_cnt       | bigint  | 0
+ is_cycled     | boolean | f
+ is_called     | boolean | t
+
+                                          Table "public.reports"
+      Column      |           Type           |                          Modifiers                          
+------------------+--------------------------+-------------------------------------------------------------
+ report_id        | integer                  | not null default nextval('reports_report_id_seq'::regclass)
+ exam_id          | integer                  | not null
+ proc_code        | character varying        | 
+ status           | character varying        | not null
+ status_timestamp | timestamp with time zone | not null
+ report_text      | text                     | 
+ signer           | character varying        | 
+ dictator         | character varying        | 
+ transcriber      | character varying        | 
+ modified_date    | timestamp with time zone | default now()
+Indexes:
+    "pk_report_id" PRIMARY KEY, btree (report_id)
+    "reports_unique_status_idx" UNIQUE, btree (exam_id, status, status_timestamp)
+    "reports_status_timestamp_idx" btree (status_timestamp)
+Foreign-key constraints:
+    "fk_exam_id" FOREIGN KEY (exam_id) REFERENCES exams(exam_id)
+Referenced by:
+    TABLE "jobs" CONSTRAINT "fk_report_id" FOREIGN KEY (report_id) REFERENCES reports(report_id)
+
+     Sequence "public.reports_report_id_seq"
+    Column     |  Type   |         Value         
+---------------+---------+-----------------------
+ sequence_name | name    | reports_report_id_seq
+ last_value    | bigint  | 186
+ start_value   | bigint  | 1
+ increment_by  | bigint  | 1
+ max_value     | bigint  | 9223372036854775807
+ min_value     | bigint  | 1
+ cache_value   | bigint  | 1
+ log_cnt       | bigint  | 0
+ is_cycled     | boolean | f
+ is_called     | boolean | t
+
+                   Table "public.roles"
+      Column      |         Type          |   Modifiers   
+------------------+-----------------------+---------------
+ role_id          | integer               | not null
+ role_description | character varying(50) | not null
+ modified_date    | time with time zone   | default now()
+Indexes:
+    "pk_role_id" PRIMARY KEY, btree (role_id)
+
+                                     Table "public.schema_version"
+    Column     |           Type           |                          Modifiers                          
+---------------+--------------------------+-------------------------------------------------------------
+ id            | integer                  | not null default nextval('schema_version_id_seq'::regclass)
+ version       | character varying        | 
+ modified_date | timestamp with time zone | default now()
+Indexes:
+    "pk_id" PRIMARY KEY, btree (id)
+
+     Sequence "public.schema_version_id_seq"
+    Column     |  Type   |         Value         
+---------------+---------+-----------------------
+ sequence_name | name    | schema_version_id_seq
+ last_value    | bigint  | 1
+ start_value   | bigint  | 1
+ increment_by  | bigint  | 1
+ max_value     | bigint  | 9223372036854775807
+ min_value     | bigint  | 1
+ cache_value   | bigint  | 1
+ log_cnt       | bigint  | 0
+ is_cycled     | boolean | f
+ is_called     | boolean | f
+
+                    Table "public.status_codes"
+    Column     |           Type           |       Modifiers        
+---------------+--------------------------+------------------------
+ status_code   | integer                  | not null
+ description   | character varying(255)   | 
+ modified_date | timestamp with time zone | default now()
+ send_alert    | boolean                  | not null default false
+Indexes:
+    "pk_status_code" PRIMARY KEY, btree (status_code)
+Referenced by:
+    TABLE "transactions" CONSTRAINT "fk_status_code" FOREIGN KEY (status_code) REFERENCES status_codes(status_code)
+
+                                            Table "public.studies"
+      Column       |            Type             |                         Modifiers                          
+-------------------+-----------------------------+------------------------------------------------------------
+ study_id          | integer                     | not null default nextval('studies_study_id_seq'::regclass)
+ study_uid         | character varying(255)      | not null
+ exam_id           | integer                     | not null
+ study_description | character varying(255)      | 
+ study_date        | timestamp without time zone | 
+ modified_date     | timestamp with time zone    | default now()
+Indexes:
+    "pk_study_id" PRIMARY KEY, btree (study_id)
+Foreign-key constraints:
+    "fk_exam_id" FOREIGN KEY (exam_id) REFERENCES exams(exam_id)
+
+     Sequence "public.studies_study_id_seq"
+    Column     |  Type   |        Value         
+---------------+---------+----------------------
+ sequence_name | name    | studies_study_id_seq
+ last_value    | bigint  | 236
+ start_value   | bigint  | 1
+ increment_by  | bigint  | 1
+ max_value     | bigint  | 9223372036854775807
+ min_value     | bigint  | 1
+ cache_value   | bigint  | 1
+ log_cnt       | bigint  | 0
+ is_cycled     | boolean | f
+ is_called     | boolean | t
+
+                                            Table "public.transactions"
+     Column     |           Type           |                               Modifiers                               
+----------------+--------------------------+-----------------------------------------------------------------------
+ transaction_id | integer                  | not null default nextval('transactions_transaction_id_seq'::regclass)
+ job_id         | integer                  | not null
+ status_code    | integer                  | not null
+ comments       | character varying        | 
+ modified_date  | timestamp with time zone | default now()
+Indexes:
+    "pk_transaction_id" PRIMARY KEY, btree (transaction_id)
+    "transactions_job_id" btree (job_id)
+    "transactions_modified_date" btree (modified_date)
+    "transactions_status_code_idx" btree (status_code)
+Foreign-key constraints:
+    "fk_job_id" FOREIGN KEY (job_id) REFERENCES jobs(job_id)
+    "fk_status_code" FOREIGN KEY (status_code) REFERENCES status_codes(status_code)
+
+     Sequence "public.transactions_transaction_id_seq"
+    Column     |  Type   |              Value              
+---------------+---------+---------------------------------
+ sequence_name | name    | transactions_transaction_id_seq
+ last_value    | bigint  | 16078
+ start_value   | bigint  | 1
+ increment_by  | bigint  | 1
+ max_value     | bigint  | 9223372036854775807
+ min_value     | bigint  | 1
+ cache_value   | bigint  | 1
+ log_cnt       | bigint  | 0
+ is_cycled     | boolean | f
+ is_called     | boolean | t
+
+                                              Table "public.users"
+          Column           |           Type           |                        Modifiers                        
+---------------------------+--------------------------+---------------------------------------------------------
+ user_id                   | integer                  | not null default nextval('users_user_id_seq'::regclass)
+ user_login                | character varying(40)    | default NULL::character varying
+ user_name                 | character varying(100)   | default ''::character varying
+ email                     | character varying(100)   | default NULL::character varying
+ crypted_password          | character varying(40)    | default NULL::character varying
+ salt                      | character varying(40)    | default NULL::character varying
+ created_at                | timestamp with time zone | 
+ updated_at                | timestamp with time zone | 
+ remember_token            | character varying(40)    | default NULL::character varying
+ remember_token_expires_at | timestamp with time zone | 
+ role_id                   | integer                  | not null
+ modified_date             | timestamp with time zone | default now()
+ active                    | boolean                  | default true
+Indexes:
+    "pk_user_id" PRIMARY KEY, btree (user_id)
+    "uq_login" UNIQUE, btree (user_login)
+Referenced by:
+    TABLE "job_sets" CONSTRAINT "fk_user_id" FOREIGN KEY (user_id) REFERENCES users(user_id)
+
+      Sequence "public.users_user_id_seq"
+    Column     |  Type   |        Value        
+---------------+---------+---------------------
+ sequence_name | name    | users_user_id_seq
+ last_value    | bigint  | 11
+ start_value   | bigint  | 1
+ increment_by  | bigint  | 1
+ max_value     | bigint  | 9223372036854775807
+ min_value     | bigint  | 1
+ cache_value   | bigint  | 1
+ log_cnt       | bigint  | 32
+ is_cycled     | boolean | f
+ is_called     | boolean | t
+
+               View "public.v_exam_status"
+      Column      |           Type           | Modifiers 
+------------------+--------------------------+-----------
+ patient_id       | integer                  | 
+ mrn              | character varying(50)    | 
+ patient_name     | character varying        | 
+ dob              | date                     | 
+ sex              | character(1)             | 
+ street           | character varying        | 
+ city             | character varying(50)    | 
+ state            | character varying(30)    | 
+ zip_code         | character varying(30)    | 
+ email_address    | character varying(255)   | 
+ exam_id          | integer                  | 
+ accession_number | character varying(50)    | 
+ exam_description | character varying(256)   | 
+ report_id        | integer                  | 
+ status           | character varying        | 
+ status_timestamp | timestamp with time zone | 
+ report_text      | text                     | 
+ dictator         | character varying        | 
+ transcriber      | character varying        | 
+ signer           | character varying        | 
+View definition:
+ SELECT p.patient_id, p.mrn, p.patient_name, p.dob, p.sex, p.street, p.city, p.state, p.zip_code, p.email_address, e.exam_id, e.accession_number, e.exam_description, r.report_id, r.status, r.status_timestamp, r.report_text, r.dictator, r.transcriber, r.signer
+   FROM patients p
+   JOIN exams e ON p.patient_id = e.patient_id
+   JOIN ( SELECT r1.report_id, r1.exam_id, r1.proc_code, r1.status, r1.status_timestamp, r1.report_text, r1.signer, r1.dictator, r1.transcriber, r1.modified_date
+      FROM reports r1
+     WHERE r1.report_id = (( SELECT r2.report_id
+              FROM reports r2
+             WHERE r2.exam_id = r1.exam_id
+             ORDER BY r2.status_timestamp DESC, r2.modified_date DESC
+            LIMIT 1))) r ON e.exam_id = r.exam_id;
+
+                    View "public.v_job_status"
+           Column           |           Type           | Modifiers 
+----------------------------+--------------------------+-----------
+ job_set_id                 | integer                  | 
+ job_id                     | integer                  | 
+ exam_id                    | integer                  | 
+ delay_in_hrs               | integer                  | 
+ status                     | integer                  | 
+ status_message             | character varying(255)   | 
+ last_transaction_timestamp | timestamp with time zone | 
+ single_use_patient_id      | character varying(64)    | 
+ email_address              | character varying(255)   | 
+ comments                   | character varying        | 
+ send_on_complete           | boolean                  | 
+ remaining_retries          | integer                  | 
+ send_to_site               | boolean                  | 
+View definition:
+ SELECT js.job_set_id, j.job_id, j.exam_id, js.delay_in_hrs, t.status, t.status_message, t.modified_date AS last_transaction_timestamp, js.single_use_patient_id, js.email_address, t.comments, js.send_on_complete, j.remaining_retries, js.send_to_site
+   FROM jobs j
+   JOIN job_sets js ON j.job_set_id = js.job_set_id
+   JOIN ( SELECT t1.job_id, t1.status_code AS status, sc.description AS status_message, t1.comments, t1.modified_date
+      FROM transactions t1
+   JOIN status_codes sc ON t1.status_code = sc.status_code
+  WHERE t1.modified_date = (( SELECT max(t2.modified_date) AS max
+         FROM transactions t2
+        WHERE t2.job_id = t1.job_id))) t ON j.job_id = t.job_id;
+
