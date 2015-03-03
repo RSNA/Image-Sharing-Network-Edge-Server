@@ -38,6 +38,7 @@
     <executeForPack name="Mirth" />
     <os family="unix" />
     <executefile name="$INSTALL_PATH/scripts/mirth-setup.sh">
+      <env>INSTALL_PATH=$INSTALL_PATH</env>
       <env>DBPASSWD=$mirthdb.password</env>
       <env>DBSUPERPASSWD=$mirthdb.superpassword</env>
       <arg>$mirthdb.host</arg>
