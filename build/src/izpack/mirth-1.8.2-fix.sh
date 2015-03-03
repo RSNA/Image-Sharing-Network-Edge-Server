@@ -5,6 +5,8 @@ check_hash()
     echo "$2 *$3" | sha256sum -c - || (echo "$1 hash mismatch, exiting" && return 1)
 }
 
+apt-get -y install zip unzip
+
 MIRTHROOT=$1
 
 mkdir -p $MIRTHROOT/patch_tmp
