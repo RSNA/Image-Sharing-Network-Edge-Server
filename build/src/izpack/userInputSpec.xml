@@ -1,6 +1,6 @@
 <userInput>
 <panel order="0">
-  <field type="title" txt="Are you upgrading from a previous verison?" bold="true" size="1" />
+  <field type="title" txt="Are you upgrading from a previous version?" bold="true" size="1" />
   <field type="radio" variable="upgrade">
     <spec>
       <choice txt="Yes" value="1" />
