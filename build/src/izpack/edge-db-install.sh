@@ -18,8 +18,10 @@ if [ "$UPGRADE" == "1" ] && [ "x$CURVERSION" != "x$INSTALLER_DBVERSION" ]; then 
     OLDIFS=$IFS
     IFS=$'\n'
     SQLUPDFILES=$(ls $INSTALL_PATH/RSNADB?rollout*.sql | sort | grep -A100 "$CURVERSION" | sed '/^--$/d' | tail -n +2)
-    echo "updating schema" $SQLUPDFILES
-    sed -e 's/\xef\xbb\xbf//g' $SQLUPDFILES | /usr/bin/env psql -v ON_ERROR_STOP=1 --pset pager=off -q -X -1 -w -h $DBHOST -p $DBPORT -U $SUPERUSER rsnadb || exit 1
+    if [[ -n "$SQLUPDFILES" ]]; then
+	echo "updating schema" $SQLUPDFILES
+	sed -e 's/\xef\xbb\xbf//g' $SQLUPDFILES | /usr/bin/env psql -v ON_ERROR_STOP=1 --pset pager=off -q -X -1 -w -h $DBHOST -p $DBPORT -U $SUPERUSER rsnadb || exit 1
+    fi
     IFS=$OLDIFS
     exit 0
 fi

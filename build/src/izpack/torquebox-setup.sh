@@ -78,7 +78,7 @@ if [ "x$UPGRADE" == 'x1' ]; then
     cp -v $INSTALL_PATH/openam-token-app-auth-*.jar $INSTALL_PATH/upauth/WEB-INF/lib
     pushd $INSTALL_PATH/upauth
     zip $INSTALL_PATH/openam-server-%{openam.version}.war WEB-INF/lib/*
-    unzip $INSTALL_PATH/openam-token-app-auth-*.jar amAuthTokenAppAuth.xml
+    unzip -o $INSTALL_PATH/openam-token-app-auth-*.jar amAuthTokenAppAuth.xml
     popd
 fi
 

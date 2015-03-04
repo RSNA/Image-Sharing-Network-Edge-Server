@@ -13,7 +13,9 @@ UPGRADE=$7
 
 echo "UPGRADE is $UPGRADE"
 
-if [ "$UPGRADE" == '1' ] || [ -d $INSTALL_PATH/mirth ]; then
+if [ "x$UPGRADE" == 'x1' ] || [ -d $INSTALL_PATH/mirth ]; then
+    echo "Patching Mirth 1.8.2..."
+    $INSTALL_PATH/scripts/mirth-1.8.2-fix.sh "$MIRTHROOT"
     echo "Mirth database exists, skipping"
     exit 0
 fi
@@ -35,5 +37,5 @@ EOF
 sed 's/database=.*/database=postgres/' < $MIRTHROOT/conf/mirth.properties > $MIRTHROOT/conf/mirth.properties.new &&
 mv $MIRTHROOT/conf/mirth.properties.new $MIRTHROOT/conf/mirth.properties
 
-echo "executing mirth-setup.sh"
-
+echo "Patching Mirth 1.8.2..."
+$INSTALL_PATH/scripts/mirth-1.8.2-fix.sh "$MIRTHROOT"
