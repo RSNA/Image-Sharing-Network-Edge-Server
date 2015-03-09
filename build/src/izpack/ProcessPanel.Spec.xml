@@ -41,6 +41,7 @@
       <env>INSTALL_PATH=$INSTALL_PATH</env>
       <env>DBPASSWD=$mirthdb.password</env>
       <env>DBSUPERPASSWD=$mirthdb.superpassword</env>
+      <env>JAVA_HOME=$java.home</env>
       <arg>$mirthdb.host</arg>
       <arg>$mirthdb.port</arg>
       <arg>$mirthdb.name</arg>
@@ -56,6 +57,7 @@
     <executefile name="$INSTALL_PATH/scripts/torquebox-setup.sh">
       <env>INSTALL_PATH=$INSTALL_PATH</env>
       <env>DBPASS=$database.password</env>
+      <env>JAVA_HOME=$java.home</env>
       <arg>$database.host</arg>
       <arg>$database.port</arg>
       <arg>$upgrade</arg>
