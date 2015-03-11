@@ -137,6 +137,7 @@
       </fileset>
       <file src="${basedir}/src/izpack/edge-cron" targetdir="/etc/cron.d" />
       <file src="${basedir}/src/izpack/utilization-config.sh" targetdir="$INSTALL_PATH/scripts" />
+      <file src="${basedir}/src/izpack/utilization-report-log4j.properties" targetdir="$INSTALL_PATH/conf" />
       <parsable targetfile="/etc/cron.d/edge-cron" type="shell" />
       <executable targetfile="$INSTALL_PATH/scripts/utilization-config.sh" stage="never" />
     </pack>
