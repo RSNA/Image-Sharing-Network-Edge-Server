@@ -141,6 +141,9 @@ $JBOSS_CLI -c '/subsystem=ee:write-attribute(name="global-modules",value=[{"name
 $JBOSS_CLI -c '/subsystem=datasources/jdbc-driver=postgres:add(driver-name="postgres",driver-module-name="org.postgres",driver-class-name=org.postgresql.Driver)'
 $JBOSS_CLI -c "data-source add --jndi-name=java:/rsnadbDS --name=rsnadbPool --connection-url=jdbc:postgresql://$DBHOST:$DBPORT/rsnadb --driver-name=postgres --user-name=$DBUSER --password=$DBPASS"
 
+$JBOSS_CLI -c '/subsystem=logging/logger=org.jboss.as.server.deployment:add'
+$JBOSS_CLI -c '/subsystem=logging/logger=org.jboss.as.server.deployment:change-log-level(level=ERROR)'
+
 echo "Configuring OpenAM and Creating admin user and Groups"
 
 $SSOADM do-batch -u amAdmin -f %{rsna.root}/conf/ampwd.txt -c -Z /tmp/ssoadm.batch
