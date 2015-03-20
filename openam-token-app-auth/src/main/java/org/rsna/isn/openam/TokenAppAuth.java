@@ -138,7 +138,7 @@ public class TokenAppAuth extends AMLoginModule
 	    
 	    database = ds.getConnection();
 	    PreparedStatement thisStatement = 
-		database.prepareStatement("select user_login,crypted_password,salt,role_id from users where user_login = ?");
+		database.prepareStatement("select user_login,crypted_password,salt,role_id from users where user_login = ? and active = true");
 	    thisStatement.setString(1,userName);
 	    
 	    ResultSet results = thisStatement.executeQuery();
