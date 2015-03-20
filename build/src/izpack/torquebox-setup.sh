@@ -143,6 +143,7 @@ $JBOSS_CLI -c "data-source add --jndi-name=java:/rsnadbDS --name=rsnadbPool --co
 
 $JBOSS_CLI -c '/subsystem=logging/logger=org.jboss.as.server.deployment:add'
 $JBOSS_CLI -c '/subsystem=logging/logger=org.jboss.as.server.deployment:change-log-level(level=ERROR)'
+$JBOSS_CLI -c '/subsystem=logging/periodic-rotating-file-handler=FILE:write-attribute(name=formatter, value="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c] (%t) %s%E%n")'
 
 echo "Configuring OpenAM and Creating admin user and Groups"
 
