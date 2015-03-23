@@ -122,6 +122,7 @@
       <file src="${basedir}/src/izpack/mirth-setup.sh" targetdir="$INSTALL_PATH/scripts" />
       <file src="${basedir}/src/izpack/mirth-1.8.2-fix.sh" targetdir="$INSTALL_PATH/scripts" />
       <file src="${basedir}/src/izpack/wrapper.conf" targetdir="$INSTALL_PATH/mirth/conf" override="true" />
+      <parsable targetfile="$INSTALL_PATH/mirth/conf/wrapper.conf" type="javaprop" />
       <executable targetfile="$INSTALL_PATH/scripts/mirth-setup.sh" stage="never" />
       <executable targetfile="$INSTALL_PATH/scripts/mirth-1.8.2-fix.sh" stage="never" />
       <executable targetfile="$INSTALL_PATH/mirth/mirth-daemon" stage="never" />
