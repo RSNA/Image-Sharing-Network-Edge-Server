@@ -13,7 +13,7 @@ UPGRADE=$7
 
 echo "UPGRADE is $UPGRADE"
 
-if [ "x$UPGRADE" == 'x1' ] && [ -d $INSTALL_PATH/mirth ]; then
+if [ "x$UPGRADE" == 'x1' ] && [ -d "$MIRTHROOT" ]; then
     echo "Patching Mirth 1.8.2..."
     $INSTALL_PATH/scripts/mirth-1.8.2-fix.sh "$MIRTHROOT"
     echo "Mirth database exists, skipping"
