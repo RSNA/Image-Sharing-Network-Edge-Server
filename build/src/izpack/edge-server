@@ -26,6 +26,7 @@ USER=edge
 JAVA=$JAVA_HOME/bin/java
 
 export AS_JAVA=$JAVA_HOME
+export JAVA_HOME
 
 . /lib/lsb/init-functions
 
