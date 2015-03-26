@@ -113,6 +113,7 @@ chmod +x $SSOADM
 # Batch $SSOADM calls
 cat <<EOF > /tmp/ssoadm.batch
 update-server-cfg -s default -a com.iplanet.am.cookie.name=RSNA_SSO
+set-svc-attrs -e / -s iPlanetAMAuthService -a iplanet-am-auth-login-success-url=/
 create-identity -e / -t Group -i Admin
 create-identity -e / -t Group -i Super
 create-identity -e / -t Group -i Export
