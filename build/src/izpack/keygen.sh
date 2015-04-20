@@ -24,8 +24,8 @@ if [ "$UPGRADE" == '1' ] || [ -f $INSTALL_PATH/conf/keystore.jks ]
     exit 0
 fi
 keytool -genkey -keyalg RSA -dname "$DN" -storepass edge1234 -keypass edge1234 -keysize 2048 -alias edge -validity $VALID_DAYS -keystore $INSTALL_PATH/conf/keystore.jks &&
-keytool -export -v -rfc -alias edge -storepass edge1234 -keypass edge1234 -keystore $INSTALL_PATH/conf/keystore.jks > $INSTALL_PATH/client.pem &&
-echo "Done, exported certificate: $INSTALL_PATH/client.pem"
+keytool -certreq -v -rfc -alias edge -sigalg SHA256withRSA -storepass edge1234 -keypass edge1234 -keystore $INSTALL_PATH/conf/keystore.jks > $INSTALL_PATH/client.csr &&
+echo "Done, exported certificate signing request: $INSTALL_PATH/client.csr"
 
 echo "completing keygen.sh"
 
