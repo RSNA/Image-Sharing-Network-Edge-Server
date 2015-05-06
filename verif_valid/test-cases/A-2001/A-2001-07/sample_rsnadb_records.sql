@@ -69,9 +69,9 @@ insert into job_sets
 	(2, 2, 20, 'job-2@gmail.com', '2013-04-01 15:00:00-04', 20, 'hash-two');
 
 insert into jobs
-	(job_id, job_set_id, exam_id, report_id, document_id, modified_date) values
-	(1, 1, 1, 1, 'document ID 1', '2013-03-30 16:00:00-04'),
-	(2, 2, 2, 2, 'document ID 2', '2013-04-01 16:00:00-04');
+	(job_id, job_set_id, exam_id, report_id, document_id, modified_date, remaining_retries) values
+	(1, 1, 1, 1, 'document ID 1', '2013-03-30 16:00:00-04', 0),
+	(2, 2, 2, 2, 'document ID 2', '2013-04-01 16:00:00-04', 0);
 
 --  | patient_merge_events                 | table    | edge
 
