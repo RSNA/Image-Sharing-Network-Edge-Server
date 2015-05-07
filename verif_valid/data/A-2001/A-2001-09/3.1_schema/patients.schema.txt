@@ -1,0 +1,25 @@
+                                           Table "public.patients"
+      Column       |           Type           |                           Modifiers                           
+-------------------+--------------------------+---------------------------------------------------------------
+ patient_id        | integer                  | not null default nextval('patients_patient_id_seq'::regclass)
+ mrn               | character varying(50)    | not null
+ patient_name      | character varying        | 
+ dob               | date                     | 
+ sex               | character(1)             | 
+ street            | character varying        | 
+ city              | character varying(50)    | 
+ state             | character varying(30)    | 
+ zip_code          | character varying(30)    | 
+ email_address     | character varying(255)   | 
+ rsna_id           | character varying(64)    | 
+ modified_date     | timestamp with time zone | default now()
+ consent_timestamp | timestamp with time zone | 
+Indexes:
+    "pk_patient_id" PRIMARY KEY, btree (patient_id)
+    "patients_dob_idx" btree (dob)
+    "patients_mrn_idx" btree (mrn)
+    "patients_patient_name_idx" btree (patient_name)
+Referenced by:
+    TABLE "job_sets" CONSTRAINT "fk_patient_id" FOREIGN KEY (patient_id) REFERENCES patients(patient_id)
+    TABLE "exams" CONSTRAINT "fk_patient_id" FOREIGN KEY (patient_id) REFERENCES patients(patient_id)
+

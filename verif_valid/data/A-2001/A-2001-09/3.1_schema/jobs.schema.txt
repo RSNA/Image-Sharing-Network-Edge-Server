@@ -1,0 +1,19 @@
+                                         Table "public.jobs"
+      Column       |           Type           |                       Modifiers                       
+-------------------+--------------------------+-------------------------------------------------------
+ job_id            | integer                  | not null default nextval('jobs_job_id_seq'::regclass)
+ job_set_id        | integer                  | not null
+ exam_id           | integer                  | not null
+ report_id         | integer                  | 
+ document_id       | character varying(100)   | 
+ remaining_retries | integer                  | not null
+ modified_date     | timestamp with time zone | default now()
+Indexes:
+    "pk_job_id" PRIMARY KEY, btree (job_id)
+Foreign-key constraints:
+    "fk_exam_id" FOREIGN KEY (exam_id) REFERENCES exams(exam_id)
+    "fk_job_set_id" FOREIGN KEY (job_set_id) REFERENCES job_sets(job_set_id)
+    "fk_report_id" FOREIGN KEY (report_id) REFERENCES reports(report_id)
+Referenced by:
+    TABLE "transactions" CONSTRAINT "fk_job_id" FOREIGN KEY (job_id) REFERENCES jobs(job_id)
+

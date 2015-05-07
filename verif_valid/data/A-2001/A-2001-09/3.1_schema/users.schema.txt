@@ -1,0 +1,22 @@
+                                              Table "public.users"
+          Column           |           Type           |                        Modifiers                        
+---------------------------+--------------------------+---------------------------------------------------------
+ user_id                   | integer                  | not null default nextval('users_user_id_seq'::regclass)
+ user_login                | character varying(40)    | default NULL::character varying
+ user_name                 | character varying(100)   | default ''::character varying
+ email                     | character varying(100)   | default NULL::character varying
+ crypted_password          | character varying(40)    | default NULL::character varying
+ salt                      | character varying(40)    | default NULL::character varying
+ created_at                | timestamp with time zone | 
+ updated_at                | timestamp with time zone | 
+ remember_token            | character varying(40)    | default NULL::character varying
+ remember_token_expires_at | timestamp with time zone | 
+ role_id                   | integer                  | not null
+ modified_date             | timestamp with time zone | default now()
+ active                    | boolean                  | default true
+Indexes:
+    "pk_user_id" PRIMARY KEY, btree (user_id)
+    "uq_login" UNIQUE, btree (user_login)
+Referenced by:
+    TABLE "job_sets" CONSTRAINT "fk_user_id" FOREIGN KEY (user_id) REFERENCES users(user_id)
+
