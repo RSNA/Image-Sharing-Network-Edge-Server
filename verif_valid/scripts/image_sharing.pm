@@ -15,7 +15,7 @@ sub default_EDGE_params {
 }
 
 sub check_environment {
- @ folders = ( "scripts", "db" );
+ @ folders = ( "scripts", "db", "test-data" );
  foreach $f(@folders) {
   if (!(-e $f)) { die "Are you in the proper folder: did not find <$f>"; }
  }
@@ -211,6 +211,7 @@ sub cstore
   $x .= " -set 00100020=$patID";
   $x .= " -set 00080050=$accessionNumber";
   $x .= " -set 00080030=$studyTime";
+  $x .= " -set 00100021=ISSUER";
   $x .= " -setuid $uidPrefix" if ($uidPrefix ne "");
 
   `$x`;
