@@ -15,7 +15,7 @@ sub default_EDGE_params {
 }
 
 sub check_environment {
- @ folders = ( "scripts", "db", "test-data" );
+ @ folders = ( "scripts", "db");
  foreach $f(@folders) {
   if (!(-e $f)) { die "Are you in the proper folder: did not find <$f>"; }
  }
