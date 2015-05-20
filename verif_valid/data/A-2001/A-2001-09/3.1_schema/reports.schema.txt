@@ -1,0 +1,22 @@
+                                          Table "public.reports"
+      Column      |           Type           |                          Modifiers                          
+------------------+--------------------------+-------------------------------------------------------------
+ report_id        | integer                  | not null default nextval('reports_report_id_seq'::regclass)
+ exam_id          | integer                  | not null
+ proc_code        | character varying        | 
+ status           | character varying        | not null
+ status_timestamp | timestamp with time zone | not null
+ report_text      | text                     | 
+ signer           | character varying        | 
+ dictator         | character varying        | 
+ transcriber      | character varying        | 
+ modified_date    | timestamp with time zone | default now()
+Indexes:
+    "pk_report_id" PRIMARY KEY, btree (report_id)
+    "reports_unique_status_idx" UNIQUE, btree (exam_id, status, status_timestamp)
+    "reports_status_timestamp_idx" btree (status_timestamp)
+Foreign-key constraints:
+    "fk_exam_id" FOREIGN KEY (exam_id) REFERENCES exams(exam_id)
+Referenced by:
+    TABLE "jobs" CONSTRAINT "fk_report_id" FOREIGN KEY (report_id) REFERENCES reports(report_id)
+
