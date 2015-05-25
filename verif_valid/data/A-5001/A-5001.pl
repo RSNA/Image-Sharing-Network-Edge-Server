@@ -26,7 +26,7 @@ sub fill_variables {
  # First, create all scheduling ORM messages
  @ files = (
 	"A-5001-04-1", "A-5001-04-2", "A-5001-04-3", "A-5001-04-4",
-	"A-5001-04-5"
+	"A-5001-04-5",
 	"A-5001-04-6"
  );
  foreach $f(@files) {
