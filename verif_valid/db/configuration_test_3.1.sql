@@ -1,5 +1,5 @@
 update configurations
-set value = 'https://test.rsnaclearinghouse.com/services/xdsrepositoryb'
+set value = 'http://test.rsnaclearinghouse.com:9090/services/xdsrepositoryb'
 where key = 'iti41-endpoint-uri';
 
 update configurations
