@@ -35,26 +35,6 @@
 		root="roots/ResearchSender/DicomAnonymizer"
 		script="scripts/Sender.script"></DicomAnonymizer>
 
-	<EmailService
-	    name="EmailService"
-	    class="org.rsna.ctp.stdstages.EmailService"
-	    root="roots/EmailService"
-	    script="scripts/EmailService.script"
-	    smtpServer="10.242.100.61"
-	    username=""
-	    password=""
-	    to="smm7324@yahoo.com"
-	    from="smoore@wustl.edu"
-	    cc=""
-	    subject="CTP Images Sent"
-	    includeModality="no"
-	    includePatientID="no"
-	    includePatientName="no"
-	    includeStudyDate="no"
-	    includeAccessionNumber="no"
-	    logSentEmails="no"
-	    quarantine="quarantines/EmailService"/>
-
         <CachingXDSExportService auditLogID="AuditLog"
 		class="org.rsna.isn.ctp.xds.sender.CachingXDSExportService"
 		iti41Production="https://clearinghouse.lifeimage.com/services/xdsrepositoryb"
@@ -84,6 +64,10 @@
 		dob="20150320"
 		key="1d82792db59799dc4919c14dd5d65d3a327a0b395fefb8ede1e1c7a9eb692571"
 		name="20150320 - 1479" pw="1479" token="1479"></Destination>
+            <Destination
+		dob="20120701"
+		key="50f395a407b2ead53fbc7ef9efe3eb89b95d5904939f6af6772ca56a259fe8f1"
+		name="20120701 - 01234abcde56789defgh" pw="01234abcde56789defgh" token="01234abcde56789defgh"></Destination>
 
         </CachingXDSExportService>
     </Pipeline>
@@ -107,10 +91,32 @@
 
 		repositoryUniqueID="rsna.domain.repository"
 		root="roots/ResearchReceiver/PollingXDSImportService"
-		siteID="9652fef890fe9b5de17f2116e971f153d7d655c3b57fef6012a2138239e34d20"
+		siteID-Trial-S="9652fef890fe9b5de17f2116e971f153d7d655c3b57fef6012a2138239e34d20"
+		siteID="50f395a407b2ead53fbc7ef9efe3eb89b95d5904939f6af6772ca56a259fe8f1"
 		timeout="120000"></PollingXDSImportService>
         <FileStorageService class="org.rsna.ctp.stdstages.FileStorageService" name="FileStorageService" port="1086" quarantine="quarantines/ResearchReceiver/FileStorageService" root="roots/ResearchReceiver/FileStorageService"></FileStorageService>
-        <DicomExportService class="org.rsna.ctp.stdstages.DicomExportService" interval="5000" name="DicomExportService" quarantine="quarantines/ResearchReceiver/DicomExportService" root="roots/ResearchReceiver/DicomExportService" url="dicom://DestinationAET:ThisAET@ipaddress:104"></DicomExportService>
+
+	<EmailService
+	    name="EmailService"
+	    class="org.rsna.ctp.stdstages.EmailService"
+	    root="roots/EmailService"
+	    script="scripts/EmailService.script"
+	    smtpServer="10.242.100.61"
+	    username=""
+	    password=""
+	    to="stl.steve.moore@gmail.com"
+	    from="smoore@wustl.edu"
+	    cc=""
+	    subject="CTP Images Sent"
+	    includeModality="no"
+	    includePatientID="no"
+	    includePatientName="no"
+	    includeStudyDate="no"
+	    includeAccessionNumber="no"
+	    logSentEmails="no"
+	    quarantine="quarantines/EmailService"/>
+
+        <DicomExportService class="org.rsna.ctp.stdstages.DicomExportService" interval="5000" name="DicomExportService" quarantine="quarantines/ResearchReceiver/DicomExportService" root="roots/ResearchReceiver/DicomExportService" url="dicom://SIMPLE_STORAGE:ThisAET@localhost:2100"></DicomExportService>
    </Pipeline>
 
     <Pipeline name="Clinical Receiver">
@@ -144,6 +150,6 @@
 		name="DicomExportService"
 		quarantine="quarantines/ClinicalReceiver/DicomExportService"
 		root="roots/ClinicalReceiver/DicomExportService"
-		url="dicom://DestinationAET:ThisAET@ipaddress:104"></DicomExportService>
+		url="dicom://SIMPLE_STORAGE:ThisAET@localhost:2100"></DicomExportService>
    </Pipeline>
 </Configuration>
