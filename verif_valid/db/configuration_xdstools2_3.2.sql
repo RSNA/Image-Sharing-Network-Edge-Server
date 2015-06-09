@@ -3,11 +3,11 @@ set value = 'http://localhost:28080/xdstools2/sim/a2de485d-22ea-4c42-937d-8e603e
 where key = 'iti41-endpoint-uri';
 
 update configurations
-set value ='mllp://localhost:3600'
+set value ='mllp://localhost:9082'
 where key = 'iti8-pix-uri';
 
 update configurations
-set value ='mllp://localhost:3600'
+set value ='mllp://localhost:9082'
 where key = 'iti8-reg-uri';
 
 
