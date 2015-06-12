@@ -24,6 +24,21 @@ sub send_DICOM {
   image_sharing::cstore($inputFolder, $ae, $host, $port, $name, $id, $acc, $uidSuffix);
  }
 
+
+ @image_setsX = (
+	".5001.6\tImage^One\tA-5001-04-6\tA-5001-04-6F\tCR/CR1/CR1S1"
+ );
+
+ foreach $im(@image_setsX) {
+  ($uidSuffix, $name, $id, $acc, $folder) = split("\t", $im);
+  $uidSuffix = $uidSuffix . image_sharing::generate_date_time();
+  $uidSuffix = $uidSuffix . ":" . $uidSuffix . ":" . $uidSuffix;
+  my $inputFolder = "$MESA_TARGET/storage/modality/$folder";
+  image_sharing::cstore($inputFolder, $ae, $host, $port, $name, $id, $acc, $uidSuffix);
+ }
+
+
+
 }
 
 
@@ -32,7 +47,7 @@ sub send_DICOM {
  image_sharing::clear_db("rsnadb");
  
  my $ae = "DCM4CHEE";
- my $host = "10.242.100.999";
+ my $host = "10.242.100.67";
  my $port = "11112";
  die "Set host to real value, not $host.\nSearch for $host in this script and repair it.\n  " if ($host eq "10.242.100.999");
 
@@ -51,6 +66,8 @@ sub send_DICOM {
 	"A-5001-04-1-oru", "A-5001-04-2-oru",
 	"A-5001-04-3-oru", "A-5001-04-4-oru",
 	"A-5001-04-5-oru",
+
+	"A-5001-04-6-orm", "A-5001-04-6-oru",
  );
  foreach $msg(@hl7_msgs) {
   print "$msg\n";
