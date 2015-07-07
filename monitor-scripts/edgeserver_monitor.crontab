@@ -1,0 +1,12 @@
+# This is the crontab file used to setup the hourly running cron job - edgeserver_monitor.sh. 
+#
+# Refer to the "Edge Server Installation Guide and Administration manual (version 3.2)" for details of how to setup the monitor script.
+
+#
+# Author: Xiaojiang Yang, Mayo Clinic Rochester
+# Date: Oct 6, 2013. Modified: Jan. 29, 2014. Modified: July 1, 2015.
+#
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+0 0-23 * * * /root/edgeserver_monitor.sh
+
