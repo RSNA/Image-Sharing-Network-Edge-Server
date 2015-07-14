@@ -247,11 +247,16 @@ if [ $bAllServiceRunning == false ] || [ $bDBConnectionTestSuccess == false ] ||
 	addToMailContent " "
 	addToMailContent "--------------------"
 	addToMailContent "This email was sent to you by the RSNA edge server monitor script. You received this email because your email address was configured in a RSNA edge server as a recipient of this kind of notifications."
-	java=$(which java)
-	if [ -z $java ]; then 
-		echo "You have not installed Java - Please install Java!";
-		exit 1;
+	if [ -z $JAVA_HOME ]; then
+		java=$(which java)
+		if [ -z $java ]; then 
+			echo "You have not installed Java - Please install Java!";
+			exit 1;
+		fi
+	else
+		java=$JAVA_HOME/bin/java
 	fi
+
 	ret=`$java -jar $RSNA_ROOT/sendemail-isn-1.0.jar "$MAIL_SUBJECT" "$mailContent"`
 	echo "An email notification has been sent to the configured recipient(s)."
 fi
