@@ -68,6 +68,7 @@
       <fileset dir="${basedir}/../database" targetdir="$INSTALL_PATH">
 	<include name="RSNADB*rollout*.sql" />
       </fileset>
+      <fileset dir="${basedir}/../monitor-scripts" targetdir="$INSTALL_PATH/monitor-scripts" />
       <file src="version.txt" targetdir="$INSTALL_PATH"/>
       <file src="${basedir}/src/izpack/rsna.conf" targetdir="/etc" />
       <file src="${basedir}/../database/rsna.sql" targetdir="$INSTALL_PATH" />
