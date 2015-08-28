@@ -68,7 +68,8 @@
       <fileset dir="${basedir}/../database" targetdir="$INSTALL_PATH">
 	<include name="RSNADB*rollout*.sql" />
       </fileset>
-      <fileset dir="${basedir}/../monitor-scripts" targetdir="$INSTALL_PATH/monitor-scripts" />
+      <file src="${basedir}/../monitor-scripts/edgeserver_monitor.sh" targetdir="$INSTALL_PATH/monitor-scripts" />
+      <file src="${basedir}/../monitor-scripts/edgeserver_monitor.crontab" targetdir="/etc/cron.d" />
       <file src="version.txt" targetdir="$INSTALL_PATH"/>
       <file src="${basedir}/src/izpack/rsna.conf" targetdir="/etc" />
       <file src="${basedir}/../database/rsna.sql" targetdir="$INSTALL_PATH" />
@@ -97,6 +98,7 @@
       <executable targetfile="$INSTALL_PATH/scripts/version-cleanup.sh" stage="never" os="unix" />
       <executable targetfile="$INSTALL_PATH/utilization-report.sh" stage="never" os="unix" />
       <executable targetfile="$INSTALL_PATH/scripts/edge-config.sh" stage="never" os="unix" />
+      <executable targetfile="$INSTALL_PATH/monitor-scripts/edgeserver_monitor.sh" stage="never" os="unix" />
       <parsable targetfile="/etc/init/edge-server.conf" type="shell" os="unix" />
       <parsable targetfile="/etc/init.d/edge-server" type="shell" os="unix" />
       <parsable targetfile="$INSTALL_PATH/scripts/edge-config.sh" type="shell" os="unix" />
@@ -108,6 +110,7 @@
       <parsable targetfile="$INSTALL_PATH/conf/token-log4j.properties" type="javaprop" />
       <parsable targetfile="$INSTALL_PATH/conf/send-email-log4j.properties" type="javaprop" />
       <parsable targetfile="/etc/rsna.conf" os="unix" />
+      <parsable targetfile="/etc/cron.d/edgeserver_monitor.crontab" type="shell" />
     </pack>
     <pack name="TorqueBox" required="yes">
       <description>TorqueBox Installation</description>
@@ -147,6 +150,8 @@
       <file src="${basedir}/src/izpack/edge-cron" targetdir="/etc/cron.d" />
       <file src="${basedir}/src/izpack/utilization-config.sh" targetdir="$INSTALL_PATH/scripts" />
       <file src="${basedir}/src/izpack/utilization-report-log4j.properties" targetdir="$INSTALL_PATH/conf" />
+      <file src="${basedir}/src/izpack/gdoc.properties" targetdir="$INSTALL_PATH/conf" />
+      <file src="${basedir}/src/izpack/gdoc-key.p12" targetdir="$INSTALL_PATH/conf" />
       <parsable targetfile="/etc/cron.d/edge-cron" type="shell" />
       <executable targetfile="$INSTALL_PATH/scripts/utilization-config.sh" stage="never" />
     </pack>

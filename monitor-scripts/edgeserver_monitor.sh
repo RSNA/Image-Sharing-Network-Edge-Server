@@ -16,6 +16,8 @@
 IP_ADDRESS=`/sbin/ifconfig | grep 'inet addr:' | grep -v '127.0.0.1' | cut -d: -f2 | awk '{print $1}'`
 #
 
+. /etc/rsna.conf
+
 # A general property file parser function.
 # Param: $1 propertyName
 # Param: $2 fileName

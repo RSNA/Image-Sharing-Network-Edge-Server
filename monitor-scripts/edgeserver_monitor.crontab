@@ -8,5 +8,5 @@
 #
 SHELL=/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-0 0-23 * * * /root/edgeserver_monitor.sh
+0 0-23 * * * %{rsna.root}/monitor-scripts/edgeserver_monitor.sh
 
