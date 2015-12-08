@@ -8,9 +8,7 @@
   </formats>
   <files>
     <file>
-      <source>src/izpack/install.sh</source>
-      <fileMode>755</fileMode>
-      <lineEnding>keep</lineEnding>
+      <source>src/izpack/install-options</source>
       <filtered>true</filtered>
     </file>
     <file>

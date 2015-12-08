@@ -49,12 +49,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.codehaus.izpack</groupId>
-      <artifactId>izpack-standalone-compiler</artifactId>
-      <version>${izpack.standalone.compiler.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
       <groupId>org.rsna.isn</groupId>
       <artifactId>torquebox</artifactId>
       <version>${torquebox.version}</version>
@@ -222,31 +216,6 @@
 	    </configuration>
 	  </execution>
 	</executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.codehaus.izpack</groupId>
-        <artifactId>izpack-maven-plugin</artifactId>
-        <version>1.0-alpha-5</version>
-	<configuration>
-	  <izpackBasedir>${staging.dir}</izpackBasedir>
-	</configuration>
-        <executions>
-          <execution>
-	    <id>standard-installer</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>izpack</goal>
-            </goals>
-          </execution>
-        </executions>
-        <dependencies>
-          <dependency>
-            <groupId>org.codehaus.izpack</groupId>
-            <artifactId>izpack-standalone-compiler</artifactId>
-            <version>${izpack.standalone.compiler.version}</version>
-          </dependency>
-        </dependencies>
       </plugin>
     </plugins>
   </build>

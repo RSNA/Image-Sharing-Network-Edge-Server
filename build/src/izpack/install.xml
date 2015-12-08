@@ -27,28 +27,12 @@
     <variable name="openam.version" value="${openam.version}" />
   </dynamicvariables>
 
-  <resources>
-    <res id="userInputSpec.xml" src="${basedir}/src/izpack/userInputSpec.xml" />
-    <res id="ProcessPanel.Spec.xml" src="${basedir}/src/izpack/ProcessPanel.Spec.xml" />
-  </resources>
-
-  <conditions>
-    <condition type="variable" id="upgradeinstall">
-      <name>upgrade</name>
-      <value>1</value>
-    </condition>
-  </conditions>
-
   <panels>
     <panel classname="HelloPanel"/>
-    <panel classname="UserInputPanel" id="UserInputPanel.0" />
     <panel classname="TargetPanel" />
     <panel classname="PacksPanel" />
-    <panel classname="UserInputPanel" id="UserInputPanel.1" />
-    <panel classname="UserInputPanel" id="UserInputPanel.2" />
     <panel classname="SummaryPanel" />
     <panel classname="InstallPanel" />
-    <panel classname="ProcessPanel" />
     <panel classname="SimpleFinishPanel" />
   </panels>
 

@@ -1,20 +1,11 @@
 <userInput>
 <panel order="0">
-  <field type="title" txt="Are you upgrading from a previous version?" bold="true" size="1" />
-  <field type="radio" variable="upgrade">
-    <spec>
-      <choice txt="Yes" value="1" />
-      <choice txt="No" value="0" set="true" />
-    </spec>
-  </field>
-</panel>
-<panel order="1">
 <field type="title" txt="Java path configuration" bold="true" size="1" />
 <field type="text" variable="java.home">
   <spec txt="JAVA_HOME:" size="25" set="$JAVA_HOME" />
 </field>
 </panel>
-<panel order="2">
+<panel order="1">
 <field type="title" txt="Configure database connection" bold="true" size="1" />
 <field type="text" variable="database.host">
   <spec txt="Host:" size="25" set="localhost" />
