@@ -46,4 +46,12 @@
       </excludes>
     </dependencySet>
   </dependencySets>
+  <files>
+    <file>
+      <source>../database/rsna.sql</source>
+    </file>
+    <file>
+      <source>../CTP/ISN-installer.jar</source>
+    </file>
+  </files>
 </assembly>

@@ -149,19 +149,6 @@
 	<version>2.2-beta-5</version>
 	<executions>
 	  <execution>
-	    <id>make-assembly</id>
-	    <phase>prepare-package</phase>
-	    <goals>
-	      <goal>single</goal>
-	    </goals>
-	    <configuration>
-	      <finalName>edgeserver</finalName>
-	      <descriptors>
-		<descriptor>src/main/assembly/build.xml</descriptor>
-	      </descriptors>
-	    </configuration>
-	  </execution>
-	  <execution>
 	    <id>make-zip</id>
 	    <phase>package</phase>
 	    <goals>
@@ -169,9 +156,8 @@
 	    </goals>
 	    <configuration>
 	      <finalName>edgeserver-${project.version}</finalName>
-	      <appendAssemblyId>false</appendAssemblyId>
 	      <descriptors>
-		<descriptor>src/main/assembly/zip.xml</descriptor>
+		<descriptor>src/main/assembly/build.xml</descriptor>
 	      </descriptors>
 	    </configuration>
 	  </execution>
