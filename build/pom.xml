@@ -62,12 +62,6 @@
       <type>zip</type>
     </dependency>
     <dependency>
-      <groupId>org.rsna.isn</groupId>
-      <artifactId>mirth</artifactId>
-      <version>${mirth.version}</version>
-      <type>zip</type>
-    </dependency>
-    <dependency>
       <groupId>org.forgerock.openam</groupId>
       <artifactId>openam-server</artifactId>
       <version>${openam.version}</version>
@@ -121,16 +115,6 @@
 		http://torquebox.org/builds/1870/torquebox-dist-bin.zip
 	      </downloadUrl>
 	      <checksum>20514dd381a69c289997f66fc05e4c686f7833d7</checksum>
-	    </artifactItem>
-	    <artifactItem>
-	      <groupId>org.rsna.isn</groupId>
-	      <artifactId>mirth</artifactId>
-	      <version>${mirth.version}</version>
-	      <packaging>zip</packaging>
-	      <downloadUrl>
-		http://downloads.mirthcorp.com/connect/{version}/mirth-{version}.zip
-	      </downloadUrl>
-	      <checksum>ada132af6e45d40cda85b2670f0990b54c966a6a</checksum>
 	    </artifactItem>
 	  </artifactItems>
 	</configuration>

@@ -63,28 +63,5 @@
       <arg>$upgrade</arg>
     </executefile>
   </job>
-  <job name="client download prep">
-    <os family="unix" />
-    <executeForPack name="download-prep" />
-    <executefile name="$INSTALL_PATH/scripts/download-prep.sh">
-      <env>INSTALL_PATH=$INSTALL_PATH</env>
-    </executefile>
-  </job>
-  <job name="version cleanup">
-    <os family="unix" />
-    <executeForPack name="version-cleanup" />
-    <executefile name="$INSTALL_PATH/scripts/version-cleanup.sh">
-      <env>INSTALL_PATH=$INSTALL_PATH</env>
-      <arg>$upgrade</arg>
-    </executefile>
-  </job>
-  <job name="utilization reporting config">
-    <os family="unix" />
-    <executeForPack name="Utilization Reporting" />
-    <executefile name="$INSTALL_PATH/scripts/utilization-config.sh">
-      <env>INSTALL_PATH=$INSTALL_PATH</env>
-      <arg>$utilization.configfile</arg>
-    </executefile>
-  </job>
 </processing>
 

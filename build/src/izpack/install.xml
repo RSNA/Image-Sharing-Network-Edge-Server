@@ -46,10 +46,6 @@
     <panel classname="PacksPanel" />
     <panel classname="UserInputPanel" id="UserInputPanel.1" />
     <panel classname="UserInputPanel" id="UserInputPanel.2" />
-    <panel classname="UserInputPanel" id="UserInputPanel.3" />
-    <panel classname="UserInputPanel" id="UserInputPanel.4" />
-    <panel classname="UserInputPanel" id="UserInputPanel.5" />
-    <panel classname="UserInputPanel" id="UserInputPanel.6" />
     <panel classname="SummaryPanel" />
     <panel classname="InstallPanel" />
     <panel classname="ProcessPanel" />
@@ -127,21 +123,6 @@
       <parsable targetfile="$INSTALL_PATH/scripts/bootstrap.properties" type="javaprop" />
       <parsable targetfile="$INSTALL_PATH/scripts/openam.config" type="javaprop" />
     </pack>
-    <pack name="Mirth" required="no">
-      <description>Mirth Installation</description>
-      <file unpack="true" src="mirth-1.8.2.4472.zip" targetdir="$INSTALL_PATH/mirth" condition="!upgradeinstall" />
-      <file src="${basedir}/src/izpack/mirth-setup.sh" targetdir="$INSTALL_PATH/scripts" />
-      <file src="${basedir}/src/izpack/mirth-1.8.2-fix.sh" targetdir="$INSTALL_PATH/scripts" />
-      <file src="${basedir}/src/izpack/wrapper.conf" targetdir="$INSTALL_PATH/mirth/conf" override="true" />
-      <parsable targetfile="$INSTALL_PATH/mirth/conf/wrapper.conf" type="javaprop" />
-      <executable targetfile="$INSTALL_PATH/scripts/mirth-setup.sh" stage="never" />
-      <executable targetfile="$INSTALL_PATH/scripts/mirth-1.8.2-fix.sh" stage="never" />
-      <executable targetfile="$INSTALL_PATH/mirth/mirth-daemon" stage="never" />
-      <executable targetfile="$INSTALL_PATH/mirth/mirth.sh" stage="never" />
-      <executable targetfile="$INSTALL_PATH/mirth/shell.sh" stage="never" />
-      <executable targetfile="$INSTALL_PATH/mirth/wrapper-linux-x86-32" stage="never" />
-      <executable targetfile="$INSTALL_PATH/mirth/wrapper-linux-x86-64" stage="never" />
-    </pack>
     <pack name="Utilization Reporting" required="no">
       <description>Utilization Reporting</description>
       <fileset dir="." targetdir="$INSTALL_PATH">
@@ -157,12 +138,6 @@
     </pack>
     <pack name="Generate Client Certificate" required="no" condition="!upgradeinstall">
       <description>Generate Client Certificate</description>
-    </pack>
-    <pack name="download-prep" required="no">
-      <description>Prepare Client Downloads</description>
-    </pack>
-    <pack name="version-cleanup" required="no" condition="upgradeinstall">
-      <description>Cleanup Previous Module Versions</description>
     </pack>
 </packs>
 
