@@ -18,8 +18,7 @@
     <app.title>${project.name}</app.title>
     <app.subpath>${project.artifactId}</app.subpath>
     <app.version>${project.version}</app.version>
-    <torquebox.version>3.x.incremental.1870</torquebox.version>
-    <mirth.version>1.8.2.4472</mirth.version>
+    <torquebox.version>3.1.2</torquebox.version>
     <openam.version>11.0.0</openam.version>
   </properties>
   <repositories>
@@ -112,9 +111,9 @@
 	      <version>${torquebox.version}</version>
 	      <packaging>zip</packaging>
 	      <downloadUrl>
-		http://torquebox.org/builds/1870/torquebox-dist-bin.zip
+		http://torquebox.org/release/org/torquebox/torquebox-dist/${torquebox.version}/torquebox-dist-${torquebox.version}-bin.zip
 	      </downloadUrl>
-	      <checksum>20514dd381a69c289997f66fc05e4c686f7833d7</checksum>
+	      <checksum>8e89296b6176c04c467c26450d1bd29c66c6d2d2</checksum>
 	    </artifactItem>
 	  </artifactItems>
 	</configuration>
