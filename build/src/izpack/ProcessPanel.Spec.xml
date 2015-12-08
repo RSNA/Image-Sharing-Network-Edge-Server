@@ -18,39 +18,6 @@
     <onFail previous="true" next="false" />
     <onSuccess previous="true" next="true" />
   </job>
-  <job name="client key gen">
-    <os family="unix" />
-    <executeForPack name="Generate Client Certificate" />
-    <executefile name="$INSTALL_PATH/scripts/keygen.sh">
-      <env>INSTALL_PATH=$INSTALL_PATH</env>
-      <arg>$keygen.server_name</arg>
-      <arg>$keygen.dn_ou</arg>
-      <arg>$keygen.dn_o</arg>
-      <arg>$keygen.dn_l</arg>
-      <arg>$keygen.dn_st</arg>
-      <arg>$keygen.dn_c</arg>
-      <arg>$keygen.days</arg>
-      <arg>$upgrade</arg>
-      <arg>"delta"</arg>
-    </executefile>
-  </job>
-  <job name="mirth setup">
-    <executeForPack name="Mirth" />
-    <os family="unix" />
-    <executefile name="$INSTALL_PATH/scripts/mirth-setup.sh">
-      <env>INSTALL_PATH=$INSTALL_PATH</env>
-      <env>DBPASSWD=$mirthdb.password</env>
-      <env>DBSUPERPASSWD=$mirthdb.superpassword</env>
-      <env>JAVA_HOME=$java.home</env>
-      <arg>$mirthdb.host</arg>
-      <arg>$mirthdb.port</arg>
-      <arg>$mirthdb.name</arg>
-      <arg>$mirthdb.username</arg>
-      <arg>$database.superuser</arg>
-      <arg>$INSTALL_PATH/mirth</arg>
-      <arg>$upgrade</arg>
-    </executefile>
-  </job>
   <job name="torquebox setup">
     <os family="unix" />
     <executeForPack name="TorqueBox" />
@@ -64,4 +31,3 @@
     </executefile>
   </job>
 </processing>
-
