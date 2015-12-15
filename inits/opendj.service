@@ -1,0 +1,11 @@
+[Unit]
+Description=OpenDJ
+
+
+[Service]
+User=rsna
+WorkingDirectory=/home/rsna/opendj
+ExecStart=/home/rsna/opendj/bin/start-ds -N
+
+[Install]
+WantedBy=multi-user.target

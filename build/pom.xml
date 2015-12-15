@@ -13,7 +13,6 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <staging.dir>${project.build.directory}/${project.artifactId}-install</staging.dir>
-    <izpack.standalone.compiler.version>4.3.4</izpack.standalone.compiler.version>
     <app.group>${project.groupId}</app.group>
     <app.title>${project.name}</app.title>
     <app.subpath>${project.artifactId}</app.subpath>
@@ -156,6 +155,7 @@
 	    </goals>
 	    <configuration>
 	      <finalName>edgeserver-${project.version}</finalName>
+	      <appendAssemblyId>false</appendAssemblyId>
 	      <descriptors>
 		<descriptor>src/main/assembly/build.xml</descriptor>
 	      </descriptors>

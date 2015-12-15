@@ -46,6 +46,12 @@
       </excludes>
     </dependencySet>
   </dependencySets>
+  <fileSets>
+    <fileSet>
+      <directory>../inits</directory>
+      <outputDirectory>inits</outputDirectory>
+    </fileSet>
+  </fileSets>
   <files>
     <file>
       <source>../database/rsna.sql</source>
