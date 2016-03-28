@@ -1,1 +1,1 @@
-0 0 * * 6 edge $JAVA_HOME/bin/java -jar %{rsna.root}/utilization-report-*.jar > /dev/null 2>&1
+0 0 * * 0 edge $JAVA_HOME/bin/java -jar $RSNA_ROOT/utilization-report-*.jar > /dev/null 2>&1

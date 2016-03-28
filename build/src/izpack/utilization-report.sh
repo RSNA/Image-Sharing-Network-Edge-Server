@@ -12,7 +12,7 @@
 
 USER=edge
 CRONFILE='/etc/cron.d/edge-cron'
-CRONJOB='0 0 * * 6 edge $JAVA_HOME/bin/java -jar $RSNA_ROOT/utilization-report*.jar > /dev/null 2>&1'
+CRONJOB='0 0 * * 0 edge $JAVA_HOME/bin/java -jar $RSNA_ROOT/utilization-report*.jar > /dev/null 2>&1'
 
 # Check appropriate number of arguments are given
 if [ $# -gt 1 ]
