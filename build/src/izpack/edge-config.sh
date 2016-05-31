@@ -10,7 +10,7 @@ COOKIE_DOMAIN=$(whiptail --title "$TITLE" --inputbox "Enter Login Cookie Domain.
 OPENAMPWD=$(whiptail --title "$TITLE" --passwordbox "Set OpenAM amAdmin user passsword." 9 50 3>&1 1>&2 2>&3)
 OPENAMPWDCONFIRM=$(whiptail --title "$TITLE" --passwordbox "Confirm OpenAM amAdmin user passsword." 9 50 3>&1 1>&2 2>&3)
 if [[ "x$OPENAMPWD" != "x$OPENAMPWDCONFIRM" ]]; then
-    whiptail --title "$TITLE" --msgbox "Passwords do not match, exiting."
+    whiptail --title "$TITLE" --msgbox "Passwords do not match, exiting." 9 50
     exit 1;
 fi
 unset OPENAMPWDCONFIRM
