@@ -47,7 +47,7 @@ sub send_DICOM {
  image_sharing::clear_db("rsnadb");
  
  my $ae = "DCM4CHEE";
- my $host = "10.242.100.67";
+ my $host = "10.242.100.999";
  my $port = "11112";
  die "Set host to real value, not $host.\nSearch for $host in this script and repair it.\n  " if ($host eq "10.242.100.999");
 
