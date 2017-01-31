@@ -9,7 +9,7 @@ sub send_DICOM {
  my ($ae, $host, $port) = @_;
 
  @image_sets = (
-	".5001.8\tExpedited^Turner\tA-5001-08-1\tA-5001-08-1F",
+	".5001.8\tExpedited^Turner\tA-5001-08-1\tA-5001-08-1F"
  );
 
  foreach $im(@image_sets) {
@@ -41,7 +41,8 @@ sub send_DICOM {
  chdir("../..");
 
  @hl7_msgs = (
-	"A-5001-08-6-orm", 
+	"A-5001-08-1-orm",
+	"A-5001-08-1-oru"
  );
  foreach $msg(@hl7_msgs) {
   print "$msg\n";
@@ -54,7 +55,7 @@ sub send_DICOM {
  send_DICOM($ae, $host, $port);
 
  my $y =
- "The automated part of test A-5001-04 is complete.\n" .
+ "The automated part of test A-5001-08 is complete.\n" .
  " The database is loaded with records. The next part of\n" .
  " the test process consists of manual steps described\n" .
  " in the test procedure.\n";
