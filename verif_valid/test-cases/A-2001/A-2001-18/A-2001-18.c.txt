@@ -1,0 +1,20 @@
+Test A-2001-18: Step C
+Mon Mar 20 16:07:16 CDT 2017
+ id | version |         modified_date         
+----+---------+-------------------------------
+  0 | 4.0.0   | 2017-03-20 16:06:40.217817-05
+(1 row)
+
+Import database and then dump schema version
+ id | version |         modified_date         
+----+---------+-------------------------------
+  0 | 4.0.0   | 2017-03-20 16:06:40.217817-05
+(1 row)
+
+Update schema version
+ id | version |         modified_date         
+----+---------+-------------------------------
+  0 | 4.0.0   | 2017-03-20 16:07:21.710085-05
+(1 row)
+
+Mon Mar 20 16:07:21 CDT 2017
