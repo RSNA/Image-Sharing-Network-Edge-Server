@@ -51,7 +51,6 @@ sed -i -e '/SECRET_KEY_BASE=/d' -e '/OPENAM_URL=/d' /etc/rsna.conf
 echo OPENAM_URL=http://$SERVER_HOST:3000/openam >> /etc/rsna.conf
 echo SECRET_KEY_BASE=$(dd if=/dev/urandom bs=1024 count=1 | sha512sum | awk '{print $1;}') >> /etc/rsna.conf
 
-echo "Restarting edge-server process."
-restart edge-server
+systemctl restart torquebox
 
 echo "Setup Complete."
