@@ -4,7 +4,7 @@
 
   <groupId>org.rsna.isn</groupId>
   <artifactId>edgeserver</artifactId>
-  <version>3.2.0-t1</version>
+  <version>5.0.0</version>
   <packaging>pom</packaging>
 
   <name>RSNA Edgeserver</name>
@@ -76,7 +76,6 @@
   <modules>
     <module>../core</module>
     <module>../prepare-content-app</module>
-    <module>../token-app</module>
     <module>../transfer-content-app</module>
     <module>../utilization-report-app</module>
     <module>../openam-token-app-auth</module>
