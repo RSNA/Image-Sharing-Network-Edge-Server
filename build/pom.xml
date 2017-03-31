@@ -80,6 +80,7 @@
     <module>../utilization-report-app</module>
     <module>../openam-token-app-auth</module>
     <module>../send-email-app</module>
+    <module>../oht</module>
   </modules>
   <build>
     <defaultGoal>package</defaultGoal>
