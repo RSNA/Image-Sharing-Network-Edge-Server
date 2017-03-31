@@ -34,3 +34,6 @@
 [submodule "utilization-report-app"]
 	path = utilization-report-app
 	url = https://github.com/RSNA/isn-utilization-report.git
+[submodule "oht"]
+	path = oht
+	url = https://github.com/RSNA/isn-edge-server-oht
