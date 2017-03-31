@@ -17,7 +17,7 @@
     <app.title>${project.name}</app.title>
     <app.subpath>${project.artifactId}</app.subpath>
     <app.version>${project.version}</app.version>
-    <torquebox.version>3.1.2</torquebox.version>
+    <torquebox.version>3.2.0</torquebox.version>
     <openam.version>11.0.0</openam.version>
   </properties>
   <repositories>
@@ -80,6 +80,7 @@
     <module>../utilization-report-app</module>
     <module>../openam-token-app-auth</module>
     <module>../send-email-app</module>
+    <module>../token-app</module>
     <module>../oht</module>
   </modules>
   <build>
@@ -106,7 +107,7 @@
 	      <downloadUrl>
 		http://torquebox.org/release/org/torquebox/torquebox-dist/${torquebox.version}/torquebox-dist-${torquebox.version}-bin.zip
 	      </downloadUrl>
-	      <checksum>8e89296b6176c04c467c26450d1bd29c66c6d2d2</checksum>
+	      <checksum>41f1b218afa0342745ca120f32a31ad7a78e692b</checksum>
 	    </artifactItem>
 	  </artifactItems>
 	</configuration>
