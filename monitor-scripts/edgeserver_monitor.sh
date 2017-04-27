@@ -12,7 +12,7 @@
 #	Jan 28, 2014 - v2.0: Changed to use Clifton's email sending utility.
 #
 # Change Log: 
-# 1) Changed the property file path/name for mirthdb to usr/local/mirthconnect/mirth.properties.
+# 1) Changed the property file path/name for mirthdb to usr/local/mirthconnect/conf/mirth.properties.
 # 2) Added "| sed 's/\r//'" to function getPropertyFromFile(), to remove \r at the end of the line.
 #
 #
@@ -43,7 +43,7 @@ function getPropertyFromFile()
 function checkDBConnection(){
 	# Extract passwords from the edge server's configuration file:
 	rsnadb_password=`getPropertyFromFile rsnadb.password $RSNA_ROOT/conf/database.properties`
-	mirthdb_password=`getPropertyFromFile database.password /usr/local/mirthconnect/mirth.properties`
+	mirthdb_password=`getPropertyFromFile database.password /usr/local/mirthconnect/conf/mirth.properties`
 
 	# Generate a password file for auto-login used by psql. The content is based on those extracted from the edge server's configuration file.
 	# !!!! Note: Do NOT add tabs before the following lines for file content of ~/.pgpass:!!!!
@@ -72,7 +72,7 @@ EOF
 # rsnadb.url=jdbc:postgresql://localhost:5432/rsnadb
 # rsnadb.user=edge
 # rsnadb.password=d17bK4#M
-# cat /usr/local/mirthconnect/mirth.properties
+# cat /usr/local/mirthconnect/conf/mirth.properties
 # database=postgres
 # database.driver=org.postgresql.Driver
 # database.url=jdbc:postgresql://localhost:5432/mirthdb
@@ -95,14 +95,14 @@ function checkDBConfig(){
 	fi
 
 	# Check mirthdb username/password:
-	mirthdb_username=`getPropertyFromFile database.username /usr/local/mirthconnect/mirth.properties`
+	mirthdb_username=`getPropertyFromFile database.username /usr/local/mirthconnect/conf/mirth.properties`
 	if [ -z $mirthdb_username ] || [ $mirthdb_username != "mirth" ]; then
-		echo "Usenmane for database \"mirthdb\" is incorrect (not the default), check the file /usr/local/mirthconnect/mirth.properties."
+		echo "Usenmane for database \"mirthdb\" is incorrect (not the default), check the file /usr/local/mirthconnect/conf/mirth.properties."
 	fi
 
-	mirthdb_password=`getPropertyFromFile database.password /usr/local/mirthconnect/mirth.properties`
+	mirthdb_password=`getPropertyFromFile database.password /usr/local/mirthconnect/conf/mirth.properties`
 	if [ -z $mirthdb_password ] || [ $mirthdb_password != "1947JAT$" ]; then
-		echo "Password for database \"mirthdb\" is incorrect (not the default), check the file /usr/local/mirthconnect/mirth.properties."
+		echo "Password for database \"mirthdb\" is incorrect (not the default), check the file /usr/local/mirthconnect/conf/mirth.properties."
 	fi
 }
 
