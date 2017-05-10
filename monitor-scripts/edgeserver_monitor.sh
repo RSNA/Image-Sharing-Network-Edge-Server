@@ -218,7 +218,7 @@ done
 # Do the DB config checking:
 bDBConfigCheckSuccess=true
 dbConfigResults=`checkDBConfig`
-echo -e "\nDaignosed Reason(s):"
+echo -e "\nDiagnosed Reason(s):"
 addToMailContent " "
 addToMailContent "Daignosed Reason(s):"
 addToMailContent "===================="
