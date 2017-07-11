@@ -18,12 +18,12 @@
 
   <repositories>
     <repository>
-      <id>forgerock</id>
-      <name>Forgerock Maven Repo</name>
-      <url>http://maven.forgerock.org/repo/releases/</url>
+      <id>rsna-isn-thirdparty</id>
+      <name>RSNA ISN Thirdparty Repo</name>
+      <url>https://raw.github.com/RSNA/isn-maven-repo/master/thirdparty/</url>
       <snapshots>
-	<enabled>false</enabled>
-      </snapshots>			
+        <enabled>false</enabled>
+      </snapshots>
     </repository>
   </repositories>
   <dependencies>

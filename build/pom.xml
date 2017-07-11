@@ -36,14 +36,6 @@
         <enabled>true</enabled>
       </releases>
     </repository>
-    <repository>
-      <id>forgerock</id>
-      <name>Forgerock Maven Repo</name>
-      <url>http://maven.forgerock.org/repo/releases/</url>
-      <snapshots>
-	<enabled>false</enabled>
-      </snapshots>
-    </repository>
   </repositories>
 
   <dependencies>
