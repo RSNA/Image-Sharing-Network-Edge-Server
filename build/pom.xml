@@ -99,7 +99,7 @@
 	      <downloadUrl>
 		http://torquebox.org/release/org/torquebox/torquebox-dist/${torquebox.version}/torquebox-dist-${torquebox.version}-bin.zip
 	      </downloadUrl>
-	      <checksum>8e89296b6176c04c467c26450d1bd29c66c6d2d2</checksum>
+	      <checksum>41f1b218afa0342745ca120f32a31ad7a78e692b</checksum>
 	    </artifactItem>
 	  </artifactItems>
 	</configuration>
