@@ -18,6 +18,7 @@
     <app.subpath>${project.artifactId}</app.subpath>
     <app.version>${project.version}</app.version>
     <torquebox.version>3.2.0</torquebox.version>
+    <torquebox.sha1>41f1b218afa0342745ca120f32a31ad7a78e692b</torquebox.sha1>
     <openam.version>11.0.0</openam.version>
   </properties>
   <repositories>
@@ -99,7 +100,7 @@
 	      <downloadUrl>
 		http://torquebox.org/release/org/torquebox/torquebox-dist/${torquebox.version}/torquebox-dist-${torquebox.version}-bin.zip
 	      </downloadUrl>
-	      <checksum>8e89296b6176c04c467c26450d1bd29c66c6d2d2</checksum>
+	      <checksum>${torquebox.sha1}</checksum>
 	    </artifactItem>
 	  </artifactItems>
 	</configuration>
