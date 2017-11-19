@@ -2,11 +2,11 @@
 -- at a local copy of the XDSTools software
 
 update configurations
-set value = 'http://nibib-test.wustl.edu:9280/xdstools4/sim/clearinghouse__rep/rep/prb'
+set value = 'http://nibib-test.wustl.edu:9280/xdstools2/sim/clearinghouse__rr/rep/prb'
 where key = 'iti41-doc-endpoint-uri';
 
 update configurations
-set value = 'http://nibib-test.wustl.edu:9280/xdstools4/sim/clearinghouse__rep/rep/prb'
+set value = 'http://nibib-test.wustl.edu:9280/xdstools2/sim/clearinghouse__rr/rep/prb'
 where key = 'iti41-img-endpoint-uri';
 
 update configurations
