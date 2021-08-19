@@ -1,9 +1,0 @@
-              Table "public.configurations"
-    Column     |           Type           |   Modifiers   
----------------+--------------------------+---------------
- key           | character varying        | not null
- value         | character varying        | not null
- modified_date | timestamp with time zone | default now()
-Indexes:
-    "pk_key" PRIMARY KEY, btree (key)
-

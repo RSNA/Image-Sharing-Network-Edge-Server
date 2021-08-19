@@ -1,5 +1,0 @@
-# complete.var
-# This is one line that gives a new order status: CM for COMPLETED
-# This .var file will be appended to the end of an existing order
-# .var file so we can build a COMPLETED message
-$ORDER_STATUS$ = CM

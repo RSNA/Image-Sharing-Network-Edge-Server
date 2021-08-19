@@ -1,9 +1,0 @@
-                                     Table "public.schema_version"
-    Column     |           Type           |                          Modifiers                          
----------------+--------------------------+-------------------------------------------------------------
- id            | integer                  | not null default nextval('schema_version_id_seq'::regclass)
- version       | character varying        | 
- modified_date | timestamp with time zone | default now()
-Indexes:
-    "pk_id" PRIMARY KEY, btree (id)
-
